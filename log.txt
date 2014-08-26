@@ -1,0 +1,3265 @@
+encode i_frame = 0------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 1------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 2------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 3------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 4------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 5------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 6------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 7------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 8------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 9------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 10------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 11------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 12------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 13------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 14------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 15------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 16------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 17------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 18------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 19------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 20------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 21------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 22------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 23------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 24------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 25------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 26------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 27------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 28------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 29------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 30------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 31------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 32------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 33------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 34------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 35------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 36------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 37------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 38------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 39------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 40------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 41------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 42------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 43------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 44------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 45------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 46------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 47------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 48------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 49------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 50------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 51------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 52------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 53------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 54------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 55------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 56------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 57------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 58------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 59------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 60------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 61------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 62------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 63------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+threads ---->1
+A-->1
+B-->1
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_threadpool_up_sampling()------------------------
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 64------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 65------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 66------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+encode i_frame = 67------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 68------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 69------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 70------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 71------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 72------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 73------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 74------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 75------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 76------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 77------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 78------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 79------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 80------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 81------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 82------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 83------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 84------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 85------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 86------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 87------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+encode i_frame = 88------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 89------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 90------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 91------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 92------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 93------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 94------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 95------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 96------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 97------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 98------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->4
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 99------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 100------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 101------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 102------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 103------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 104------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 105------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 106------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 107------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 108------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 109------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 110------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 111------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 112------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 113------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 114------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 115------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 116------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 117------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 118------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 119------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 120------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 121------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 122------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 123------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+threads ---->1
+A-->1
+B-->1
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 124------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 125------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 126------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 127------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 128------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 129------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 130------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 131------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 132------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 133------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 134------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 135------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 136------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 137------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 138------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 139------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 140------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 141------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 142------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 143------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 144------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 145------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 146------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 147------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 148------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 149------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 150------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 151------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 152------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 153------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 154------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 155------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 156------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 157------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 158------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 159------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 160------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 161------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 162------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 163------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 164------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 165------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 166------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 167------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 168------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 169------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 170------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 171------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+encode i_frame = 172------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 173------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 174------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 175------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 176------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 177------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 178------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 179------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 180------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 181------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 182------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 183------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 184------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 185------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 186------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 187------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 188------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 189------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 190------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 191------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 192------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 193------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 194------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 195------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 196------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 197------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 198------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 199------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 200------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 201------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 202------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 203------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 204------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 205------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 206------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 207------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 208------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 209------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 210------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 211------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 212------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 213------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 214------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 215------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 216------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 217------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 218------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 219------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 220------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 221------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 222------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 223------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 224------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 225------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 226------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 227------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 228------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 229------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 230------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 231------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 232------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 233------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 234------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 235------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 236------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 237------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 238------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 239------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 240------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 241------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 242------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 243------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 244------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 245------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 246------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 247------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 248------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 249------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 250------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 251------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 252------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 253------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 254------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 255------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 256------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 257------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 258------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 259------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 260------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 261------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 262------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 263------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 264------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 265------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 266------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 267------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 268------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 269------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 270------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 271------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 272------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 273------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 274------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 275------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 276------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 277------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+encode i_frame = 278------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 279------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 280------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 281------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 282------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 283------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 284------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 285------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 286------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 287------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 288------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 289------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 290------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 291------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 292------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 293------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 294------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 295------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 296------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 297------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+encode i_frame = 298------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_threadpool_up_sampling()------------------------
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+encode i_frame = 299------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ out  x264_encoder_delayed_frames ---------------
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+h->param.b_sliced_threads = 0
+threads ---->1
+A-->1
+B-->1
+threads ---->2
+A-->2
+B-->2
+threads ---->3
+A-->3
+B-->3
+threads ---->4
+A-->4
+B-->4
+threads ---->5
+x264_slices_write  if   broadcast up_sampling*********
+A-->0
+B-->0
+x264_threadpool_up_sampling()------------------------
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+slice write thread waken up>>>>>>>>>i_slice_encode_threads_finished = 0
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------

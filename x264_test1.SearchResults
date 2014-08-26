@@ -1,0 +1,3 @@
+---- x264_slice_init Æ¥Åä (2 in 1 ÎÄ¼þ) ----
+Encoder.c (encoder):static inline void x264_slice_init( x264_t *h, int i_nal_type, int i_global_qp )
+Encoder.c (encoder):    x264_slice_init( h, i_nal_type, i_global_qp );
