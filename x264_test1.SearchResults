@@ -1,3 +1,11 @@
----- x264_slice_init 匹配 (2 in 1 文件) ----
-Encoder.c (encoder):static inline void x264_slice_init( x264_t *h, int i_nal_type, int i_global_qp )
-Encoder.c (encoder):    x264_slice_init( h, i_nal_type, i_global_qp );
+---- sky Matches (10 in 3 files) ----
+Common.h (common):/*sky 2014.8.27 nalu_overhead_extension*/
+Common.h (common):	/*sky 2014.08.27 sh extension */
+Common.h (common): /*sky 2014.08.27 循环层次标识 */
+Set.h (common):/*sky 2014.08.27 添加   
+Set.h (common):	/*sky 2014.08.27 sps extension*/	
+Set.h (common):    /*sky 2014.08.27 pss extension*/
+Set.h (common):	/*sky 2014.08.23  b_base_pred_weight_table_flag*/
+X264.h: /*sky 2014.8.27 nal_unit_extension*/   
+X264.h:	/*sky 2014.08.27 nal extension*/
+X264.h:	/*sky 2014.08.27 param extension*/
