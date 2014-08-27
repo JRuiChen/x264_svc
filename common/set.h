@@ -158,6 +158,28 @@ typedef struct
     int b_qpprime_y_zero_transform_bypass;
     int i_chroma_format_idc;
 
+
+	/*sky 2014.08.27 sps extension*/	
+	int i_nal_type;
+	int b_inter_layer_deblocking_present; //sps中赋值,代码检测
+	int b_delta_pic_ord_always_zero_flag;
+// TMM_ESS{ 
+	int i_extended_spatial_scalability;
+	int b_chroma_phase_x_plus1_flag;
+	int i_chroma_phase_y_plus1;
+	int b_seq_ref_layer_chroma_phase_x_plus1_flag;
+	int i_seq_ref_layer_chroma_phase_y_plus1;	
+	int i_seq_scaled_ref_layer_left_offset;
+	int i_seq_scaled_ref_layer_top_offset;
+	int i_seq_scaled_ref_layer_right_offset;
+	int i_seq_scaled_ref_layer_bottom_offset;
+// TMM_ESS }
+	int b_seq_tcoeff_level_prediction_flag;
+	int b_adaptive_tcoeff_level_prediction_flag;
+	int b_slice_header_restriction_flag;
+	int b_svc_vui_parameters_present_flag;
+	int b_additional_extension2_flag;
+	//结束
 } x264_sps_t;
 
 typedef struct
@@ -189,6 +211,12 @@ typedef struct
 
     int i_cqm_preset;
     const uint8_t *scaling_list[8]; /* could be 12, but we don't allow separate Cb/Cr lists */
+
+    /*sky 2014.08.27 pss extension*/
+	/*sky 2014.08.23  b_base_pred_weight_table_flag*/
+	int b_base_pred_weight_table_flag ; //先赋值为1，再看
+	int i_slice_group_map_type  ;//这个值不能确定，但是不会走
+} x264_pps_t;
 
 } x264_pps_t;
 

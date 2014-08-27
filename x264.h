@@ -107,6 +107,20 @@ typedef struct
 
     /* Size of padding in bytes. */
     int i_padding;
+	/*sky 2014.08.27 nal extension*/
+	     	    int b_svc_extension;
+   	            int b_idr_flag;
+		     int i_priority_id;
+		// b_no_inter_layer_pred_flag这个值在prifix中为1 ，在unit_type == 20 且 quality > 0 时为0，一般为1
+	 	     int b_no_inter_layer_pred_flag;
+		     int i_dependency_id;
+		     int i_quality_id;
+		     int i_temporal_id;
+                     int b_use_ref_base_pic_flag;
+		     int b_discardable_flag;
+		     int b_output_flag;
+		//0x03
+		     int i_reserved_three_2bits ; 
 } x264_nal_t;
 
 /****************************************************************************
@@ -540,6 +554,11 @@ typedef struct x264_param_t
      * e.g. if doing multiple encodes in one process.
      */
     void (*nalu_process) ( x264_t *h, x264_nal_t *nal, void *opaque );
+
+	/*sky 2014.08.27 param extension*/
+		/* 添加层个数*/
+	int i_layer_number;
+	
 } x264_param_t;
 
 void x264_nal_encode( x264_t *h, uint8_t *dst, x264_nal_t *nal );
