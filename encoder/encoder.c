@@ -3698,7 +3698,7 @@ int     x264_encoder_encode( x264_t *h,
         /* All lengths are magic lengths that decoders expect to see */
         /* "UMID" SEI */
         x264_nal_start( h, NAL_SEI, NAL_PRIORITY_DISPOSABLE );
-        if( x264_sei_avcintra_umid_write( h, &h->out.bs ) < 0 )
+     E:\Projects\X264_Projects\x264_svcE:\Projects\X264_Projects\x264_svcE:\Projects\X264_Projects\x264_svc   if( x264_sei_avcintra_umid_write( h, &h->out.bs ) < 0 )
             return -1;
         if( x264_nal_end( h ) )
             return -1;
