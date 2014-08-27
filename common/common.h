@@ -591,10 +591,10 @@ struct x264_t
 
     /* Slice header */
     x264_slice_header_t sh;
-
+/*sky 2014.08.26 sps /pps 个数扩展sps[i_layer_number] 和pps[i_layer_number]，暂定为2*/
     /* SPS / PPS */
-    x264_sps_t      sps[1];
-    x264_pps_t      pps[1];
+    x264_sps_t      sps[2];
+    x264_pps_t      pps[2];
 
     /* Slice header backup, for SEI_DEC_REF_PIC_MARKING */
     int b_sh_backup;

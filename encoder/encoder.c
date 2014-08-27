@@ -198,9 +198,23 @@ static void x264_slice_header_init( x264_t *h, x264_slice_header_t *sh,
         sh->i_disable_deblocking_filter_idc = 1;
     sh->i_alpha_c0_offset = param->i_deblocking_filter_alphac0 << 1;
     sh->i_beta_offset = param->i_deblocking_filter_beta << 1;
+
+
+ 	/*sky 2014.08.25 条件不知道.初始化时设为-1*/
+
+  		sh->i_ref_layer_dq_id = -1;
+		
+
+   /*sky 2014.08.26 add sh->i_num_mbs_in_slice*/
+  // 这个地方是不是还会扩展啊
+    sh->i_num_mbs_in_slice = h ->mb.i_mb_count;
+    sh->b_slice_skip_flag = 0 // 初值0;
+    sh->i_scan_start = 0;
+    sh->i_scan_end = 15;
 }
 
-static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal_ref_idc )
+
+static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal_ref_idc) 
 {
     if( sh->b_mbaff )
     {
@@ -1824,42 +1838,6 @@ static void x264_nal_start( x264_t *h, int i_type, int i_ref_idc )
     nal->p_payload= &h->out.p_bitstream[bs_pos( &h->out.bs ) / 8];
     nal->i_padding= 0;
 
-	/*sky 2014.8.27 nal_start_extension*/
-    	{
-    		if(i_type == NAL_UNIT_PREFIX || i_type == NAL_UNIT_CODED_SLICE_SCALABLE)
-    			{
-				nal ->b_svc_extension = 1;
-				if( i_ref_idc == NAL_PRIORITY_HIGHEST )
-				       	nal ->b_idr_flag = 1;
-					else	
-						nal ->b_idr_flag = 0;
-				if( i_type == NAL_UNIT_PREFIX )
-					{
-						nal ->i_priority_id = 0 ;
-						nal ->b_no_inter_layer_pred_flag = 1 ;						
-						nal ->i_dependency_id = 0;
-						nal ->i_quality_id = 0;
-						nal ->i_temporal_id = 0;
-						nal ->b_use_ref_base_pic_flag = 0;
-						nal ->b_discardable_flag = 0;
-						nal ->b_output_flag = 1;
-						nal ->i_reserved_three_2bits = 3;
-					}
-				else
-					{
-						nal ->i_priority_id = 0 ;
-						nal ->b_no_inter_layer_pred_flag = 0 ;	
-						nal ->i_dependency_id = 1;
-						nal ->i_quality_id = 0;
-						nal ->i_temporal_id = 0;
-						nal ->b_use_ref_base_pic_flag = 0;
-						nal ->b_discardable_flag = 1;
-						nal ->b_output_flag = 1;
-						nal ->i_reserved_three_2bits = 3;
-					}
-				
-			}
-    	}
 
 }
 
