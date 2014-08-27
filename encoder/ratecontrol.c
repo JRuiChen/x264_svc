@@ -1204,6 +1204,7 @@ parse_error:
             h->thread[i]->mbEL1.ip_offset = h->mbEL1.ip_offset;
 	     h->thread[i]->mbEL2.b_variable_qp = h->mbEL2.b_variable_qp;
             h->thread[i]->mbEL2.ip_offset = h->mbEL2.ip_offset;
+			
         }
     }
 

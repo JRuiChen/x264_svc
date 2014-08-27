@@ -2203,6 +2203,14 @@ static inline void x264_reference_build_list( x264_t *h, int i_poc )
     /* build ref list 0/1 */
     h->mb.pic.i_fref[0] = h->i_ref[0] = 0;
     h->mb.pic.i_fref[1] = h->i_ref[1] = 0;
+    /* Add by chenjie */
+    h->mbBL.pic.i_fref[0] = h->i_ref[0] = 0;
+    h->mbBL.pic.i_fref[1] = h->i_ref[1] = 0;
+    h->mbEL1.pic.i_fref[0] = h->i_ref[0] = 0;
+    h->mbEL1.pic.i_fref[1] = h->i_ref[1] = 0;
+    h->mbEL2.pic.i_fref[0] = h->i_ref[0] = 0;
+    h->mbEL2.pic.i_fref[1] = h->i_ref[1] = 0;
+	
     if( h->sh.i_type == SLICE_TYPE_I )
         return;
 
@@ -2290,11 +2298,23 @@ static inline void x264_reference_build_list( x264_t *h, int i_poc )
             }
         }
         h->mb.ref_blind_dupe = idx;
+	  /* Add by chenjie */
+	  h->mbBL.ref_blind_dupe = idx;
+	  h->mbEL1.ref_blind_dupe = idx;
+	  h->mbEL2.ref_blind_dupe = idx;
+	  
     }
 
     assert( h->i_ref[0] + h->i_ref[1] <= X264_REF_MAX );
     h->mb.pic.i_fref[0] = h->i_ref[0];
     h->mb.pic.i_fref[1] = h->i_ref[1];
+    /* Add by chenjie */
+    h->mbBL.pic.i_fref[0] = h->i_ref[0];
+    h->mbBL.pic.i_fref[1] = h->i_ref[1];
+    h->mbEL1.pic.i_fref[0] = h->i_ref[0];
+    h->mbEL1.pic.i_fref[1] = h->i_ref[1];
+    h->mbEL2.pic.i_fref[0] = h->i_ref[0];
+    h->mbEL2.pic.i_fref[1] = h->i_ref[1];
 }
 
 static void x264_fdec_filter_row( x264_t *h, int mb_y, int pass )
