@@ -430,6 +430,24 @@ typedef struct
     int i_alpha_c0_offset;
     int i_beta_offset;
 
+	/*sky 2014.08.27 sh extension */
+		//参考层i_ref_layer_dq_id 
+	int i_ref_layer_dq_id ;
+	int b_constrained_intra_resampling_flag;
+	int b_slice_skip_flag; 
+	int i_num_mbs_in_slice;
+	  
+	int b_adaptive_base_mode_flag;
+	int b_default_base_mode_flag;
+	int b_adaptive_motion_prediction_flag;
+	int b_default_motion_prediction_flag;
+	int b_adaptive_residual_prediction_flag;
+	int b_default_residual_prediction_flag;
+
+	int i_scan_start;
+	int i_scan_end;
+	// sh扩展结束
+	
 } x264_slice_header_t;
 
 typedef struct x264_lookahead_t
@@ -972,6 +990,9 @@ struct x264_t
 #if HAVE_OPENCL
     x264_opencl_t opencl;
 #endif
+ /*sky 2014.08.27 循环层次标识 */
+    int i_layer_id ;
+
 };
 
 // included at the end because it needs x264_t
