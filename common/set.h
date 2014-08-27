@@ -224,7 +224,7 @@ typedef struct
 	int i_slice_group_map_type  ;//这个值不能确定，但是不会走
 } x264_pps_t;
 
-} x264_pps_t;
+
 
 /* default quant matrices */
 static const uint8_t x264_cqm_jvt4i[16] =
