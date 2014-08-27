@@ -108,6 +108,8 @@ do {\
 #define X264_WEIGHTP_FAKE (-1)
 
 #define NALU_OVERHEAD 5 // startcode + NAL type costs 5 bytes per frame
+/*sky 2014.8.17 nalu_overhead_extension*/
+#define NALU_OVERHEAR_EXTENSION 8 //startcode + NAL type +EXTENSION
 #define FILLER_OVERHEAD (NALU_OVERHEAD+1)
 #define SEI_OVERHEAD (NALU_OVERHEAD - (h->param.b_annexb && !h->param.b_avcintra_compat && (h->out.i_nal-1)))
 

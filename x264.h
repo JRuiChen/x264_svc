@@ -76,6 +76,11 @@ enum nal_unit_type_e
     NAL_AUD         = 9,
     NAL_FILLER      = 12,
     /* ref_idc == 0 for 6,9,10,11,12 */
+ /*sky 2014.8.27 nal_unit_extension*/   
+    	NAL_UNIT_CODED_SLICE_SCALABLE = 20,
+    	NAL_UNIT_SPS_EXTENSION = 13,
+    	NAL_UNIT_PREFIX = 14,
+    	NAL_UNIT_SUBSET_SPS = 15,
 };
 enum nal_priority_e
 {

@@ -1823,6 +1823,44 @@ static void x264_nal_start( x264_t *h, int i_type, int i_ref_idc )
     nal->i_payload= 0;
     nal->p_payload= &h->out.p_bitstream[bs_pos( &h->out.bs ) / 8];
     nal->i_padding= 0;
+
+	/*sky 2014.8.27 nal_start_extension*/
+    	{
+    		if(i_type == NAL_UNIT_PREFIX || i_type == NAL_UNIT_CODED_SLICE_SCALABLE)
+    			{
+				nal ->b_svc_extension = 1;
+				if( i_ref_idc == NAL_PRIORITY_HIGHEST )
+				       	nal ->b_idr_flag = 1;
+					else	
+						nal ->b_idr_flag = 0;
+				if( i_type == NAL_UNIT_PREFIX )
+					{
+						nal ->i_priority_id = 0 ;
+						nal ->b_no_inter_layer_pred_flag = 1 ;						
+						nal ->i_dependency_id = 0;
+						nal ->i_quality_id = 0;
+						nal ->i_temporal_id = 0;
+						nal ->b_use_ref_base_pic_flag = 0;
+						nal ->b_discardable_flag = 0;
+						nal ->b_output_flag = 1;
+						nal ->i_reserved_three_2bits = 3;
+					}
+				else
+					{
+						nal ->i_priority_id = 0 ;
+						nal ->b_no_inter_layer_pred_flag = 0 ;	
+						nal ->i_dependency_id = 1;
+						nal ->i_quality_id = 0;
+						nal ->i_temporal_id = 0;
+						nal ->b_use_ref_base_pic_flag = 0;
+						nal ->b_discardable_flag = 1;
+						nal ->b_output_flag = 1;
+						nal ->i_reserved_three_2bits = 3;
+					}
+				
+			}
+    	}
+
 }
 
 /* if number of allocated nals is not enough, re-allocate a larger one. */
