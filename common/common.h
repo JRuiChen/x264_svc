@@ -108,7 +108,7 @@ do {\
 #define X264_WEIGHTP_FAKE (-1)
 
 #define NALU_OVERHEAD 5 // startcode + NAL type costs 5 bytes per frame
-/*sky 2014.8.17 nalu_overhead_extension*/
+/*sky 2014.8.27 nalu_overhead_extension*/
 #define NALU_OVERHEAR_EXTENSION 8 //startcode + NAL type +EXTENSION
 #define FILLER_OVERHEAD (NALU_OVERHEAD+1)
 #define SEI_OVERHEAD (NALU_OVERHEAD - (h->param.b_annexb && !h->param.b_avcintra_compat && (h->out.i_nal-1)))
@@ -591,10 +591,10 @@ struct x264_t
 
     /* Slice header */
     x264_slice_header_t sh;
-/*sky 2014.08.26 sps /pps 个数扩展sps[i_layer_number] 和pps[i_layer_number]，暂定为2*/
+
     /* SPS / PPS */
-    x264_sps_t      sps[2];
-    x264_pps_t      pps[2];
+    x264_sps_t      sps[1];
+    x264_pps_t      pps[1];
 
     /* Slice header backup, for SEI_DEC_REF_PIC_MARKING */
     int b_sh_backup;
@@ -992,6 +992,7 @@ struct x264_t
 #if HAVE_OPENCL
     x264_opencl_t opencl;
 #endif
+
  /*sky 2014.08.27 循环层次标识 */
     int i_layer_id ;
 
