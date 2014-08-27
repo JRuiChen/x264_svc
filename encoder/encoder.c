@@ -200,13 +200,9 @@ static void x264_slice_header_init( x264_t *h, x264_slice_header_t *sh,
     sh->i_beta_offset = param->i_deblocking_filter_beta << 1;
 
 
- 	/*sky 2014.08.25 条件不知道.初始化时设为-1*/
+ /*sky 2014.08.27 条件不知道.初始化时设为-1*/
 
-  		sh->i_ref_layer_dq_id = -1;
-		
-
-   /*sky 2014.08.26 add sh->i_num_mbs_in_slice*/
-  // 这个地方是不是还会扩展啊
+    sh->i_ref_layer_dq_id = -1;	
     sh->i_num_mbs_in_slice = h ->mb.i_mb_count;
     sh->b_slice_skip_flag = 0 // 初值0;
     sh->i_scan_start = 0;
