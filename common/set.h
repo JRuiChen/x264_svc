@@ -218,12 +218,11 @@ typedef struct
     int i_cqm_preset;
     const uint8_t *scaling_list[8]; /* could be 12, but we don't allow separate Cb/Cr lists */
 
-    /*sky 2014.08.27 pss extension*/
+    /*sky 2014.08.27 pps extension*/
 	/*sky 2014.08.23  b_base_pred_weight_table_flag*/
 	int b_base_pred_weight_table_flag ; //先赋值为1，再看
 	int i_slice_group_map_type  ;//这个值不能确定，但是不会走
 } x264_pps_t;
-
 
 
 /* default quant matrices */
