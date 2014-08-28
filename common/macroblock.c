@@ -509,7 +509,7 @@ void x264_macroblock_thread_init( x264_t *h )
     h->mb.b_dct_decimate = h->sh.i_type == SLICE_TYPE_B ||
                           (h->param.analyse.b_dct_decimate && h->sh.i_type != SLICE_TYPE_I);
     h->mb.i_mb_prev_xy = -1;
-
+    
     /*          4:2:0                      4:2:2                      4:4:4
      * fdec            fenc       fdec            fenc       fdec            fenc
      * y y y y y y y   Y Y Y Y    y y y y y y y   Y Y Y Y    y y y y y y y   Y Y Y Y

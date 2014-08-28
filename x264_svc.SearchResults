@@ -1,0 +1,1395 @@
+---- x264_encoder_encode Matches (313 in 4 files) ----
+Encoder.c (encoder):3195
+ * x264_encoder_encode:
+ *  XXX: i_poc   : is the poc of the current given picture
+ *       i_frame : is the number of the frame being coded
+Encoder.c (encoder):3207
+int     x264_encoder_encode( x264_t *h,
+                             x264_nal_t **pp_nal, int *pi_nal,
+                             x264_picture_t *pic_in,
+Encoder.c (encoder):3212
+    printf ("x264_encoder_encode()-------------\n");
+    x264_t *thread_current, *thread_prev, *thread_oldest;
+    int i_nal_type, i_nal_ref_idc, i_global_qp;
+Log.txt:3
+x264_encoder_encode()-------------
+encode i_frame = 1------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 2------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 3------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 4------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 5------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 6------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 7------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 8------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 9------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 10------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 11------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 12------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 13------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 14------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 15------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 16------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 17------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 18------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 19------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 20------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 21------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 22------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 23------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 24------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 25------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 26------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 27------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 28------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 29------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 30------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 31------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 32------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 33------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 34------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 35------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 36------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 37------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 38------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 39------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 40------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 41------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 42------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 43------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+encode i_frame = 44------------>
+encode_frame()***************
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:141
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:147
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:153
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:159
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:187
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:193
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:199
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:205
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:211
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:239
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:245
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:251
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:257
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:263
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:291
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:297
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:303
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:309
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:315
+x264_encoder_encode()-------------
+threads ---->1
+A-->1
+Log.txt:343
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:349
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:355
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:364
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:370
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:395
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:401
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:407
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:413
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:419
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:447
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:453
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:459
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:465
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:471
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:499
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:505
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:511
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:517
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:523
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:551
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:557
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:563
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:569
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:581
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:603
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:609
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:615
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:621
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:627
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:655
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:661
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:667
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:673
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:679
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:707
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:713
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:719
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:725
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:731
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:759
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:765
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:771
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:777
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:783
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:811
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:817
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:823
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:829
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:835
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:863
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:869
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:875
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:881
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:887
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:915
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:921
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:927
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:933
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:939
+x264_encoder_encode()-------------
+threads ---->1
+A-->1
+Log.txt:967
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:973
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:979
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:985
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:991
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1019
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1025
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1031
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1037
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1043
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1071
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1077
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1083
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1089
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1095
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1123
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1129
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1135
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1141
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1147
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1175
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1181
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1187
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1193
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1199
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1227
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1233
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1239
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1245
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1251
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1279
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1285
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1291
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1297
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1303
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1331
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1337
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1343
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1349
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1355
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1383
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1389
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1395
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1401
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1407
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1435
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1441
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1447
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1456
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1462
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1487
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1493
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1499
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1505
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1511
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1539
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1545
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1551
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1557
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1563
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1591
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1597
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1603
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1609
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1615
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1643
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1649
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1655
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1661
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1667
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1695
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1701
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1707
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1713
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1719
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1747
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1753
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1759
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1765
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1771
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1799
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1805
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1811
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1817
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1823
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1851
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1857
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1863
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1869
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1875
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1903
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1909
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1915
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1921
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1927
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1955
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1961
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1967
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1973
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:1979
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2007
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2013
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2019
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2025
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2031
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2059
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2065
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2071
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2077
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2083
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2111
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2117
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2123
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2129
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2135
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2163
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2169
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2175
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2181
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2187
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2215
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2221
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2227
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2233
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2239
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2267
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2273
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2279
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2285
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2291
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2319
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2325
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2331
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2337
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2343
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2371
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2377
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2383
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2389
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2395
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2423
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2429
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2435
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2441
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2447
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2475
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2481
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2487
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2493
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2499
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2527
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2533
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2539
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2545
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2557
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2579
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2585
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2591
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2597
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2603
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2631
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2637
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2643
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2649
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2655
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2683
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2689
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2695
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2701
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2707
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2735
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2741
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2747
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2753
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2759
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2787
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2794
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2800
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2806
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2812
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2837
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2845
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2851
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2857
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2864
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2892
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2898
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2904
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2910
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2916
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2944
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2950
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2956
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2962
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2968
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:2996
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3002
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3008
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3014
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3020
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3048
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3054
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3060
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3066
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3072
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3100
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3106
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3112
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3118
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3124
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3152
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3158
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3164
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3170
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3176
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3204
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3210
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3216
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3222
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3228
+x264_encoder_encode()-------------
+if----------i_thread_frames = 5
+h->param.i_threads = 5
+Log.txt:3256
+x264_encoder_encode()-------------
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+ in  x264_encoder_delayed_frames ---------------
+encode_frame()***************
+x264_encoder_encode()-------------
+X264.c:1771
+    i_frame_size = x264_encoder_encode( h, &nal, &i_nal, pic, &pic_out );
+
+    FAIL_IF_ERROR( i_frame_size < 0, "x264_encoder_encode failed\n" );
+
+    if( i_frame_size )
+X264.h:96
+ * valid after the next call to x264_encoder_encode.  Thus it must be used or copied
+ * before calling x264_encoder_encode or x264_encoder_headers again. */
+typedef struct
+{
+X264.h:536
+     * the NAL unit were output by x264_encoder_encode.
+     *
+     * This does not need to be synchronous with the encoding process: the data pointed to
+X264.h:540
+     * x264_encoder_encode call.  The callback must be re-entrant.
+     *
+     * This callback does not work with frame-based threads; threads must be disabled
+X264.h:551
+     * When this callback is enabled, x264_encoder_encode does not return valid NALs;
+     * the calling application is expected to acquire all output NALs through the callback.
+     *
+X264.h:913
+/* x264_encoder_encode:
+ *      encode one picture.
+ *      *pi_nal is the number of NAL units outputted in pp_nal.
+X264.h:918
+int     x264_encoder_encode( x264_t *, x264_nal_t **pp_nal, int *pi_nal, x264_picture_t *pic_in, x264_picture_t *pic_out );
+/* x264_encoder_close:
+ *      close an encoder handler */
+X264.h:942
+ *      Should not be called during an x264_encoder_encode. */
+void    x264_encoder_intra_refresh( x264_t * );
+/* x264_encoder_invalidate_reference:
+X264.h:963
+ *      Should not be called during an x264_encoder_encode, but multiple calls can be made simultaneously.
+ *
+ *      Returns 0 on success, negative on failure. */
