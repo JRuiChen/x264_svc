@@ -797,6 +797,10 @@ int x264_ratecontrol_new( x264_t *h )
     }
 
     h->mb.b_variable_qp = rc->b_vbv || h->param.rc.i_aq_mode;
+    /* Add by chenjie */
+    h->mbBL.b_variable_qp = rc->b_vbv || h->param.rc.i_aq_mode;
+    h->mbEL1.b_variable_qp = rc->b_vbv || h->param.rc.i_aq_mode;
+    h->mbEL2.b_variable_qp = rc->b_vbv || h->param.rc.i_aq_mode;
 
     if( rc->b_abr )
     {
@@ -816,6 +820,10 @@ int x264_ratecontrol_new( x264_t *h )
     rc->qp_constant[SLICE_TYPE_I] = x264_clip3( h->param.rc.i_qp_constant - rc->ip_offset + 0.5, 0, QP_MAX );
     rc->qp_constant[SLICE_TYPE_B] = x264_clip3( h->param.rc.i_qp_constant + rc->pb_offset + 0.5, 0, QP_MAX );
     h->mb.ip_offset = rc->ip_offset + 0.5;
+    /* Add by chenjie */
+    h->mbBL.ip_offset = rc->ip_offset + 0.5;
+    h->mbEL1.ip_offset = rc->ip_offset + 0.5;
+    h->mbEL2.ip_offset = rc->ip_offset + 0.5;
 
     rc->lstep = pow( 2, h->param.rc.i_qp_step / 6.0 );
     rc->last_qscale = qp2qscale( 26 );
@@ -964,6 +972,10 @@ int x264_ratecontrol_new( x264_t *h )
             {
                 x264_log( h, X264_LOG_WARNING, "direct=auto not used on the first pass\n" );
                 h->mb.b_direct_auto_write = 1;
+		   /* Add by chenjie */
+		   h->mbBL.b_direct_auto_write = 1;
+		   h->mbEL1.b_direct_auto_write = 1;
+		   h->mbEL2.b_direct_auto_write = 1;
             }
 
             if( ( p = strstr( opts, "b_adapt=" ) ) && sscanf( p, "b_adapt=%d", &i ) && i >= X264_B_ADAPT_NONE && i <= X264_B_ADAPT_TRELLIS )
@@ -1185,6 +1197,14 @@ parse_error:
             h->thread[i]->param = h->param;
             h->thread[i]->mb.b_variable_qp = h->mb.b_variable_qp;
             h->thread[i]->mb.ip_offset = h->mb.ip_offset;
+	     /* Add by chenjie */
+	     h->thread[i]->mbBL.b_variable_qp = h->mbBL.b_variable_qp;
+            h->thread[i]->mbBL.ip_offset = h->mbBL.ip_offset;
+	     h->thread[i]->mbEL1.b_variable_qp = h->mbEL1.b_variable_qp;
+            h->thread[i]->mbEL1.ip_offset = h->mbEL1.ip_offset;
+	     h->thread[i]->mbEL2.b_variable_qp = h->mbEL2.b_variable_qp;
+            h->thread[i]->mbEL2.ip_offset = h->mbEL2.ip_offset;
+			
         }
     }
 

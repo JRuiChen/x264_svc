@@ -790,6 +790,11 @@ static int x264_validate_parameters( x264_t *h, int b_open )
         && h->param.rc.i_qp_constant == 0 )
     {
         h->mb.b_lossless = 1;
+        /* Add by chenjie */
+	 h->mbBL.b_lossless = 1;
+	 h->mbEL1.b_lossless = 1;
+	 h->mbEL2.b_lossless = 1;
+	 
         h->param.i_cqm_preset = X264_CQM_FLAT;
         h->param.psz_cqm_file = NULL;
         h->param.rc.i_rc_method = X264_RC_CQP;
@@ -1070,6 +1075,16 @@ static int x264_validate_parameters( x264_t *h, int b_open )
     h->param.analyse.f_psy_trellis = x264_clip3f( h->param.analyse.f_psy_trellis, 0, 10 );
     h->mb.i_psy_rd = h->param.analyse.i_subpel_refine >= 6 ? FIX8( h->param.analyse.f_psy_rd ) : 0;
     h->mb.i_psy_trellis = h->param.analyse.i_trellis ? FIX8( h->param.analyse.f_psy_trellis / 4 ) : 0;
+    /* Add by chenjie */
+    h->mbBL.i_psy_rd = h->param.analyse.i_subpel_refine >= 6 ? FIX8( h->param.analyse.f_psy_rd ) : 0;
+    h->mbBL.i_psy_trellis = h->param.analyse.i_trellis ? FIX8( h->param.analyse.f_psy_trellis / 4 ) : 0;
+    h->mbEL1.i_psy_rd = h->param.analyse.i_subpel_refine >= 6 ? FIX8( h->param.analyse.f_psy_rd ) : 0;
+    h->mbEL1.i_psy_trellis = h->param.analyse.i_trellis ? FIX8( h->param.analyse.f_psy_trellis / 4 ) : 0;
+    h->mbEL2.i_psy_rd = h->param.analyse.i_subpel_refine >= 6 ? FIX8( h->param.analyse.f_psy_rd ) : 0;
+    h->mbEL2.i_psy_trellis = h->param.analyse.i_trellis ? FIX8( h->param.analyse.f_psy_trellis / 4 ) : 0;
+
+
+	
     h->param.analyse.i_chroma_qp_offset = x264_clip3(h->param.analyse.i_chroma_qp_offset, -32, 32);
     /* In 4:4:4 mode, chroma gets twice as much resolution, so we can halve its quality. */
     if( b_open && i_csp >= X264_CSP_I444 && i_csp < X264_CSP_BGR && h->param.analyse.b_psy )
@@ -1429,6 +1444,47 @@ x264_t *x264_encoder_open( x264_param_t *param )
      * The chosen solution is to make MBAFF non-adaptive in this case. */
     h->mb.b_adaptive_mbaff = PARAM_INTERLACED && h->param.analyse.i_subpel_refine;
 
+    /* Add by chenjie */
+    h->mbBL.i_mb_width = h->sps->i_mb_width;
+    h->mbBL.i_mb_height = h->sps->i_mb_height;
+    h->mbBL.i_mb_count = h->mbBL.i_mb_width * h->mbBL.i_mb_height;
+
+    h->mbBL.chroma_h_shift = CHROMA_FORMAT == CHROMA_420 || CHROMA_FORMAT == CHROMA_422;
+    h->mbBL.chroma_v_shift = CHROMA_FORMAT == CHROMA_420;
+
+    /* Adaptive MBAFF and subme 0 are not supported as we require halving motion
+     * vectors during prediction, resulting in hpel mvs.
+     * The chosen solution is to make MBAFF non-adaptive in this case. */
+    h->mbBL.b_adaptive_mbaff = PARAM_INTERLACED && h->param.analyse.i_subpel_refine;
+
+
+    h->mbEL1.i_mb_width = h->sps->i_mb_width;
+    h->mbEL1.i_mb_height = h->sps->i_mb_height;
+    h->mbEL1.i_mb_count = h->mbEL1.i_mb_width * h->mbEL1.i_mb_height;
+
+    h->mbEL1.chroma_h_shift = CHROMA_FORMAT == CHROMA_420 || CHROMA_FORMAT == CHROMA_422;
+    h->mbEL1.chroma_v_shift = CHROMA_FORMAT == CHROMA_420;
+
+    /* Adaptive MBAFF and subme 0 are not supported as we require halving motion
+     * vectors during prediction, resulting in hpel mvs.
+     * The chosen solution is to make MBAFF non-adaptive in this case. */
+    h->mbEL1.b_adaptive_mbaff = PARAM_INTERLACED && h->param.analyse.i_subpel_refine;
+
+    h->mbEL2.i_mb_width = h->sps->i_mb_width;
+    h->mbEL2.i_mb_height = h->sps->i_mb_height;
+    h->mbEL2.i_mb_count = h->mbEL2.i_mb_width * h->mbEL2.i_mb_height;
+
+    h->mbEL2.chroma_h_shift = CHROMA_FORMAT == CHROMA_420 || CHROMA_FORMAT == CHROMA_422;
+    h->mbEL2.chroma_v_shift = CHROMA_FORMAT == CHROMA_420;
+
+    /* Adaptive MBAFF and subme 0 are not supported as we require halving motion
+     * vectors during prediction, resulting in hpel mvs.
+     * The chosen solution is to make MBAFF non-adaptive in this case. */
+    h->mbEL2.b_adaptive_mbaff = PARAM_INTERLACED && h->param.analyse.i_subpel_refine;
+
+
+
+	
     /* Init frames. */
     if( h->param.i_bframe_adaptive == X264_B_ADAPT_TRELLIS && !h->param.rc.b_stat_read )
         h->frames.i_delay = X264_MAX(h->param.i_bframe,3)*4;
@@ -2147,6 +2203,14 @@ static inline void x264_reference_build_list( x264_t *h, int i_poc )
     /* build ref list 0/1 */
     h->mb.pic.i_fref[0] = h->i_ref[0] = 0;
     h->mb.pic.i_fref[1] = h->i_ref[1] = 0;
+    /* Add by chenjie */
+    h->mbBL.pic.i_fref[0] = h->i_ref[0] = 0;
+    h->mbBL.pic.i_fref[1] = h->i_ref[1] = 0;
+    h->mbEL1.pic.i_fref[0] = h->i_ref[0] = 0;
+    h->mbEL1.pic.i_fref[1] = h->i_ref[1] = 0;
+    h->mbEL2.pic.i_fref[0] = h->i_ref[0] = 0;
+    h->mbEL2.pic.i_fref[1] = h->i_ref[1] = 0;
+	
     if( h->sh.i_type == SLICE_TYPE_I )
         return;
 
@@ -2234,11 +2298,23 @@ static inline void x264_reference_build_list( x264_t *h, int i_poc )
             }
         }
         h->mb.ref_blind_dupe = idx;
+	  /* Add by chenjie */
+	  h->mbBL.ref_blind_dupe = idx;
+	  h->mbEL1.ref_blind_dupe = idx;
+	  h->mbEL2.ref_blind_dupe = idx;
+	  
     }
 
     assert( h->i_ref[0] + h->i_ref[1] <= X264_REF_MAX );
     h->mb.pic.i_fref[0] = h->i_ref[0];
     h->mb.pic.i_fref[1] = h->i_ref[1];
+    /* Add by chenjie */
+    h->mbBL.pic.i_fref[0] = h->i_ref[0];
+    h->mbBL.pic.i_fref[1] = h->i_ref[1];
+    h->mbEL1.pic.i_fref[0] = h->i_ref[0];
+    h->mbEL1.pic.i_fref[1] = h->i_ref[1];
+    h->mbEL2.pic.i_fref[0] = h->i_ref[0];
+    h->mbEL2.pic.i_fref[1] = h->i_ref[1];
 }
 
 static void x264_fdec_filter_row( x264_t *h, int mb_y, int pass )
