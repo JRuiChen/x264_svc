@@ -1378,7 +1378,7 @@ x264_t *x264_encoder_open( x264_param_t *param )
     CHECKED_MALLOCZERO( h, sizeof(x264_t) );
 
     /* Add by chenjie */
-    up_sampling_arg.pH = h;
+ //   up_sampling_arg.pH = h;
     up_sampling_arg.exit = 0;
  
 
@@ -3176,6 +3176,7 @@ static int x264_threaded_slices_write( x264_t *h )
 {
     /* Add by chenjie */
 	i_slice_encode_threads_finished = 0;
+	up_sampling_arg.pH = h;
     printf ("in x264_threaded_slices_write ---->\n");
     printf ("h->param.i_threads ---->%d\n", h->param.i_threads);
     printf ("h->i_thread_frames------>%d\n", h->i_thread_frames);
