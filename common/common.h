@@ -438,7 +438,11 @@ typedef struct
 	int b_constrained_intra_resampling_flag;
 	int b_slice_skip_flag; 
 	int i_num_mbs_in_slice;
-	  
+
+	  /*int b_adaptive_base_mode_flag;
+	int b_adaptive_motion_prediction_flag;
+	int b_adaptive_residual_prediction_flag;
+	sh里边这几个值如果是0的话其实是不用改的*/
 	int b_adaptive_base_mode_flag;
 	int b_default_base_mode_flag;
 	int b_adaptive_motion_prediction_flag;
