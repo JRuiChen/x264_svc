@@ -497,6 +497,91 @@ void x264_macroblock_slice_init( x264_t *h )
     h->mb.i_neighbour8[3] = MB_LEFT|MB_TOP|MB_TOPLEFT;
 }
 
+
+
+
+/*init macroblock slice of enhance layer - BY MING*/
+void x264_macroblock_slice_init_EL(x264_t* h)
+{
+    h->mbEL1.mv[0] = h->fdec.mvEL1[0];
+	h->mbEL1.mv[1] = h->fdec.mvEL1[1];
+	h->mbEL1.mvr[0][0] = h->fdec.mvEL116x16;
+	h->mbEL1.ref[0] = h->fdec->ref[0];
+    h->mbEL1.ref[1] = h->fdec->ref[1];
+    h->mbEL1.type = h->fdec->mb_type;
+    h->mbEL1.partition = h->fdec->mb_partition;
+    h->mbEL1.field = h->fdec->field;
+
+    h->fdec->i_ref[0] = h->i_ref[0];
+    h->fdec->i_ref[1] = h->i_ref[1];
+    for( int i = 0; i < h->i_ref[0]; i++ )
+        h->fdec->ref_poc[0][i] = h->fref[0][i]->i_poc;
+    if( h->sh.i_type == SLICE_TYPE_B )
+    {
+        for( int i = 0; i < h->i_ref[1]; i++ )
+            h->fdec->ref_poc[1][i] = h->fref[1][i]->i_poc;
+
+        map_col_to_list0(-1) = -1;
+        map_col_to_list0(-2) = -2;
+        for( int i = 0; i < h->fref[1][0]->i_ref[0]; i++ )
+        {
+            int poc = h->fref[1][0]->ref_poc[0][i];
+            map_col_to_list0(i) = -2;
+            for( int j = 0; j < h->i_ref[0]; j++ )
+                if( h->fref[0][j]->i_poc == poc )
+                {
+                    map_col_to_list0(i) = j;
+                    break;
+                }
+        }
+    }
+    else if( h->sh.i_type == SLICE_TYPE_P )
+    {
+        if( h->sh.i_disable_deblocking_filter_idc != 1 && h->param.analyse.i_weighted_pred == X264_WEIGHTP_SMART )
+        {
+            deblock_ref_table(-2) = -2;
+            deblock_ref_table(-1) = -1;
+            for( int i = 0; i < h->i_ref[0] << SLICE_MBAFF; i++ )
+            {
+                /* Mask off high bits to avoid frame num collisions with -1/-2.
+                 * In current x264 frame num values don't cover a range of more
+                 * than 32, so 6 bits is enough for uniqueness. */
+                if( !MB_INTERLACED )
+                    deblock_ref_table(i) = h->fref[0][i]->i_frame_num&63;
+                else
+                    deblock_ref_table(i) = ((h->fref[0][i>>1]->i_frame_num&63)<<1) + (i&1);
+            }
+        }
+    }
+
+    /* init with not available (for top right idx=7,15) */
+    memset( h->mbEL1.cache.ref, -2, sizeof( h->mbEL1.cache.ref ) );
+
+    if( h->i_ref[0] > 0 )
+        for( int field = 0; field <= SLICE_MBAFF; field++ )
+        {
+            int curpoc = h->fdec->i_poc + h->fdec->i_delta_poc[field];
+            int refpoc = h->fref[0][0]->i_poc + h->fref[0][0]->i_delta_poc[field];
+            int delta = curpoc - refpoc;
+
+            h->fdec->inv_ref_poc[field] = (256 + delta/2) / delta;
+        }
+
+    h->mbEL1.i_neighbour4[6] =
+    h->mbEL1.i_neighbour4[9] =
+    h->mbEL1.i_neighbour4[12] =
+    h->mbEL1.i_neighbour4[14] = MB_LEFT|MB_TOP|MB_TOPLEFT|MB_TOPRIGHT;
+    h->mbEL1.i_neighbour4[3] =
+    h->mbEL1.i_neighbour4[7] =
+    h->mbEL1.i_neighbour4[11] =
+    h->mbEL1.i_neighbour4[13] =
+    h->mbEL1.i_neighbour4[15] =
+    h->mbEL1.i_neighbour8[3] = MB_LEFT|MB_TOP|MB_TOPLEFT;
+	
+}
+
+
+
 void x264_macroblock_thread_init( x264_t *h )
 {
     h->mb.i_me_method = h->param.analyse.i_me_method;
@@ -543,6 +628,75 @@ void x264_macroblock_thread_init( x264_t *h )
         h->mb.pic.p_fdec[2] = h->mb.pic.fdec_buf + 19*FDEC_STRIDE + 16;
     }
 }
+
+
+
+
+
+
+
+
+/*macroblock_thread init in enhance layer - BY MING */ 
+void x264_macroblock_thread_init_EL( x264_t *h )
+{
+    h->mbEL1.i_me_method = h->param.analyse.i_me_method;
+    h->mbEL1.i_subpel_refine = h->param.analyse.i_subpel_refine;
+    if( h->sh.i_type == SLICE_TYPE_B && (h->mbEL1.i_subpel_refine == 6 || h->mbEL1.i_subpel_refine == 8) )
+        h->mbEL1.i_subpel_refine--;
+    h->mbEL1.b_chroma_me = h->param.analyse.b_chroma_me &&
+                        ((h->sh.i_type == SLICE_TYPE_P && h->mbEL1.i_subpel_refine >= 5) ||
+                         (h->sh.i_type == SLICE_TYPE_B && h->mbEL1.i_subpel_refine >= 9));
+    h->mbEL1.b_dct_decimate = h->sh.i_type == SLICE_TYPE_B ||
+                          (h->param.analyse.b_dct_decimate && h->sh.i_type != SLICE_TYPE_I);
+    h->mbEL1.i_mb_prev_xy = -1;
+    
+    /*          4:2:0                      4:2:2                      4:4:4
+     * fdec            fenc       fdec            fenc       fdec            fenc
+     * y y y y y y y   Y Y Y Y    y y y y y y y   Y Y Y Y    y y y y y y y   Y Y Y Y
+     * y Y Y Y Y       Y Y Y Y    y Y Y Y Y       Y Y Y Y    y Y Y Y Y       Y Y Y Y
+     * y Y Y Y Y       Y Y Y Y    y Y Y Y Y       Y Y Y Y    y Y Y Y Y       Y Y Y Y
+     * y Y Y Y Y       Y Y Y Y    y Y Y Y Y       Y Y Y Y    y Y Y Y Y       Y Y Y Y
+     * y Y Y Y Y       U U V V    y Y Y Y Y       U U V V    y Y Y Y Y       U U U U
+     * u u u   v v v   U U V V    u u u   v v v   U U V V    u u u u u u u   U U U U
+     * u U U   v V V              u U U   v V V   U U V V    u U U U U       U U U U
+     * u U U   v V V              u U U   v V V   U U V V    u U U U U       U U U U
+     *                            u U U   v V V              u U U U U       V V V V
+     *                            u U U   v V V              u U U U U       V V V V
+     *                                                       v v v v v v v   V V V V
+     *                                                       v V V V V       V V V V
+     *                                                       v V V V V
+     *                                                       v V V V V
+     *                                                       v V V V V
+     */
+    h->mbEL1.pic.p_fenc[0] = h->mbEL1.pic.fenc_buf;
+    h->mbEL1.pic.p_fdec[0] = h->mbEL1.pic.fdec_buf + 2*FDEC_STRIDE;
+    h->mbEL1.pic.p_fenc[1] = h->mbEL1.pic.fenc_buf + 16*FENC_STRIDE;
+    h->mbEL1.pic.p_fdec[1] = h->mbEL1.pic.fdec_buf + 19*FDEC_STRIDE;
+    if( CHROMA444 )
+    {
+        h->mbEL1.pic.p_fenc[2] = h->mbEL1.pic.fenc_buf + 32*FENC_STRIDE;
+        h->mbEL1.pic.p_fdec[2] = h->mbEL1.pic.fdec_buf + 36*FDEC_STRIDE;
+    }
+    else
+    {
+        h->mbEL1.pic.p_fenc[2] = h->mbEL1.pic.fenc_buf + 16*FENC_STRIDE + 8;
+        h->mbEL1.pic.p_fdec[2] = h->mbEL1.pic.fdec_buf + 19*FDEC_STRIDE + 16;
+    }
+}
+
+void x264_prefetch_fenc( x264_t *h, x264_frame_t *fenc, int i_mb_x, int i_mb_y )
+{
+    int stride_y  = fenc->i_stride[0];
+    int stride_uv = fenc->i_stride[1];
+    int off_y  = 16 * i_mb_x + 16 * i_mb_y * stride_y;
+    int off_uv = 16 * i_mb_x + (16 * i_mb_y * stride_uv >> CHROMA_V_SHIFT);
+    h->mc.prefetch_fenc( fenc->plane[0]+off_y, stride_y,
+                         fenc->plane[1]+off_uv, stride_uv, i_mb_x );
+}
+
+
+
+
 
 void x264_prefetch_fenc( x264_t *h, x264_frame_t *fenc, int i_mb_x, int i_mb_y )
 {

@@ -179,6 +179,16 @@ typedef struct x264_frame
     uint8_t *field;
     uint8_t *effective_qp;
 
+	/*motion data in Enhance Layer - BY MING*/
+    int8_t  *mbEL1_type;
+    uint8_t *mbEL1_partition;
+    int16_t (*mvEL1[2])[2];
+    int16_t (*mvEL16x16)[2];
+    int16_t (*lowres_mvsEL1[2][X264_BFRAME_MAX+1])[2];
+    uint8_t *fieldEL1;
+    uint8_t *effective_qpEL1;
+
+
     /* Stored as (lists_used << LOWRES_COST_SHIFT) + (cost).
      * Doesn't need special addressing for intra cost because
      * lists_used is guaranteed to be zero in that cast. */
