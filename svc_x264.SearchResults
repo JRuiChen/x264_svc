@@ -1,0 +1,39 @@
+---- sky Matches (38 in 6 files) ----
+Common.h (common):/*sky 2014.8.27 nalu_overhead_extension*/
+Common.h (common):	/*sky 2014.08.27 sh extension */
+Common.h (common):/*sky 2014.08.28 sps pps [i_layer_number]扩展 ，暂时设为2*/
+Common.h (common): /*sky 2014.08.27 h 扩展循环层次标识 */
+Encoder.c (encoder):	/*sky 2014.08.28  sh init extension*/
+Encoder.c (encoder):/*sky 2014.08.28 add &h->out.nal[h->out.i_nal]*/
+Encoder.c (encoder):	/*sky 2014.08.28 add sh writer nal扩展头*/
+Encoder.c (encoder):/*sky 2014.08.28 add sh->sps->i_poc_type == 1*/
+Encoder.c (encoder):/*sky 2014.08.23 添加nal ->i_quality_id == 0*/
+Encoder.c (encoder):	/*sky 2014.08.23 添   if(!nal->b_no_inter_layer_pred_flag)*/
+Encoder.c (encoder):		/*sky 2014.08.23 添加if(!sh->sps->b_slice_header_restriction_flag)*/
+Encoder.c (encoder):	/*sky 2014.08.25  add svc */
+Encoder.c (encoder):/*sky 2014.08.28 sps pps init extension*/
+Encoder.c (encoder):   /*sky 2014.8.17 nal_start_extension*/
+Encoder.c (encoder):	/*sky 2014.08.19 header_write extension*/
+Encoder.c (encoder):	/*sky 2014.08.28 [h->i_layer_id]*/
+Encoder.c (encoder):/*sky 2014.08.28添加扩展层*/
+Encoder.c (encoder):   /*sky 2014.08.28 &h->out.nal[h->out.i_nal]*/
+Encoder.c (encoder):	/*sky 2014.8.28 prifix write */
+Encoder.c (encoder):        	/*sky 2014.08.28 sps[]*/
+Encoder.c (encoder):	/*	sky 2014.08.29 add nalu_overhead_extension*/			
+Encoder.c (encoder):	/*sky 2014.08.28 pps[]*/
+Set.c (encoder):/*	sky 2014.08.28 添加ssps 情况下 i_profile_idc*/
+Set.c (encoder):   /*sky 2014.08.28 sps init 添加 ||sps->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE;*/
+Set.c (encoder):  /*sky 2014.08.21为了和输出码流对应从上述语句改为下述*/
+Set.c (encoder):  /*sky 2014.08.21，没有看懂邋i_level_idc的取值关系和意义，为了跟码流对上添加如下句子*/
+Set.c (encoder): /*sky 2014.08.20 sps init extension*/
+Set.c (encoder):/*sky 2014.08.28 添加了 ||sps->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE
+Set.c (encoder):	/*sky 2014.08.28 添加ssps write*/
+Set.c (encoder):	/*sky 2014.08.28 pps init extension*/
+Set.h (common):/*sky 2014.08.27 添加     profile extension*/
+Set.h (common):/*sky 2014.8.28 x264_prifix_t*/
+Set.h (common):	/*sky 2014.08.27 sps extension*/	
+Set.h (common):    /*sky 2014.08.27 pps extension*/
+X264.c:/*sky  2014.08.28 param parse extension */
+X264.h: /*sky 2014.8.27 nal_unit_extension*/   
+X264.h:	/*sky 2014.08.27 nal extension*/
+X264.h:	/*sky 2014.08.27 param extension*/

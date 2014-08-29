@@ -109,7 +109,7 @@ do {\
 
 #define NALU_OVERHEAD 5 // startcode + NAL type costs 5 bytes per frame
 /*sky 2014.8.27 nalu_overhead_extension*/
-#define NALU_OVERHEAR_EXTENSION 8 //startcode + NAL type +EXTENSION
+#define NALU_OVERHEAD_EXTENSION 8 //startcode + NAL type +EXTENSION
 #define FILLER_OVERHEAD (NALU_OVERHEAD+1)
 #define SEI_OVERHEAD (NALU_OVERHEAD - (h->param.b_annexb && !h->param.b_avcintra_compat && (h->out.i_nal-1)))
 
@@ -566,10 +566,10 @@ struct x264_t
     int             b_queued_intra_refresh;
     int64_t         i_last_idr_pts;
 
-    int             i_idr_pic_id;
+    int             i_idr_pic_id;	
 
-    /* quantization matrix for decoding, [cqm][qp%6][coef] */
-    int             (*dequant4_mf[4])[16];   /* [4][6][16] */
+ /* quantization matrix for decoding, [cqm][qp%6][coef] */
+    int            (*dequant4_mf[4])[16];   /* [4][6][16] */
     int             (*dequant8_mf[4])[64];   /* [4][6][64] */
     /* quantization matrix for trellis, [cqm][qp][coef] */
     int             (*unquant4_mf[4])[16];   /* [4][52][16] */
@@ -584,7 +584,7 @@ struct x264_t
     udctcoef        (*nr_offset_emergency)[4][64];
 
     /* mv/ref cost arrays. */
-    uint16_t *cost_mv[QP_MAX+1];
+    uint16_t *cost_mv[QP_MAX+1];	
     uint16_t *cost_mv_fpel[QP_MAX+1][4];
 
     const uint8_t   *chroma_qp_table; /* includes both the nonlinear luma->chroma mapping and chroma_qp_offset */
@@ -592,9 +592,13 @@ struct x264_t
     /* Slice header */
     x264_slice_header_t sh;
 
-    /* SPS / PPS */
-    x264_sps_t      sps[1];
-    x264_pps_t      pps[1];
+/*sky 2014.08.28 sps pps [i_layer_number]扩展 ，暂时设为2*/
+/* SPS / PPS */
+    x264_sps_t      sps[2];
+    x264_pps_t      pps[2];
+
+
+	
 
     /* Slice header backup, for SEI_DEC_REF_PIC_MARKING */
     int b_sh_backup;
@@ -1240,7 +1244,7 @@ struct x264_t
     x264_opencl_t opencl;
 #endif
 
- /*sky 2014.08.27 循环层次标识 */
+ /*sky 2014.08.27 h 扩展循环层次标识 */
     int i_layer_id ;
 
 };
