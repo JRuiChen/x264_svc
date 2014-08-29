@@ -386,6 +386,106 @@ if(nal ->i_quality_id == 0)
 			}
     	}
     }
+else if(nal->i_quality_id == -1 )
+{
+	 if( sh->pps->b_redundant_pic_cnt )
+        bs_write_ue( s, sh->i_redundant_pic_cnt );
+
+    if( sh->i_type == SLICE_TYPE_B )
+        bs_write1( s, sh->b_direct_spatial_mv_pred );
+
+    if( sh->i_type == SLICE_TYPE_P || sh->i_type == SLICE_TYPE_B )
+    {
+        bs_write1( s, sh->b_num_ref_idx_override );
+        if( sh->b_num_ref_idx_override )
+        {
+            bs_write_ue( s, sh->i_num_ref_idx_l0_active - 1 );
+            if( sh->i_type == SLICE_TYPE_B )
+                bs_write_ue( s, sh->i_num_ref_idx_l1_active - 1 );
+        }
+    }
+
+    /* ref pic list reordering */
+    if( sh->i_type != SLICE_TYPE_I )
+    {
+        bs_write1( s, sh->b_ref_pic_list_reordering[0] );
+        if( sh->b_ref_pic_list_reordering[0] )
+        {
+            for( int i = 0; i < sh->i_num_ref_idx_l0_active; i++ )
+            {
+                bs_write_ue( s, sh->ref_pic_list_order[0][i].idc );
+                bs_write_ue( s, sh->ref_pic_list_order[0][i].arg );
+            }
+            bs_write_ue( s, 3 );
+        }
+    }
+    if( sh->i_type == SLICE_TYPE_B )
+    {
+        bs_write1( s, sh->b_ref_pic_list_reordering[1] );
+        if( sh->b_ref_pic_list_reordering[1] )
+        {
+            for( int i = 0; i < sh->i_num_ref_idx_l1_active; i++ )
+            {
+                bs_write_ue( s, sh->ref_pic_list_order[1][i].idc );
+                bs_write_ue( s, sh->ref_pic_list_order[1][i].arg );
+            }
+            bs_write_ue( s, 3 );
+        }
+    }
+
+    sh->b_weighted_pred = 0;
+    if( sh->pps->b_weighted_pred && sh->i_type == SLICE_TYPE_P )
+    {
+       bs_write_ue( s, sh->weight[0][0].i_denom );
+        bs_write_ue( s, sh->weight[0][1].i_denom );
+        for( int i = 0; i < sh->i_num_ref_idx_l0_active; i++ )
+        {
+            int luma_weight_l0_flag = !!sh->weight[i][0].weightfn;
+            int chroma_weight_l0_flag = !!sh->weight[i][1].weightfn || !!sh->weight[i][2].weightfn;
+            bs_write1( s, luma_weight_l0_flag );
+            if( luma_weight_l0_flag )
+            {
+                bs_write_se( s, sh->weight[i][0].i_scale );
+                bs_write_se( s, sh->weight[i][0].i_offset );
+            }
+            bs_write1( s, chroma_weight_l0_flag );
+            if( chroma_weight_l0_flag )
+            {
+                for( int j = 1; j < 3; j++ )
+                {
+                    bs_write_se( s, sh->weight[i][j].i_scale );
+                    bs_write_se( s, sh->weight[i][j].i_offset );
+                }
+            }
+        }
+    }
+    else if( sh->pps->b_weighted_bipred == 1 && sh->i_type == SLICE_TYPE_B )
+    {
+      /* TODO */
+    }
+
+    if( i_nal_ref_idc != 0 )
+    {
+        if( sh->i_idr_pic_id >= 0 )
+        {
+            bs_write1( s, 0 );  /* no output of prior pics flag */
+            bs_write1( s, 0 );  /* long term reference flag */
+        }
+        else
+        {
+            bs_write1( s, sh->i_mmco_command_count > 0 ); /* adaptive_ref_pic_marking_mode_flag */
+            if( sh->i_mmco_command_count > 0 )
+            {
+                for( int i = 0; i < sh->i_mmco_command_count; i++ )
+                {
+                    bs_write_ue( s, 1 ); /* mark short term ref as unused */
+                    bs_write_ue( s, sh->mmco[i].i_difference_of_pic_nums - 1 );
+                }
+                bs_write_ue( s, 0 ); /* end command list */
+            }
+        }
+    }
+}
 
     if( sh->pps->b_cabac && sh->i_type != SLICE_TYPE_I )
         bs_write_ue( s, sh->i_cabac_init_idc );
@@ -2049,9 +2149,9 @@ static void x264_nal_start( x264_t *h, int i_type, int i_ref_idc )
 						nal ->b_svc_extension = 0;
 						nal ->b_idr_flag = -1;
 						nal ->i_priority_id = -1 ;
-						nal ->b_no_inter_layer_pred_flag = -1 ;						
+						nal ->b_no_inter_layer_pred_flag = 1 ;						
 						nal ->i_dependency_id = -1;
-						nal ->i_quality_id = -1;
+						nal ->i_quality_id = -1 ; 
 						nal ->i_temporal_id = -1;
 						nal ->b_use_ref_base_pic_flag = -1;
 						nal ->b_discardable_flag = -1;
