@@ -416,7 +416,8 @@ static ALWAYS_INLINE void x264_cabac_mb_header_i( x264_t *h, x264_cabac_t *cb, i
 
     if( i_mb_type != I_16x16 )  //if( transform_8x8_mode_flag && mb_type = = I_NxN )
     {
-        if( h->pps->b_transform_8x8_mode )
+    /*sky 2014.08.29 ÐÞ¸ÄÁËpps*/
+        if( h->pps[h->i_layer_id].b_transform_8x8_mode )
             x264_cabac_transform_size( h, cb ); // ransform_size_8x8_flag
 
         int di = h->mb.b_transform_8x8 ? 4 : 1;

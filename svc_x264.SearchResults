@@ -1,40 +1,158 @@
----- x264_cabac_encode_decision_noup Matches (39 in 3 files) ----
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, ctx0, 0 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, ctx0, 1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, ctx0, 1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, ctx1, !!h->mb.i_cbp_luma );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, ctx2, 0 );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, ctx3, h->mb.i_cbp_chroma>>1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, ctx5, i_pred&1 );
-Cabac.c (encoder):    x264_cabac_encode_decision_noup( cb, 70 + ctx, MB_INTERLACED );
-Cabac.c (encoder):    x264_cabac_encode_decision_noup( cb, 64 + ctx, i_mode > 0 );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, 64 + 3, i_mode > 2 );
-Cabac.c (encoder):    x264_cabac_encode_decision_noup( cb, 76 - ((cbp   >> 2) & 1) - ((cbp   >> 0) & 2), (cbp >> 3) & 1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 77 + ctx, 0 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 77 + ctx, 1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 77 + ctx, h->mb.i_cbp_chroma >> 1 );
-Cabac.c (encoder):    x264_cabac_encode_decision_noup( cb, 60 + ctx, 0 );
-Cabac.c (encoder):    x264_cabac_encode_decision_noup( cb, ctx, h->mb.b_transform_8x8 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 14, 1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 27+3,   1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 27+4,   1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 14, 0 );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, 15, 0 );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, 16, 0 );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, 15, 1 );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, 17, 1 );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, 15, 1 );
-Cabac.c (encoder):            x264_cabac_encode_decision_noup( cb, 17, 0 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 14, 0 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 15, 0 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 16, 1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 27+ctx, 0 );
-Cabac.c (encoder):    x264_cabac_encode_decision_noup( cb, 27+ctx, 1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 27+3,   1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 27+4,   1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 27+5,   1 );
-Cabac.c (encoder):        x264_cabac_encode_decision_noup( cb, 27+3, bits&1 );
-Cabac.c (encoder):                x264_cabac_encode_decision_noup( cb, 27+5, bits&1 );
-Cabac.h (common):#define x264_cabac_encode_decision_noup x264_cabac_encode_decision
-Rdo.c (encoder):#undef  x264_cabac_encode_decision_noup
-Rdo.c (encoder):#define x264_cabac_encode_decision_noup(c,x,v) x264_cabac_size_decision_noup(c,x,v)
+---- pps Matches (161 in 20 files) ----
+Analyse.c (encoder):/*sky 2014.08.24 this pps 这个pps其实可以不用修改,出于逻辑还是应该修改的*/
+Analyse.c (encoder):    if( h->param.analyse.b_transform_8x8 && h->pps[h->i_layer_id].b_transform_8x8_mode )
+Cabac.c (encoder):        if( h->pps[h->i_layer_id].b_transform_8x8_mode )
+Cavlc.c (encoder):        if( h->pps[h->i_layer_id].b_transform_8x8_mode )
+Checkasm.c (tools):        h->pps->scaling_list[i] = x264_cqm_flat16;
+Checkasm.c (tools):                h->pps->scaling_list[i] = x264_cqm_flat16;
+Checkasm.c (tools):            h->param.i_cqm_preset = h->pps->i_cqm_preset = X264_CQM_FLAT;
+Checkasm.c (tools):                h->pps->scaling_list[i] = x264_cqm_jvt[i];
+Checkasm.c (tools):            h->param.i_cqm_preset = h->pps->i_cqm_preset = X264_CQM_JVT;
+Checkasm.c (tools):                h->pps->scaling_list[i] = cqm_buf;
+Checkasm.c (tools):            h->param.i_cqm_preset = h->pps->i_cqm_preset = X264_CQM_CUSTOM;
+Common.h (common):    x264_pps_t *pps;
+Common.h (common):/*sky 2014.08.28 sps pps [i_layer_number]扩展 ，暂时设为2*/
+Common.h (common):/* SPS / PPS */
+Common.h (common):    x264_pps_t      pps[2];
+Deblock.c (common):    int qp_thresh = 15 - X264_MIN( a, b ) - X264_MAX( 0, h->pps->i_chroma_qp_index_offset );
+Deblock.c (common):    int qp_thresh = 15 - X264_MIN( a, b ) - X264_MAX( 0, h->pps->i_chroma_qp_index_offset );
+Encoder.c (encoder):                                    x264_sps_t *sps, x264_pps_t *pps,
+Encoder.c (encoder):    sh->pps = pps;
+Encoder.c (encoder):    sh->i_pps_id    = pps->i_id;
+Encoder.c (encoder):    sh->i_qp_delta = sh->i_qp - pps->i_pic_init_qp;
+Encoder.c (encoder):        if( sh->pps->b_pic_order && !sh->b_field_pic )
+Encoder.c (encoder):    if( sh->pps->b_redundant_pic_cnt )
+Encoder.c (encoder):    if( sh->pps->b_weighted_pred && sh->i_type == SLICE_TYPE_P )
+Encoder.c (encoder):		bs_write1(s, sh->pps->b_base_pred_weight_table_flag); // 这个值在pps中填加值是多少不知道
+Encoder.c (encoder):    else if( sh->pps->b_weighted_bipred == 1 && sh->i_type == SLICE_TYPE_B )
+Encoder.c (encoder):	 if( sh->pps->b_redundant_pic_cnt )
+Encoder.c (encoder):    if( sh->pps->b_weighted_pred && sh->i_type == SLICE_TYPE_P )
+Encoder.c (encoder):    else if( sh->pps->b_weighted_bipred == 1 && sh->i_type == SLICE_TYPE_B )
+Encoder.c (encoder):    if( sh->pps->b_cabac && sh->i_type != SLICE_TYPE_I )
+Encoder.c (encoder):    if( sh->pps->b_deblocking_filter_control )
+Encoder.c (encoder):  if(sh->pps->i_num_slice_groups -1 > 0 
+Encoder.c (encoder):  	&&  sh->pps->i_slice_group_map_type >=3 
+Encoder.c (encoder):  	&& sh->pps->i_slice_group_map_type <= 5)
+Encoder.c (encoder):/*sky 2014.08.28 sps pps init extension*/
+Encoder.c (encoder):   	x264_pps_init(& h->pps[i_layer_id], i_sps_id, &h->param, &h->sps [i_layer_id]);
+Encoder.c (encoder):    原句x264_pps_init( h->pps, h->param.i_sps_id, &h->param, h->sps );
+Encoder.c (encoder):    h->chroma_qp_table = i_chroma_qp_table + 12 + h->pps->i_chroma_qp_index_offset;
+Encoder.c (encoder):    if( h->pps->b_transform_8x8_mode )
+Encoder.c (encoder):    /* Write SEI, SPS and PPS. */
+Encoder.c (encoder):   		    		x264_pps_write( &h->out.bs, &h->sps[ i_layer_id], &h->pps [i_layer_id]);
+Encoder.c (encoder):    x264_pps_write( &h->out.bs, h->sps, h->pps );
+Encoder.c (encoder):        x264_slice_header_init( h, &h->sh,& h->sps[h->i_layer_id],& h->pps[h->i_layer_id], h->i_idr_pic_id, h->i_frame_num, i_global_qp );
+Encoder.c (encoder):        x264_slice_header_init( h, &h->sh, &h->sps[h->i_layer_id], &h->pps[h->i_layer_id], -1, h->i_frame_num, i_global_qp );
+Encoder.c (encoder):        if( h->sh.i_num_ref_idx_l0_active != h->pps->i_num_ref_idx_l0_default_active ||
+Encoder.c (encoder):            (h->sh.i_type == SLICE_TYPE_B && h->sh.i_num_ref_idx_l1_active != h->pps->i_num_ref_idx_l1_default_active) )
+Encoder.c (encoder):    h->sh.i_qp_delta = h->sh.i_qp - h->pps->i_pic_init_qp;
+Encoder.c (encoder):        /* Write SPS and PPS */
+Encoder.c (encoder):	/*sky 2014.08.28 pps[]*/
+Encoder.c (encoder):            x264_pps_write( &h->out.bs, &h->sps[h->i_layer_id], &h->pps[h->i_layer_id]);
+Encoder.c (encoder):        /* buffering period sei must follow AUD, SPS and PPS and precede all other SEIs */
+Encoder.c (encoder):        if( h->pps->b_transform_8x8_mode )
+Flv.c (output):    // PPS
+Flv.c (output):    flv_put_byte( c, 1 ); // number of pps
+Macroblock.c (common):    if( h->pps->b_transform_8x8_mode )
+Macroblock.c (common):            if( !h->param.b_cabac && h->pps->b_transform_8x8_mode )
+Macroblock.c (common):                if( !h->param.b_cabac && h->pps->b_transform_8x8_mode && h->mb.mb_transform_size[mbn_xy] )
+Macroblock.c (common):    if( !h->param.b_cabac && h->pps->b_transform_8x8_mode )
+Macroblock.h (common):    if( !h->pps->b_transform_8x8_mode )
+Matroska.c (output):    uint8_t *pps = p_nal[1].p_payload + 4;
+Matroska.c (output):    avcC[8+sps_size] = 1; // one pps
+Matroska.c (output):    memcpy( avcC+11+sps_size, pps, pps_size );
+Mp4.c (output):    uint8_t *pps = p_nal[1].p_payload + 4;
+Mp4.c (output):    // PPS
+Mp4.c (output):    memcpy( p_slot->data, pps, pps_size );
+Mp4_lsmash.c (output):    uint8_t *pps = p_nal[1].p_payload + H264_NALU_LENGTH_SIZE;
+Mp4_lsmash.c (output):    /* PPS */
+Mp4_lsmash.c (output):    if( lsmash_append_h264_parameter_set( param, H264_PARAMETER_SET_TYPE_PPS, pps, pps_size ) )
+Mp4_lsmash.c (output):        MP4_LOG_ERROR( "failed to append PPS.\n" );
+Ratecontrol.c (encoder):            h->pps->i_pic_init_qp = SPEC_QP( (int)(total_qp_aq / rc->num_entries + 0.5) );
+Set.c (common):            if( !memcmp( h->pps->scaling_list[i+start], h->pps->scaling_list[j+start], size*sizeof(uint8_t) ) )\
+Set.c (common):                !memcmp( h->pps->scaling_list[i+start], h->pps->scaling_list[j+start], size*sizeof(uint8_t) ) )\
+Set.c (common):                h->dequant4_mf[i_list][q][i] = def_dequant4[q][i] * h->pps->scaling_list[i_list][i];
+Set.c (common):                     quant4_mf[i_list][q][i] = DIV(def_quant4[q][i] * 16, h->pps->scaling_list[i_list][i]);
+Set.c (common):                h->dequant8_mf[i_list][q][i] = def_dequant8[q][i] * h->pps->scaling_list[4+i_list][i];
+Set.c (common):                     quant8_mf[i_list][q][i] = DIV(def_quant8[q][i] * 16, h->pps->scaling_list[4+i_list][i]);
+Set.c (encoder):static void scaling_list_write( bs_t *s, x264_pps_t *pps, int idx )
+Set.c (encoder):    const uint8_t *list = pps->scaling_list[idx];
+Set.c (encoder):    const uint8_t *def_list = (idx==CQM_4IC) ? pps->scaling_list[CQM_4IY]
+Set.c (encoder):                            : (idx==CQM_4PC) ? pps->scaling_list[CQM_4PY]
+Set.c (encoder):                            : (idx==CQM_8IC+4) ? pps->scaling_list[CQM_8IY+4]
+Set.c (encoder):                            : (idx==CQM_8PC+4) ? pps->scaling_list[CQM_8PY+4]
+Set.c (encoder):void x264_pps_init( x264_pps_t *pps, int i_id, x264_param_t *param, x264_sps_t *sps )
+Set.c (encoder):    pps->i_id = i_id;
+Set.c (encoder):    pps->i_sps_id = sps->i_id;
+Set.c (encoder):    pps->b_cabac = param->b_cabac;
+Set.c (encoder):    pps->b_pic_order = !param->b_avcintra_compat && param->b_interlaced;
+Set.c (encoder):    pps->i_num_slice_groups = 1;
+Set.c (encoder):    pps->i_num_ref_idx_l0_default_active = param->i_frame_reference;
+Set.c (encoder):    pps->i_num_ref_idx_l1_default_active = 1;
+Set.c (encoder):    pps->b_weighted_pred = param->analyse.i_weighted_pred > 0;
+Set.c (encoder):    pps->b_weighted_bipred = param->analyse.b_weighted_bipred ? 2 : 0;
+Set.c (encoder):    pps->i_pic_init_qp = param->rc.i_rc_method == X264_RC_ABR || param->b_stitchable ? 26 + QP_BD_OFFSET : SPEC_QP( param->rc.i_qp_constant );
+Set.c (encoder):    pps->i_pic_init_qs = 26 + QP_BD_OFFSET;
+Set.c (encoder):    pps->i_chroma_qp_index_offset = param->analyse.i_chroma_qp_offset;
+Set.c (encoder):    pps->b_deblocking_filter_control = 1;
+Set.c (encoder):    pps->b_constrained_intra_pred = param->b_constrained_intra;
+Set.c (encoder):    pps->b_redundant_pic_cnt = 0;
+Set.c (encoder):    pps->b_transform_8x8_mode = param->analyse.b_transform_8x8 ? 1 : 0;
+Set.c (encoder):    pps->i_cqm_preset = param->i_cqm_preset;
+Set.c (encoder):    switch( pps->i_cqm_preset )
+Set.c (encoder):            pps->scaling_list[i] = x264_cqm_flat16;
+Set.c (encoder):            pps->scaling_list[i] = x264_cqm_jvt[i];
+Set.c (encoder):        pps->scaling_list[CQM_4IY] = param->cqm_4iy;
+Set.c (encoder):        pps->scaling_list[CQM_4PY] = param->cqm_4py;
+Set.c (encoder):        pps->scaling_list[CQM_4IC] = param->cqm_4ic;
+Set.c (encoder):        pps->scaling_list[CQM_4PC] = param->cqm_4pc;
+Set.c (encoder):        pps->scaling_list[CQM_8IY+4] = param->cqm_8iy;
+Set.c (encoder):        pps->scaling_list[CQM_8PY+4] = param->cqm_8py;
+Set.c (encoder):        pps->scaling_list[CQM_8IC+4] = param->cqm_8ic;
+Set.c (encoder):        pps->scaling_list[CQM_8PC+4] = param->cqm_8pc;
+Set.c (encoder):                if( pps->scaling_list[i][j] == 0 )
+Set.c (encoder):                    pps->scaling_list[i] = x264_cqm_jvt[i];
+Set.c (encoder):	/*sky 2014.08.28 pps init extension*/
+Set.c (encoder):	pps->b_base_pred_weight_table_flag = 1; // 这个值暂时赋予 1
+Set.c (encoder):void x264_pps_write( bs_t *s, x264_sps_t *sps, x264_pps_t *pps )
+Set.c (encoder):    bs_write_ue( s, pps->i_id );
+Set.c (encoder):    bs_write_ue( s, pps->i_sps_id );
+Set.c (encoder):    bs_write1( s, pps->b_cabac );
+Set.c (encoder):    bs_write1( s, pps->b_pic_order );
+Set.c (encoder):    bs_write_ue( s, pps->i_num_slice_groups - 1 );
+Set.c (encoder):    bs_write_ue( s, pps->i_num_ref_idx_l0_default_active - 1 );
+Set.c (encoder):    bs_write_ue( s, pps->i_num_ref_idx_l1_default_active - 1 );
+Set.c (encoder):    bs_write1( s, pps->b_weighted_pred );
+Set.c (encoder):    bs_write( s, 2, pps->b_weighted_bipred );
+Set.c (encoder):    bs_write_se( s, pps->i_pic_init_qp - 26 - QP_BD_OFFSET );
+Set.c (encoder):    bs_write_se( s, pps->i_pic_init_qs - 26 - QP_BD_OFFSET );
+Set.c (encoder):    bs_write_se( s, pps->i_chroma_qp_index_offset );
+Set.c (encoder):    bs_write1( s, pps->b_deblocking_filter_control );
+Set.c (encoder):    bs_write1( s, pps->b_constrained_intra_pred );
+Set.c (encoder):    bs_write1( s, pps->b_redundant_pic_cnt );
+Set.c (encoder):    if( pps->b_transform_8x8_mode || pps->i_cqm_preset != X264_CQM_FLAT )
+Set.c (encoder):        bs_write1( s, pps->b_transform_8x8_mode );
+Set.c (encoder):        bs_write1( s, (pps->i_cqm_preset != X264_CQM_FLAT) );
+Set.c (encoder):        if( pps->i_cqm_preset != X264_CQM_FLAT )
+Set.c (encoder):            scaling_list_write( s, pps, CQM_4IY );
+Set.c (encoder):            scaling_list_write( s, pps, CQM_4IC );
+Set.c (encoder):            scaling_list_write( s, pps, CQM_4PY );
+Set.c (encoder):            scaling_list_write( s, pps, CQM_4PC );
+Set.c (encoder):            if( pps->b_transform_8x8_mode )
+Set.c (encoder):                    scaling_list_write( s, pps, CQM_8IY+4 );
+Set.c (encoder):                    scaling_list_write( s, pps, CQM_8IC+4 );
+Set.c (encoder):                    scaling_list_write( s, pps, CQM_8PY+4 );
+Set.c (encoder):                    scaling_list_write( s, pps, CQM_8PC+4 );
+Set.c (encoder):                    scaling_list_write( s, pps, CQM_8IY+4 );
+Set.c (encoder):                    scaling_list_write( s, pps, CQM_8PY+4 );
+Set.c (encoder):        bs_write_se( s, pps->i_chroma_qp_index_offset );
+Set.h (common):    /*sky 2014.08.27 pps extension*/
+Set.h (encoder):void x264_pps_init( x264_pps_t *pps, int i_id, x264_param_t *param, x264_sps_t *sps );
+Set.h (encoder):void x264_pps_write( bs_t *s, x264_sps_t *sps, x264_pps_t *pps );
+X264.c:    H2( "      --sps-id <integer>      Set SPS and PPS id numbers [%d]\n", defaults->i_sps_id );
+X264.c:        // Write SPS/PPS/SEI
+X264.h:    int b_repeat_headers;       /* put SPS/PPS before each keyframe */
+X264.h:    int i_sps_id;               /* SPS and PPS id number */
+X264.h:     * each part, and stitching them back together will result in identical SPS/PPS. This is necessary for stitching
+X264.h:     * with container formats that don't allow multiple SPS/PPS. */
+X264.h: *      return the SPS and PPS that will be used for the whole stream.

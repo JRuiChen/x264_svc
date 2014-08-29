@@ -210,6 +210,14 @@ static void x264_slice_header_init( x264_t *h, x264_slice_header_t *sh,
     sh->i_scan_start = 0;
     sh->i_scan_end = 15;
 
+    sh->b_adaptive_base_mode_flag = 0;
+    sh->b_default_base_mode_flag = 1;
+	/*sky ¿¼ÂÇµ½½âÂë¶Ë ÒÔÏÂÖµÉèÎª0*/
+    sh->b_adaptive_motion_prediction_flag = 0;  
+    sh->b_default_motion_prediction_flag = 0;
+    sh->b_adaptive_residual_prediction_flag = 0;
+    sh->b_default_residual_prediction_flag = 0;
+
 }
 
 /*sky 2014.08.28 add &h->out.nal[h->out.i_nal]*/
@@ -1318,6 +1326,7 @@ static int x264_validate_parameters( x264_t *h, int b_open )
             int maxrate_bak = h->param.rc.i_vbv_max_bitrate;
             if( h->param.rc.i_rc_method == X264_RC_ABR && h->param.rc.i_vbv_buffer_size <= 0 )
                 h->param.rc.i_vbv_max_bitrate = h->param.rc.i_bitrate * 2;
+	/*sky  2014.08.29 sps Õâ¸öÖµ»á×ßÃ´£¬ÎÒÒªÔõÃ´ÉèÄØ*/
             x264_sps_init( h->sps, h->param.i_sps_id, &h->param );
             do h->param.i_level_idc = l->level_idc;
                 while( l[1].level_idc && x264_validate_levels( h, 0 ) && l++ );
@@ -1645,10 +1654,8 @@ x264_t *x264_encoder_open( x264_param_t *param )
 	
    	x264_pps_init(& h->pps[i_layer_id], i_sps_id, &h->param, &h->sps [i_layer_id]);
    	}	
-		/*Ô­¾ä
-
-    x264_sps_init( h->sps, h->param.i_sps_id, &h->param );
-    x264_pps_init( h->pps, h->param.i_sps_id, &h->param, h->sps );
+		/*Ô­¾ä    x264_sps_init( h->sps, h->param.i_sps_id, &h->param );
+    Ô­¾äx264_pps_init( h->pps, h->param.i_sps_id, &h->param, h->sps );
 	*/
     x264_validate_levels( h, 1 );
 
@@ -1656,9 +1663,9 @@ x264_t *x264_encoder_open( x264_param_t *param )
 
     if( x264_cqm_init( h ) < 0 )
         goto fail;
-
-    h->mb.i_mb_width = h->sps->i_mb_width;
-    h->mb.i_mb_height = h->sps->i_mb_height;
+/*sky 2014.8.29 sps ¶Ômb  w h  init*/
+    h->mb.i_mb_width = h->sps[0].i_mb_width;
+    h->mb.i_mb_height = h->sps[0].i_mb_height;
     h->mb.i_mb_count = h->mb.i_mb_width * h->mb.i_mb_height;
 
     h->mb.chroma_h_shift = CHROMA_FORMAT == CHROMA_420 || CHROMA_FORMAT == CHROMA_422;
@@ -1668,7 +1675,7 @@ x264_t *x264_encoder_open( x264_param_t *param )
      * vectors during prediction, resulting in hpel mvs.
      * The chosen solution is to make MBAFF non-adaptive in this case. */
     h->mb.b_adaptive_mbaff = PARAM_INTERLACED && h->param.analyse.i_subpel_refine;
-
+/*sky 2014.08.29 ÎÒ¾õµÃÕâ¸öµØ·½µÄ³õÊ¼»¯²»ºÏÊÊ£¬µ«ÊÇÄ¿Ç°Ò²²»Ó°Ïì*/
     /* Add by chenjie */
     h->mbBL.i_mb_width = h->sps->i_mb_width;
     h->mbBL.i_mb_height = h->sps->i_mb_height;
@@ -1724,6 +1731,7 @@ x264_t *x264_encoder_open( x264_param_t *param )
     h->frames.i_bframe_delay = h->param.i_bframe ? (h->param.i_bframe_pyramid ? 2 : 1) : 0;
 
     h->frames.i_max_ref0 = h->param.i_frame_reference;
+/*sky  2014.08.29 Õâ¸öµØ·½ÎÒ×¢Òâµ½ÁË£¬ÎÒ¾õµÃ¿ÉÒÔ²»ÓÃ¸Ä*/
     h->frames.i_max_ref1 = X264_MIN( h->sps->vui.i_num_reorder_frames, h->param.i_frame_reference );
     h->frames.i_max_dpb  = h->sps->vui.i_max_dec_frame_buffering;
     h->frames.b_have_lowres = !h->param.rc.b_stat_read
@@ -1950,7 +1958,7 @@ x264_t *x264_encoder_open( x264_param_t *param )
         }
         fclose( f );
     }
-
+/* sky  2014.08.29 Õâ¸öµØ·½ÎÒ×¢Òâµ½ÁË£¬²»ÖªµÀÐè²»Òª¼ÓÉÏÑ­»·¿ØÖÆ*/
     const char *profile = h->sps->i_profile_idc == PROFILE_BASELINE ? "Constrained Baseline" :
                           h->sps->i_profile_idc == PROFILE_MAIN ? "Main" :
                           h->sps->i_profile_idc == PROFILE_HIGH ? "High" :
@@ -2056,6 +2064,7 @@ int x264_encoder_reconfig_apply( x264_t *h, x264_param_t *param )
 
     mbcmp_init( h );
     if( !ret )
+		/*sky 2014.08.29 Õâ¸öµØ·½ÎÒ×¢Òâµ½ÁË£¬µ«ÊÇÕâÓ¦¸ÃÊÇ¶Ô»ù±¾²ãµÄreconfig£¬ÐèÒªÐÞ¸Ä·ñå */
         x264_sps_init( h->sps, h->param.i_sps_id, &h->param );
 
     /* Supported reconfiguration options (1-pass only):
@@ -2763,6 +2772,7 @@ static inline int x264_reference_update( x264_t *h )
 
     /* move frame in the buffer */
     x264_frame_push( h->frames.reference, h->fdec );
+	/*sky 2014.08.29 ÎÒ×¢Òâµ½ÁËÕâ¸öµØ·½£¬µ«ÊÇÎÒ¾õµÃ¿ÉÒÔ²»¸Ä¡£ »ù±¾²ãºÍÀ©Õ¹²ãÕâ¸öÖµÓ¦¸ÃÊÇÒ»ÑùµÄ*/
     if( h->frames.reference[h->sps->i_num_ref_frames] )
         x264_frame_push_unused( h, x264_frame_shift( h->frames.reference ) );
     h->fdec = x264_frame_pop_unused( h, 1 );
@@ -2821,19 +2831,21 @@ static inline void x264_slice_init( x264_t *h, int i_nal_type, int i_global_qp )
     /* ------------------------ Create slice header  ----------------------- */
     if( i_nal_type == NAL_SLICE_IDR )
     {
-        x264_slice_header_init( h, &h->sh, h->sps, h->pps, h->i_idr_pic_id, h->i_frame_num, i_global_qp );
+    /*sky 2014.08.29 add slice header init sps[h->i_layer_id]*/
+        x264_slice_header_init( h, &h->sh,& h->sps[h->i_layer_id],& h->pps[h->i_layer_id], h->i_idr_pic_id, h->i_frame_num, i_global_qp );
 
         /* alternate id */
         h->i_idr_pic_id ^= 1;
     }
     else
     {
-        x264_slice_header_init( h, &h->sh, h->sps, h->pps, -1, h->i_frame_num, i_global_qp );
+       /*sky 2014.08.29 add slice header init sps[h->i_layer_id]*/
+        x264_slice_header_init( h, &h->sh, &h->sps[h->i_layer_id], &h->pps[h->i_layer_id], -1, h->i_frame_num, i_global_qp );
 
         h->sh.i_num_ref_idx_l0_active = h->i_ref[0] <= 0 ? 1 : h->i_ref[0];
         h->sh.i_num_ref_idx_l1_active = h->i_ref[1] <= 0 ? 1 : h->i_ref[1];
-        if( h->sh.i_num_ref_idx_l0_active != h->pps->i_num_ref_idx_l0_default_active ||
-            (h->sh.i_type == SLICE_TYPE_B && h->sh.i_num_ref_idx_l1_active != h->pps->i_num_ref_idx_l1_default_active) )
+        if( h->sh.i_num_ref_idx_l0_active != h->pps[h->i_layer_id].i_num_ref_idx_l0_default_active ||
+            (h->sh.i_type == SLICE_TYPE_B && h->sh.i_num_ref_idx_l1_active != h->pps[h->i_layer_id].i_num_ref_idx_l1_default_active) )
         {
             h->sh.b_num_ref_idx_override = 1;
         }
@@ -2956,7 +2968,8 @@ static int x264_slice_write( x264_t *h )
      * other inaccuracies. */
     int overhead_guess = (NALU_OVERHEAD - (h->param.b_annexb && h->out.i_nal)) + 1 + h->param.b_cabac + 5;
     int slice_max_size = h->param.i_slice_max_size > 0 ? (h->param.i_slice_max_size-overhead_guess)*8 : 0;
-    int back_up_bitstream = slice_max_size || (!h->param.b_cabac && h->sps->i_profile_idc < PROFILE_HIGH);
+	/*sky 2014.08.29 ÐÞ¸Äsps[h->i_layer_id]*/
+    int back_up_bitstream = slice_max_size || (!h->param.b_cabac && h->sps[h->i_layer_id].i_profile_idc < PROFILE_HIGH);
     int starting_bits = bs_pos(&h->out.bs);
     int b_deblock = h->sh.i_disable_deblocking_filter_idc != 1;
     int b_hpel = h->fdec->b_kept_as_ref;
@@ -3960,7 +3973,7 @@ int     x264_encoder_encode( x264_t *h,
             /* Pad AUD/SPS to 256 bytes like Panasonic */
             if( h->param.b_avcintra_compat )
 	/*	sky 2014.08.29 add nalu_overhead_extension*/			
-               if(h->i_layer_id)
+            	{   if(h->i_layer_id)
 					{
 					 	
 						 h->out.nal[h->out.i_nal-1].i_padding = 256 - bs_pos( &h->out.bs ) / 8 - 2*NALU_OVERHEAD_EXTENSION;
@@ -3971,6 +3984,7 @@ int     x264_encoder_encode( x264_t *h,
 						  h->out.nal[h->out.i_nal-1].i_padding = 256 - bs_pos( &h->out.bs ) / 8 - 2*NALU_OVERHEAD;
             					overhead += h->out.nal[h->out.i_nal-1].i_payload + h->out.nal[h->out.i_nal-1].i_padding + NALU_OVERHEAD;
 					}
+            	}
 	/*sky 2014.08.28 pps[]*/
             /* generate picture parameters */
             x264_nal_start( h, NAL_PPS, NAL_PRIORITY_HIGHEST );
@@ -3983,6 +3997,7 @@ int     x264_encoder_encode( x264_t *h,
         }
 
         /* when frame threading is used, buffering period sei is written in x264_encoder_frame_end */
+		/*sky 2014.08.29 ÎÒ×¢Òâµ½ÁËthis sps£¬µ«ÊÇÎÒ¾õµÃÃ»ÓÐ±ØÒªÐÞ¸Ä*/
         if( h->i_thread_frames == 1 && h->sps->vui.b_nal_hrd_parameters_present )
         {
             x264_hrd_fullness( h );
