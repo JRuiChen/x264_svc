@@ -200,13 +200,48 @@ static void x264_slice_header_init( x264_t *h, x264_slice_header_t *sh,
     sh->i_beta_offset = param->i_deblocking_filter_beta << 1;
 
 
+	/*sky 2014.08.28  sh init extension*/
+
+    sh->i_ref_layer_dq_id = -1; // Õâ¸öÖµ³õÖµÎª-1 £¬¾ßÌå»¹Òª¸³Öµ
+	
+  // Õâ¸öµØ·½ÊÇ²»ÊÇ»¹»áÀ©Õ¹°¡
+    sh->i_num_mbs_in_slice = h ->mb.i_mb_count;
+    sh->b_slice_skip_flag = 0; // ³õÖµ0;
+    sh->i_scan_start = 0;
+    sh->i_scan_end = 15;
+
+    sh->b_adaptive_base_mode_flag = 0;
+    sh->b_default_base_mode_flag = 1;
+	/*sky ¿¼ÂÇµ½½âÂë¶Ë ÒÔÏÂÖµÉèÎª0*/
+    sh->b_adaptive_motion_prediction_flag = 0;  
+    sh->b_default_motion_prediction_flag = 0;
+    sh->b_adaptive_residual_prediction_flag = 0;
+    sh->b_default_residual_prediction_flag = 0;
 
 }
 
-
-static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal_ref_idc) 
+/*sky 2014.08.28 add &h->out.nal[h->out.i_nal]*/
+static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal_ref_idc, x264_nal_t *nal) 
+//static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal_ref_idc) 
 {
-    if( sh->b_mbaff )
+
+	/*sky 2014.08.28 add sh writer nalÀ©Õ¹Í·*/
+	if(nal->i_type == NAL_UNIT_CODED_SLICE_SCALABLE)
+		{
+			  bs_realign( s ); // Õâ¸ö¶ÔÆë ÄÜ²»ÄÜÓÐ°¡£¬Ó¦¸ÃÊÇÃ»ÎÊÌâµÄ°É
+  			  bs_write1( s , nal ->b_svc_extension);
+  			  bs_write1( s , nal ->b_idr_flag);
+    			  bs_write( s , 6 , nal ->i_priority_id);
+                          bs_write1(s, nal ->b_no_inter_layer_pred_flag);
+                          bs_write(s, 3, nal ->i_dependency_id);
+                          bs_write(s, 4, nal ->i_quality_id);
+                          bs_write(s, 3, nal ->i_temporal_id);
+                          bs_write1(s, nal ->b_use_ref_base_pic_flag);
+                          bs_write1(s, nal ->b_discardable_flag);
+                          bs_write1(s, nal ->b_output_flag);
+                          bs_write(s, 2, nal ->i_reserved_three_2bits);
+		}	
+if( sh->b_mbaff )
     {
         int first_x = sh->i_first_mb % sh->sps->i_mb_width;
         int first_y = sh->i_first_mb / sh->sps->i_mb_width;
@@ -237,6 +272,14 @@ static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal
             bs_write_se( s, sh->i_delta_poc_bottom );
     }
 
+/*sky 2014.08.28 add sh->sps->i_poc_type == 1*/
+    if(sh->sps->i_poc_type == 1 && !sh->sps->b_delta_pic_ord_always_zero_flag)
+    	{
+    		//ÎÒ¾õµÃ²»ÐèÒª´¦Àí
+    	}
+/*sky 2014.08.23 Ìí¼Ónal ->i_quality_id == 0*/
+if(nal ->i_quality_id == 0)
+{
     if( sh->pps->b_redundant_pic_cnt )
         bs_write_ue( s, sh->i_redundant_pic_cnt );
 
@@ -286,7 +329,10 @@ static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal
     if( sh->pps->b_weighted_pred && sh->i_type == SLICE_TYPE_P )
     {
         sh->b_weighted_pred = sh->weight[0][0].weightfn || sh->weight[0][1].weightfn || sh->weight[0][2].weightfn;
-        /* pred_weight_table() */
+	/*sky 2014.08.23 Ìí   if(!nal->b_no_inter_layer_pred_flag)*/
+	if(!nal->b_no_inter_layer_pred_flag)
+		bs_write1(s, sh->pps->b_base_pred_weight_table_flag); // Õâ¸öÖµÔÚppsÖÐÌî¼ÓÖµÊÇ¶àÉÙ²»ÖªµÀ
+		/* pred_weight_table() */
         bs_write_ue( s, sh->weight[0][0].i_denom );
         bs_write_ue( s, sh->weight[0][1].i_denom );
         for( int i = 0; i < sh->i_num_ref_idx_l0_active; i++ )
@@ -335,7 +381,119 @@ static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal
                 bs_write_ue( s, 0 ); /* end command list */
             }
         }
+		/*sky 2014.08.23 Ìí¼Óif(!sh->sps->b_slice_header_restriction_flag)*/
+		if(!sh->sps->b_slice_header_restriction_flag)
+			{
+				
+				bs_write1(s, 0); // store_ref_base_pic_flag prifixºÍÕâ¶¼Ð´ËÀÁË
+				if((nal ->b_use_ref_base_pic_flag ||0)  // Õâ¸ö||0ÊÇÖ¸store_ref_base_pic_flag
+					&& !nal->b_idr_flag)
+					{
+						// ²»»á×ßÕâÌõÏß
+					}
+			}
+    	}
     }
+else if(nal->i_quality_id == -1 )
+{
+	 if( sh->pps->b_redundant_pic_cnt )
+        bs_write_ue( s, sh->i_redundant_pic_cnt );
+
+    if( sh->i_type == SLICE_TYPE_B )
+        bs_write1( s, sh->b_direct_spatial_mv_pred );
+
+    if( sh->i_type == SLICE_TYPE_P || sh->i_type == SLICE_TYPE_B )
+    {
+        bs_write1( s, sh->b_num_ref_idx_override );
+        if( sh->b_num_ref_idx_override )
+        {
+            bs_write_ue( s, sh->i_num_ref_idx_l0_active - 1 );
+            if( sh->i_type == SLICE_TYPE_B )
+                bs_write_ue( s, sh->i_num_ref_idx_l1_active - 1 );
+        }
+    }
+
+    /* ref pic list reordering */
+    if( sh->i_type != SLICE_TYPE_I )
+    {
+        bs_write1( s, sh->b_ref_pic_list_reordering[0] );
+        if( sh->b_ref_pic_list_reordering[0] )
+        {
+            for( int i = 0; i < sh->i_num_ref_idx_l0_active; i++ )
+            {
+                bs_write_ue( s, sh->ref_pic_list_order[0][i].idc );
+                bs_write_ue( s, sh->ref_pic_list_order[0][i].arg );
+            }
+            bs_write_ue( s, 3 );
+        }
+    }
+    if( sh->i_type == SLICE_TYPE_B )
+    {
+        bs_write1( s, sh->b_ref_pic_list_reordering[1] );
+        if( sh->b_ref_pic_list_reordering[1] )
+        {
+            for( int i = 0; i < sh->i_num_ref_idx_l1_active; i++ )
+            {
+                bs_write_ue( s, sh->ref_pic_list_order[1][i].idc );
+                bs_write_ue( s, sh->ref_pic_list_order[1][i].arg );
+            }
+            bs_write_ue( s, 3 );
+        }
+    }
+
+    sh->b_weighted_pred = 0;
+    if( sh->pps->b_weighted_pred && sh->i_type == SLICE_TYPE_P )
+    {
+       bs_write_ue( s, sh->weight[0][0].i_denom );
+        bs_write_ue( s, sh->weight[0][1].i_denom );
+        for( int i = 0; i < sh->i_num_ref_idx_l0_active; i++ )
+        {
+            int luma_weight_l0_flag = !!sh->weight[i][0].weightfn;
+            int chroma_weight_l0_flag = !!sh->weight[i][1].weightfn || !!sh->weight[i][2].weightfn;
+            bs_write1( s, luma_weight_l0_flag );
+            if( luma_weight_l0_flag )
+            {
+                bs_write_se( s, sh->weight[i][0].i_scale );
+                bs_write_se( s, sh->weight[i][0].i_offset );
+            }
+            bs_write1( s, chroma_weight_l0_flag );
+            if( chroma_weight_l0_flag )
+            {
+                for( int j = 1; j < 3; j++ )
+                {
+                    bs_write_se( s, sh->weight[i][j].i_scale );
+                    bs_write_se( s, sh->weight[i][j].i_offset );
+                }
+            }
+        }
+    }
+    else if( sh->pps->b_weighted_bipred == 1 && sh->i_type == SLICE_TYPE_B )
+    {
+      /* TODO */
+    }
+
+    if( i_nal_ref_idc != 0 )
+    {
+        if( sh->i_idr_pic_id >= 0 )
+        {
+            bs_write1( s, 0 );  /* no output of prior pics flag */
+            bs_write1( s, 0 );  /* long term reference flag */
+        }
+        else
+        {
+            bs_write1( s, sh->i_mmco_command_count > 0 ); /* adaptive_ref_pic_marking_mode_flag */
+            if( sh->i_mmco_command_count > 0 )
+            {
+                for( int i = 0; i < sh->i_mmco_command_count; i++ )
+                {
+                    bs_write_ue( s, 1 ); /* mark short term ref as unused */
+                    bs_write_ue( s, sh->mmco[i].i_difference_of_pic_nums - 1 );
+                }
+                bs_write_ue( s, 0 ); /* end command list */
+            }
+        }
+    }
+}
 
     if( sh->pps->b_cabac && sh->i_type != SLICE_TYPE_I )
         bs_write_ue( s, sh->i_cabac_init_idc );
@@ -351,6 +509,60 @@ static void x264_slice_header_write( bs_t *s, x264_slice_header_t *sh, int i_nal
             bs_write_se( s, sh->i_beta_offset >> 1 );
         }
     }
+	/*sky 2014.08.25  add svc */
+  if(sh->pps->i_num_slice_groups -1 > 0 
+  	&&  sh->pps->i_slice_group_map_type >=3 
+  	&& sh->pps->i_slice_group_map_type <= 5)
+	
+	{
+		// ÕâÌõ²»Ö´ÐÐ
+  	}
+  if(!nal->b_no_inter_layer_pred_flag && nal->i_quality_id == 0)
+  	{
+		sh->i_ref_layer_dq_id = ((nal ->i_dependency_id - 1) << 4 ) + nal ->i_quality_id ; // skyÓÐ´ýÈ·¶¨
+		bs_write_ue(s,sh->i_ref_layer_dq_id); // shÖÐµÄ¸³Öµ£¬Õâ¸öÖµÓë²Î¿¼²ãµÄdqid
+		if(sh->sps->b_inter_layer_deblocking_present)
+			{
+				//deblockwrite ²»×ßÕâÌõÏß
+			}
+		bs_write1(s,sh->b_constrained_intra_resampling_flag); // Õâ¸öÖµ²»ÄÜÈ·¶¨£¬Éæ¼°µ½mb±àÂë
+		if( sh->sps->i_extended_spatial_scalability ==2 )  // sh->sps->i_extended_spatial_scalability == 0
+			{
+				//²»×ßÕâÌõÏß
+			}
+  	}
+  if(!nal->b_no_inter_layer_pred_flag)
+  	{
+		bs_write1(s, sh->b_slice_skip_flag); // Õâ¸öÖµÔõÃ´¸³Ö,ÔÝÊ±0µ
+		if(sh->b_slice_skip_flag)
+			{
+				bs_write_ue(s,sh->i_num_mbs_in_slice - 1); // Õâ¸öÖµÒªinit£¬initÍê³É
+			}
+		else
+			{
+				bs_write1(s,sh->b_adaptive_base_mode_flag);
+				if( !sh->b_adaptive_base_mode_flag )
+					{
+						bs_write1(s, sh->b_default_base_mode_flag);
+						if(sh->b_default_base_mode_flag)
+							bs_write1(s,sh->b_default_base_mode_flag);
+							if(!sh->b_adaptive_motion_prediction_flag)
+								bs_write1(s,sh->b_default_motion_prediction_flag);
+					}
+				bs_write1(s,sh->b_adaptive_residual_prediction_flag);
+				if(sh->b_adaptive_residual_prediction_flag)
+					bs_write1(s,sh->b_default_residual_prediction_flag);
+			}
+		
+		if(sh->sps->b_adaptive_tcoeff_level_prediction_flag)
+			bs_write1(s,sh->sps->b_seq_tcoeff_level_prediction_flag);
+  	}
+  if(!sh->sps->b_slice_header_restriction_flag  && !sh->b_slice_skip_flag)
+  	{
+		bs_write( s, 4, 0); // "SH: scan_idx_start"Õâ¸öÖµÃ»ÓÐ¸ã¶®£¬¸³ÖµÌ«Âé·³
+		bs_write(s, 4, 15); // "SH: scan_idx_end"Õâ¸öÖµÃ»ÓÐ¸ã¶®£¬¸³ÖµÌ«Âé·³
+			
+  	}
 }
 
 /* If we are within a reasonable distance of the end of the memory allocated for the bitstream, */
@@ -1114,6 +1326,7 @@ static int x264_validate_parameters( x264_t *h, int b_open )
             int maxrate_bak = h->param.rc.i_vbv_max_bitrate;
             if( h->param.rc.i_rc_method == X264_RC_ABR && h->param.rc.i_vbv_buffer_size <= 0 )
                 h->param.rc.i_vbv_max_bitrate = h->param.rc.i_bitrate * 2;
+	/*sky  2014.08.29 sps Õâ¸öÖµ»á×ßÃ´£¬ÎÒÒªÔõÃ´ÉèÄØ*/
             x264_sps_init( h->sps, h->param.i_sps_id, &h->param );
             do h->param.i_level_idc = l->level_idc;
                 while( l[1].level_idc && x264_validate_levels( h, 0 ) && l++ );
@@ -1422,18 +1635,37 @@ x264_t *x264_encoder_open( x264_param_t *param )
 
     x264_set_aspect_ratio( h, &h->param, 1 );
 
-    x264_sps_init( h->sps, h->param.i_sps_id, &h->param );
-    x264_pps_init( h->pps, h->param.i_sps_id, &h->param, h->sps );
-
+/*sky 2014.08.28 sps pps init extension*/
+	
+	  int i_sps_id =  h->param.i_sps_id;
+    	for(int i_layer_id = 0 ; i_layer_id < h ->param.i_layer_number ; i_layer_id ++ )
+  	 {  
+    	  	if(i_layer_id)
+		{	
+   			h ->sps[i_layer_id] .i_nal_type = NAL_UNIT_SUBSET_SPS;
+   			x264_sps_init(&h->sps[i_layer_id ], i_sps_id,&h->param );
+			i_sps_id++; 
+		}
+		else 
+		{
+			h->sps[i_layer_id].i_nal_type = NAL_SPS;
+			x264_sps_init(&h->sps[i_layer_id ], i_sps_id,&h->param );
+		}
+	
+   	x264_pps_init(& h->pps[i_layer_id], i_sps_id, &h->param, &h->sps [i_layer_id]);
+   	}	
+		/*Ô­¾ä    x264_sps_init( h->sps, h->param.i_sps_id, &h->param );
+    Ô­¾äx264_pps_init( h->pps, h->param.i_sps_id, &h->param, h->sps );
+	*/
     x264_validate_levels( h, 1 );
 
     h->chroma_qp_table = i_chroma_qp_table + 12 + h->pps->i_chroma_qp_index_offset;
 
     if( x264_cqm_init( h ) < 0 )
         goto fail;
-
-    h->mb.i_mb_width = h->sps->i_mb_width;
-    h->mb.i_mb_height = h->sps->i_mb_height;
+/*sky 2014.8.29 sps ¶Ômb  w h  init*/
+    h->mb.i_mb_width = h->sps[0].i_mb_width;
+    h->mb.i_mb_height = h->sps[0].i_mb_height;
     h->mb.i_mb_count = h->mb.i_mb_width * h->mb.i_mb_height;
 
     h->mb.chroma_h_shift = CHROMA_FORMAT == CHROMA_420 || CHROMA_FORMAT == CHROMA_422;
@@ -1443,7 +1675,7 @@ x264_t *x264_encoder_open( x264_param_t *param )
      * vectors during prediction, resulting in hpel mvs.
      * The chosen solution is to make MBAFF non-adaptive in this case. */
     h->mb.b_adaptive_mbaff = PARAM_INTERLACED && h->param.analyse.i_subpel_refine;
-
+/*sky 2014.08.29 ÎÒ¾õµÃÕâ¸öµØ·½µÄ³õÊ¼»¯²»ºÏÊÊ£¬µ«ÊÇÄ¿Ç°Ò²²»Ó°Ïì*/
     /* Add by chenjie */
     h->mbBL.i_mb_width = h->sps->i_mb_width;
     h->mbBL.i_mb_height = h->sps->i_mb_height;
@@ -1499,6 +1731,7 @@ x264_t *x264_encoder_open( x264_param_t *param )
     h->frames.i_bframe_delay = h->param.i_bframe ? (h->param.i_bframe_pyramid ? 2 : 1) : 0;
 
     h->frames.i_max_ref0 = h->param.i_frame_reference;
+/*sky  2014.08.29 Õâ¸öµØ·½ÎÒ×¢Òâµ½ÁË£¬ÎÒ¾õµÃ¿ÉÒÔ²»ÓÃ¸Ä*/
     h->frames.i_max_ref1 = X264_MIN( h->sps->vui.i_num_reorder_frames, h->param.i_frame_reference );
     h->frames.i_max_dpb  = h->sps->vui.i_max_dec_frame_buffering;
     h->frames.b_have_lowres = !h->param.rc.b_stat_read
@@ -1725,7 +1958,7 @@ x264_t *x264_encoder_open( x264_param_t *param )
         }
         fclose( f );
     }
-
+/* sky  2014.08.29 Õâ¸öµØ·½ÎÒ×¢Òâµ½ÁË£¬²»ÖªµÀÐè²»Òª¼ÓÉÏÑ­»·¿ØÖÆ*/
     const char *profile = h->sps->i_profile_idc == PROFILE_BASELINE ? "Constrained Baseline" :
                           h->sps->i_profile_idc == PROFILE_MAIN ? "Main" :
                           h->sps->i_profile_idc == PROFILE_HIGH ? "High" :
@@ -1831,6 +2064,7 @@ int x264_encoder_reconfig_apply( x264_t *h, x264_param_t *param )
 
     mbcmp_init( h );
     if( !ret )
+		/*sky 2014.08.29 Õâ¸öµØ·½ÎÒ×¢Òâµ½ÁË£¬µ«ÊÇÕâÓ¦¸ÃÊÇ¶Ô»ù±¾²ãµÄreconfig£¬ÐèÒªÐÞ¸Ä·ñå */
         x264_sps_init( h->sps, h->param.i_sps_id, &h->param );
 
     /* Supported reconfiguration options (1-pass only):
@@ -1884,6 +2118,56 @@ static void x264_nal_start( x264_t *h, int i_type, int i_ref_idc )
     nal->p_payload= &h->out.p_bitstream[bs_pos( &h->out.bs ) / 8];
     nal->i_padding= 0;
 
+   /*sky 2014.8.17 nal_start_extension*/
+    	{
+    		if(i_type == NAL_UNIT_PREFIX || i_type == NAL_UNIT_CODED_SLICE_SCALABLE)
+    			{
+				nal ->b_svc_extension = 1;
+				if( i_ref_idc == NAL_PRIORITY_HIGHEST )
+				       	nal ->b_idr_flag = 1;
+					else	
+						nal ->b_idr_flag = 0;
+				if( i_type == NAL_UNIT_PREFIX )
+					{
+						nal ->i_priority_id = 0 ;
+						nal ->b_no_inter_layer_pred_flag = 1 ;						
+						nal ->i_dependency_id = 0;
+						nal ->i_quality_id = 0;
+						nal ->i_temporal_id = 0;
+						nal ->b_use_ref_base_pic_flag = 0;
+						nal ->b_discardable_flag = 0;
+						nal ->b_output_flag = 1;
+						nal ->i_reserved_three_2bits = 3;
+					}
+				else
+					{
+						nal ->i_priority_id = 0 ;
+						nal ->b_no_inter_layer_pred_flag = 0 ;	
+						nal ->i_dependency_id = 1;
+						nal ->i_quality_id = 0;
+						nal ->i_temporal_id = 0;
+						nal ->b_use_ref_base_pic_flag = 0;
+						nal ->b_discardable_flag = 1;
+						nal ->b_output_flag = 1;
+						nal ->i_reserved_three_2bits = 3;
+					}
+				
+			}
+			/*²»À©ÕÅ³õÊ¼»¯*/
+			else {
+						nal ->b_svc_extension = 0;
+						nal ->b_idr_flag = -1;
+						nal ->i_priority_id = -1 ;
+						nal ->b_no_inter_layer_pred_flag = 1 ;						
+						nal ->i_dependency_id = -1;
+						nal ->i_quality_id = -1 ; 
+						nal ->i_temporal_id = -1;
+						nal ->b_use_ref_base_pic_flag = -1;
+						nal ->b_discardable_flag = -1;
+						nal ->b_output_flag = -1;
+						nal ->i_reserved_three_2bits = -1;
+			}
+    	}
 
 }
 
@@ -2005,19 +2289,48 @@ int x264_encoder_headers( x264_t *h, x264_nal_t **pp_nal, int *pi_nal )
     bs_init( &h->out.bs, h->out.p_bitstream, h->out.i_bitstream );
 
     /* Write SEI, SPS and PPS. */
+	/*sky 2014.08.19 header_write extension*/
 
+	for (int i_layer_id = 0 ; i_layer_id < h->param.i_layer_number;i_layer_id++)
+		{
+			if(i_layer_id)
+			{
+			/* generate sub sequence parameters */
+   				x264_nal_start( h, NAL_UNIT_SUBSET_SPS, NAL_PRIORITY_HIGHEST );			
+    				x264_sps_write( &h->out.bs,&h->sps[ i_layer_id] );
+  			  	if( x264_nal_end( h ) )
+  			     		 return -1;  		
+			}
+			else
+			{
+ 			 /* generate sequence parameters */
+				x264_nal_start(h,NAL_SPS,NAL_PRIORITY_HIGHEST);
+ 			 	x264_sps_write( &h->out.bs, &h->sps [ i_layer_id]);
+ 			 	if( x264_nal_end( h ) )
+    			    		return -1;    		    		
+                   	  }
+			 /* generate picture parameters */
+				x264_nal_start( h, NAL_PPS, NAL_PRIORITY_HIGHEST );
+   		    		x264_pps_write( &h->out.bs, &h->sps[ i_layer_id], &h->pps [i_layer_id]);
+                  		if( x264_nal_end( h ) )
+                     	        return -1;
+		}
+	/*Ô­´úÂë*/
     /* generate sequence parameters */
+	/*
     x264_nal_start( h, NAL_SPS, NAL_PRIORITY_HIGHEST );
     x264_sps_write( &h->out.bs, h->sps );
     if( x264_nal_end( h ) )
         return -1;
-
+       */
     /* generate picture parameters */
+	/*
     x264_nal_start( h, NAL_PPS, NAL_PRIORITY_HIGHEST );
     x264_pps_write( &h->out.bs, h->sps, h->pps );
     if( x264_nal_end( h ) )
         return -1;
-
+*/
+/*Ô­´úÂë½áÊø*/
     /* identify ourselves */
     x264_nal_start( h, NAL_SEI, NAL_PRIORITY_DISPOSABLE );
     if( x264_sei_version_write( h, &h->out.bs ) )
@@ -2459,6 +2772,7 @@ static inline int x264_reference_update( x264_t *h )
 
     /* move frame in the buffer */
     x264_frame_push( h->frames.reference, h->fdec );
+	/*sky 2014.08.29 ÎÒ×¢Òâµ½ÁËÕâ¸öµØ·½£¬µ«ÊÇÎÒ¾õµÃ¿ÉÒÔ²»¸Ä¡£ »ù±¾²ãºÍÀ©Õ¹²ãÕâ¸öÖµÓ¦¸ÃÊÇÒ»ÑùµÄ*/
     if( h->frames.reference[h->sps->i_num_ref_frames] )
         x264_frame_push_unused( h, x264_frame_shift( h->frames.reference ) );
     h->fdec = x264_frame_pop_unused( h, 1 );
@@ -2517,19 +2831,21 @@ static inline void x264_slice_init( x264_t *h, int i_nal_type, int i_global_qp )
     /* ------------------------ Create slice header  ----------------------- */
     if( i_nal_type == NAL_SLICE_IDR )
     {
-        x264_slice_header_init( h, &h->sh, h->sps, h->pps, h->i_idr_pic_id, h->i_frame_num, i_global_qp );
+    /*sky 2014.08.29 add slice header init sps[h->i_layer_id]*/
+        x264_slice_header_init( h, &h->sh,& h->sps[h->i_layer_id],& h->pps[h->i_layer_id], h->i_idr_pic_id, h->i_frame_num, i_global_qp );
 
         /* alternate id */
         h->i_idr_pic_id ^= 1;
     }
     else
     {
-        x264_slice_header_init( h, &h->sh, h->sps, h->pps, -1, h->i_frame_num, i_global_qp );
+       /*sky 2014.08.29 add slice header init sps[h->i_layer_id]*/
+        x264_slice_header_init( h, &h->sh, &h->sps[h->i_layer_id], &h->pps[h->i_layer_id], -1, h->i_frame_num, i_global_qp );
 
         h->sh.i_num_ref_idx_l0_active = h->i_ref[0] <= 0 ? 1 : h->i_ref[0];
         h->sh.i_num_ref_idx_l1_active = h->i_ref[1] <= 0 ? 1 : h->i_ref[1];
-        if( h->sh.i_num_ref_idx_l0_active != h->pps->i_num_ref_idx_l0_default_active ||
-            (h->sh.i_type == SLICE_TYPE_B && h->sh.i_num_ref_idx_l1_active != h->pps->i_num_ref_idx_l1_default_active) )
+        if( h->sh.i_num_ref_idx_l0_active != h->pps[h->i_layer_id].i_num_ref_idx_l0_default_active ||
+            (h->sh.i_type == SLICE_TYPE_B && h->sh.i_num_ref_idx_l1_active != h->pps[h->i_layer_id].i_num_ref_idx_l1_default_active) )
         {
             h->sh.b_num_ref_idx_override = 1;
         }
@@ -2543,7 +2859,10 @@ static inline void x264_slice_init( x264_t *h, int i_nal_type, int i_global_qp )
 
     h->fdec->i_frame_num = h->sh.i_frame_num;
 
-    if( h->sps->i_poc_type == 0 )
+	/*sky 2014.08.28 [h->i_layer_id]*/
+
+    if( h->sps[h->i_layer_id].i_poc_type == 0 )    
+		//if(h->sps->i_poc_type == 0) Ô­´úÂë
     {
         h->sh.i_poc = h->fdec->i_poc;
         if( PARAM_INTERLACED )
@@ -2649,7 +2968,8 @@ static int x264_slice_write( x264_t *h )
      * other inaccuracies. */
     int overhead_guess = (NALU_OVERHEAD - (h->param.b_annexb && h->out.i_nal)) + 1 + h->param.b_cabac + 5;
     int slice_max_size = h->param.i_slice_max_size > 0 ? (h->param.i_slice_max_size-overhead_guess)*8 : 0;
-    int back_up_bitstream = slice_max_size || (!h->param.b_cabac && h->sps->i_profile_idc < PROFILE_HIGH);
+	/*sky 2014.08.29 ÐÞ¸Äsps[h->i_layer_id]*/
+    int back_up_bitstream = slice_max_size || (!h->param.b_cabac && h->sps[h->i_layer_id].i_profile_idc < PROFILE_HIGH);
     int starting_bits = bs_pos(&h->out.bs);
     int b_deblock = h->sh.i_disable_deblocking_filter_idc != 1;
     int b_hpel = h->fdec->b_kept_as_ref;
@@ -2664,7 +2984,17 @@ static int x264_slice_write( x264_t *h )
     bs_realign( &h->out.bs );
 
     /* Slice */
+/*sky 2014.08.28Ìí¼ÓÀ©Õ¹²ã*/
+/*Õâ¸öµØ·½²»Ó¦¸ÃÔÚÕâÐ´£¬µ«ÊÇÖ®Ç°µÄi_type¾ö¶¨Ê±Ó¦¸Ã²»ÔÚÑ­»·ÄÚ²
+	¶øÇÒÐèÒªÅÐ¶ÏËûÊÇ²»ÊÇÌõ´øÐÅÏ¢*/
+    /* Slice */
+if(h->i_layer_id)
+{
+	x264_nal_start( h, NAL_UNIT_CODED_SLICE_SCALABLE, NAL_PRIORITY_HIGH);
+}
+else
     x264_nal_start( h, h->i_nal_type, h->i_nal_ref_idc );
+   // x264_nal_start( h, h->i_nal_type, h->i_nal_ref_idc );
     h->out.nal[h->out.i_nal].i_first_mb = h->sh.i_first_mb;
 
     /* Slice header */
@@ -2675,8 +3005,9 @@ static int x264_slice_write( x264_t *h )
     h->sh.i_qp = x264_ratecontrol_mb_qp( h );
     h->sh.i_qp = SPEC_QP( h->sh.i_qp );
     h->sh.i_qp_delta = h->sh.i_qp - h->pps->i_pic_init_qp;
-
-    x264_slice_header_write( &h->out.bs, &h->sh, h->i_nal_ref_idc );
+   /*sky 2014.08.28 &h->out.nal[h->out.i_nal]*/
+    x264_slice_header_write( &h->out.bs, &h->sh, h->i_nal_ref_idc,&h->out.nal[h->out.i_nal] );
+  //  x264_slice_header_write( &h->out.bs, &h->sh, h->i_nal_ref_idc );
     if( h->param.b_cabac )
     {
         /* alignment needed */
@@ -3575,7 +3906,23 @@ int     x264_encoder_encode( x264_t *h,
 
     h->i_nal_type = i_nal_type;
     h->i_nal_ref_idc = i_nal_ref_idc;
-
+	
+	/*sky 2014.8.28 prifix write */
+	if(i_nal_type == NAL_SLICE_IDR)
+		{
+			 x264_nal_start( h, NAL_UNIT_PREFIX, NAL_PRIORITY_HIGHEST);
+			 x264_prifix_write( &h->out.bs, &h->out.nal[h->out.i_nal]);
+			 if( x264_nal_end( h ) )
+            		 return -1;
+		}
+	else if(i_nal_type == NAL_SLICE)
+		{
+			 x264_nal_start( h, NAL_UNIT_PREFIX, NAL_PRIORITY_HIGH);
+			 x264_prifix_write( &h->out.bs,  &h->out.nal[h->out.i_nal]);
+			 if( x264_nal_end( h ) )
+               		 return -1;
+		}
+	 
     if( h->param.b_intra_refresh )
     {
         if( IS_X264_TYPE_I( h->fenc->i_type ) )
@@ -3617,19 +3964,31 @@ int     x264_encoder_encode( x264_t *h,
         /* Write SPS and PPS */
         if( h->param.b_repeat_headers )
         {
+        	/*sky 2014.08.28 sps[]*/
             /* generate sequence parameters */
             x264_nal_start( h, NAL_SPS, NAL_PRIORITY_HIGHEST );
-            x264_sps_write( &h->out.bs, h->sps );
+            x264_sps_write( &h->out.bs, &h->sps[h->i_layer_id] );
             if( x264_nal_end( h ) )
                 return -1;
             /* Pad AUD/SPS to 256 bytes like Panasonic */
             if( h->param.b_avcintra_compat )
-                h->out.nal[h->out.i_nal-1].i_padding = 256 - bs_pos( &h->out.bs ) / 8 - 2*NALU_OVERHEAD;
-            overhead += h->out.nal[h->out.i_nal-1].i_payload + h->out.nal[h->out.i_nal-1].i_padding + NALU_OVERHEAD;
-
+	/*	sky 2014.08.29 add nalu_overhead_extension*/			
+            	{   if(h->i_layer_id)
+					{
+					 	
+						 h->out.nal[h->out.i_nal-1].i_padding = 256 - bs_pos( &h->out.bs ) / 8 - 2*NALU_OVERHEAD_EXTENSION;
+        					 overhead += h->out.nal[h->out.i_nal-1].i_payload + h->out.nal[h->out.i_nal-1].i_padding + NALU_OVERHEAD_EXTENSION;
+					}
+				else
+					{
+						  h->out.nal[h->out.i_nal-1].i_padding = 256 - bs_pos( &h->out.bs ) / 8 - 2*NALU_OVERHEAD;
+            					overhead += h->out.nal[h->out.i_nal-1].i_payload + h->out.nal[h->out.i_nal-1].i_padding + NALU_OVERHEAD;
+					}
+            	}
+	/*sky 2014.08.28 pps[]*/
             /* generate picture parameters */
             x264_nal_start( h, NAL_PPS, NAL_PRIORITY_HIGHEST );
-            x264_pps_write( &h->out.bs, h->sps, h->pps );
+            x264_pps_write( &h->out.bs, &h->sps[h->i_layer_id], &h->pps[h->i_layer_id]);
             if( x264_nal_end( h ) )
                 return -1;
             if( h->param.b_avcintra_compat )
@@ -3638,6 +3997,7 @@ int     x264_encoder_encode( x264_t *h,
         }
 
         /* when frame threading is used, buffering period sei is written in x264_encoder_frame_end */
+		/*sky 2014.08.29 ÎÒ×¢Òâµ½ÁËthis sps£¬µ«ÊÇÎÒ¾õµÃÃ»ÓÐ±ØÒªÐÞ¸Ä*/
         if( h->i_thread_frames == 1 && h->sps->vui.b_nal_hrd_parameters_present )
         {
             x264_hrd_fullness( h );

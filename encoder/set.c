@@ -103,8 +103,17 @@ void x264_sps_init( x264_sps_t *sps, int i_id, x264_param_t *param )
     int csp = param->i_csp & X264_CSP_MASK;
 
     sps->i_id = i_id;
-    sps->i_mb_width = ( param->i_width + 15 ) / 16;
-    sps->i_mb_height= ( param->i_height + 15 ) / 16;
+	/*sky 2014.08.29 ÃÌº” ssps µƒøÌ∂»∏ﬂ∂»º∆À„*/
+	if(sps->i_nal_type == NAL_SPS)
+		{
+    			sps->i_mb_width = ( param->i_width + 15 ) / 16;
+    			sps->i_mb_height= ( param->i_height + 15 ) / 16;
+		}
+	else if(sps->i_nal_type == NAL_UNIT_SUBSET_SPS)
+		{
+			sps->i_mb_width = ( param->i_width + 15 ) / 16 * 2 * (sps->i_id + 1);
+    			sps->i_mb_height= ( param->i_height + 15 ) / 16 * 2 * (sps->i_id + 1);
+		}
     sps->i_chroma_format_idc = csp >= X264_CSP_I444 ? CHROMA_444 :
                                csp >= X264_CSP_I422 ? CHROMA_422 : CHROMA_420;
 
@@ -122,14 +131,26 @@ void x264_sps_init( x264_sps_t *sps, int i_id, x264_param_t *param )
     else
         sps->i_profile_idc  = PROFILE_BASELINE;
 
+/*	sky 2014.08.28 ÃÌº”ssps «Èøˆœ¬ i_profile_idc*/
+   if( sps ->i_nal_type == NAL_UNIT_SUBSET_SPS)
+  	{
+		sps ->i_profile_idc = PROFILE_SCALABLE_HIGH_PROFILE;
+  	}
+
     sps->b_constraint_set0  = sps->i_profile_idc == PROFILE_BASELINE;
     /* x264 doesn't support the features that are in Baseline and not in Main,
      * namely arbitrary_slice_order and slice_groups. */
-    sps->b_constraint_set1  = sps->i_profile_idc <= PROFILE_MAIN;
-    /* Never set constraint_set2, it is not necessary and not used in real world. */
-    sps->b_constraint_set2  = 0;
-    sps->b_constraint_set3  = 0;
 
+   /*sky 2014.08.28 sps init ÃÌº” ||sps->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE;*/
+    sps->b_constraint_set1  = (sps->i_profile_idc <= PROFILE_MAIN ||sps->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE);
+
+	/* Never set constraint_set2, it is not necessary and not used in real world. */
+    sps->b_constraint_set2  = 0;
+  
+  /*sky 2014.08.21Œ™¡À∫Õ ‰≥ˆ¬Î¡˜∂‘”¶¥”…œ ˆ”Ôæ‰∏ƒŒ™œ¬ ˆ*/
+  // sps->b_constraint_set3  = 0;
+    sps->b_constraint_set3  = (sps->i_profile_idc <= PROFILE_MAIN ||sps->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE);
+ 
     sps->i_level_idc = param->i_level_idc;
     if( param->i_level_idc == 9 && ( sps->i_profile_idc == PROFILE_BASELINE || sps->i_profile_idc == PROFILE_MAIN ) )
     {
@@ -153,6 +174,12 @@ void x264_sps_init( x264_sps_t *sps, int i_id, x264_param_t *param )
         sps->vui.i_max_dec_frame_buffering = 0;
     }
 
+  /*sky 2014.08.21£¨√ª”–ø¥∂ÆÂÂi_level_idcµƒ»°÷µπÿœµ∫Õ“‚“Â£¨Œ™¡À∏˙¬Î¡˜∂‘…œÃÌº”»Áœ¬æ‰◊”*/
+	if(sps->i_nal_type == NAL_UNIT_SUBSET_SPS && sps->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE)
+		{
+			sps ->i_level_idc =  21 ; // ’‚∏ˆ ÷µ «∏˘æ›jsvm±‡µƒ¬Î¡˜¥’≥ˆ¿¥µƒ
+		}
+	
     /* number of refs + current frame */
     int max_frame_num = sps->vui.i_max_dec_frame_buffering * (!!param->i_bframe_pyramid+1) + 1;
     /* Intra refresh cannot write a recovery time greater than max frame num-1 */
@@ -162,6 +189,8 @@ void x264_sps_init( x264_sps_t *sps, int i_id, x264_param_t *param )
         max_frame_num = X264_MAX( max_frame_num, time_to_recovery+1 );
     }
 
+
+	
     sps->i_log2_max_frame_num = 4;
     while( (1 << sps->i_log2_max_frame_num) <= max_frame_num )
         sps->i_log2_max_frame_num++;
@@ -259,6 +288,61 @@ void x264_sps_init( x264_sps_t *sps, int i_id, x264_param_t *param )
         sps->vui.i_log2_max_mv_length_horizontal =
         sps->vui.i_log2_max_mv_length_vertical = (int)log2f( X264_MAX( 1, param->analyse.i_mv_range*4-1 ) ) + 1;
     }
+ /*sky 2014.08.20 sps init extension*/
+ if(sps ->i_nal_type == NAL_SPS)
+ 	{
+		sps ->b_adaptive_tcoeff_level_prediction_flag = 0;
+		sps ->b_seq_tcoeff_level_prediction_flag = 0;
+ 	}
+ else 
+ 	{
+		/*’‚¡Ω∏ˆ÷µµ»”⁄ ‰»Î–≈œ¢≤Œ ˝ ø param
+
+		*	sps ->b_adaptive_tcoeff_level_prediction_flag = 0;
+		*	sps ->b_seq_tcoeff_level_prediction_flag = 0;
+		*/
+		
+	
+	}
+ /*¬Î¡˜ºÏ≤‚π˝*/
+		sps ->b_inter_layer_deblocking_present = 0 ;//,¬Î¡˜≥ı÷µ0 
+		sps ->b_slice_header_restriction_flag = 0; // jsvm
+		sps ->b_svc_vui_parameters_present_flag = 0; // –¥À¿0
+		sps ->b_additional_extension2_flag = 0;//jsvm
+		sps ->b_chroma_phase_x_plus1_flag = 0;//jsvm
+		sps ->i_chroma_phase_y_plus1 = 1;//jsvm
+		sps ->b_delta_pic_ord_always_zero_flag = 0;//jsvm
+// ¿©’πΩ· ¯
+}
+
+/*sky 2014.08.29 prifix write*/
+void x264_prifix_write(bs_t *s, x264_nal_t *nal)
+{
+    bs_realign( s );
+	
+    bs_write1( s , nal ->b_svc_extension);
+    bs_write1( s , nal ->b_idr_flag);
+    bs_write( s , 6 , nal ->i_priority_id);
+    bs_write1(s, nal ->b_no_inter_layer_pred_flag);
+    bs_write(s, 3, nal ->i_dependency_id);
+    bs_write(s, 4, nal ->i_quality_id);
+    bs_write(s, 3, nal ->i_temporal_id);
+    bs_write1(s, nal ->b_use_ref_base_pic_flag);
+    bs_write1(s, nal ->b_discardable_flag);
+    bs_write1(s, nal ->b_output_flag);
+    bs_write(s, 2, nal ->i_reserved_three_2bits);
+	
+  /*’‚∏ˆµÿ∑ΩŒ“–¥À¿¡À*/
+    bs_write1(s, 0);   // "store_ref_base_pic_flag" 
+  /*  if( ( getUseRefBasePicFlag() || m_bStoreRefBasePicFlag ) && ! getIdrFlag() )
+    {
+      RNOK( m_cDecRefBasePicMarking.write( rcWriteIf ) );
+    }*/
+    
+    bs_write1(s, 0);  //"additional_prefix_nal_unit_extension_flag"
+    
+    bs_rbsp_trailing( s );
+    bs_flush( s );
 }
 
 void x264_sps_write( bs_t *s, x264_sps_t *sps )
@@ -276,7 +360,11 @@ void x264_sps_write( bs_t *s, x264_sps_t *sps )
 
     bs_write_ue( s, sps->i_id );
 
-    if( sps->i_profile_idc >= PROFILE_HIGH )
+
+/*sky 2014.08.28 ÃÌº”¡À ||sps->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE
+		||sps->i_profile_idc == PROFILE_SCALABLE_BASELINE_PROFILE*/
+    if( sps->i_profile_idc >= PROFILE_HIGH ||sps->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE
+		||sps->i_profile_idc == PROFILE_SCALABLE_BASELINE_PROFILE)
     {
         bs_write_ue( s, sps->i_chroma_format_idc );
         if( sps->i_chroma_format_idc == CHROMA_444 )
@@ -284,8 +372,9 @@ void x264_sps_write( bs_t *s, x264_sps_t *sps )
         bs_write_ue( s, BIT_DEPTH-8 ); // bit_depth_luma_minus8
         bs_write_ue( s, BIT_DEPTH-8 ); // bit_depth_chroma_minus8
         bs_write1( s, sps->b_qpprime_y_zero_transform_bypass );
-        bs_write1( s, 0 ); // seq_scaling_matrix_present_flag
+        bs_write1( s, 0 ); // seq_scaling_matrix_present_flag’‚∏ˆµÿ∑Ω∏¯À˚ƒ¨»œ∏≥ 0 ¡À
     }
+
 
     bs_write_ue( s, sps->i_log2_max_frame_num - 4 );
     bs_write_ue( s, sps->i_poc_type );
@@ -411,6 +500,48 @@ void x264_sps_write( bs_t *s, x264_sps_t *sps )
             bs_write_ue( s, sps->vui.i_max_dec_frame_buffering );
         }
     }
+	/*sky 2014.08.28 ÃÌº”ssps write*/
+	 
+	  if(sps ->i_nal_type == NAL_UNIT_SUBSET_SPS)
+  	{
+			if(sps ->i_profile_idc == PROFILE_SCALABLE_BASELINE_PROFILE || sps ->i_profile_idc == PROFILE_SCALABLE_HIGH_PROFILE)
+			{
+
+				bs_write1(s, sps ->b_inter_layer_deblocking_present) ;
+				bs_write(s, 2, sps  ->i_extended_spatial_scalability) ;
+				if( sps->i_chroma_format_idc == CHROMA_420 ||sps->i_chroma_format_idc == CHROMA_422 )
+					bs_write ( s , 1 , sps ->b_chroma_phase_x_plus1_flag); 
+				if( sps ->i_chroma_format_idc == CHROMA_420 )
+					bs_write ( s, 2, sps ->i_chroma_phase_y_plus1);
+				if( sps->i_extended_spatial_scalability == 1)   //ess_seq
+					{
+						if(sps->i_chroma_format_idc > 0)
+							{
+								bs_write(s, 1, sps ->b_seq_ref_layer_chroma_phase_x_plus1_flag);
+								bs_write(s, 2, sps ->i_seq_ref_layer_chroma_phase_y_plus1);
+							}
+						
+						bs_write_se(s, sps ->i_seq_scaled_ref_layer_left_offset);
+						bs_write_se(s, sps ->i_seq_scaled_ref_layer_top_offset);
+						bs_write_se(s, sps ->i_seq_scaled_ref_layer_right_offset);						
+						bs_write_se(s, sps ->i_seq_scaled_ref_layer_bottom_offset );
+					}
+				bs_write1(s, sps ->b_seq_tcoeff_level_prediction_flag);
+				if(sps ->b_seq_tcoeff_level_prediction_flag)
+					bs_write1( s, sps ->b_adaptive_tcoeff_level_prediction_flag);
+				bs_write1( s, sps ->b_slice_header_restriction_flag ) ;
+
+					/*------------svc yuv¿©’π “ª∞„±Í÷æŒªŒ™0≤ªΩ¯––º∆À„-------------*/
+				bs_write1(s, sps ->b_svc_vui_parameters_present_flag) ;
+				if(sps ->b_svc_vui_parameters_present_flag)
+					{
+						//write svc_vui ≤Œ ˝
+					}
+			}
+
+			bs_write1(s, sps ->b_additional_extension2_flag);
+	  }
+//¿©’πΩ· ¯
 
     bs_rbsp_trailing( s );
     bs_flush( s );
@@ -477,6 +608,8 @@ void x264_pps_init( x264_pps_t *pps, int i_id, x264_param_t *param, x264_sps_t *
                     pps->scaling_list[i] = x264_cqm_jvt[i];
         break;
     }
+	/*sky 2014.08.28 pps init extension*/
+	pps->b_base_pred_weight_table_flag = 1; // ’‚∏ˆ÷µ‘› ±∏≥”Ë 1
 }
 
 void x264_pps_write( bs_t *s, x264_sps_t *sps, x264_pps_t *pps )

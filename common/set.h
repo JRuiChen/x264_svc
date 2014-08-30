@@ -36,9 +36,7 @@ enum profile_e
     PROFILE_HIGH422 = 122,
     PROFILE_HIGH444_PREDICTIVE = 244,
 
-/*sky 2014.08.27 添加   
-    SCALABLE_BASELINE_PROFILE = 83,
-    SCALABLE_HIGH_PROFILE = 86,*/
+/*sky 2014.08.27 添加     profile extension*/
      PROFILE_SCALABLE_BASELINE_PROFILE = 83,
      PROFILE_SCALABLE_HIGH_PROFILE = 86,
 };
@@ -65,6 +63,19 @@ enum cqm8_e
     CQM_8IC = 2,
     CQM_8PC = 3,
 };
+
+/*sky 2014.8.28 x264_prifix_t*/
+typedef struct
+{    
+  	//     if( ! getSPS().getAVCHeaderRewriteFlag() && ! isH264AVCCompatible() )
+	//这个东西在哪赋值的呀 该值不存在时推断为 0,如果为1表示作为参考帧解码存储
+	//If quality_id is equal to 0, store_ref_base_pic_flag is inferred to be equal to 0.
+   int b_store_ref_base_pic_flag; 
+	//这意思应该是 一般为0
+   int b_additional_prefix_nal_unit_extension_flag   ; 
+
+}x264_prifix_t;
+
 
 typedef struct
 {
@@ -219,7 +230,7 @@ typedef struct
     const uint8_t *scaling_list[8]; /* could be 12, but we don't allow separate Cb/Cr lists */
 
     /*sky 2014.08.27 pps extension*/
-	/*sky 2014.08.23  b_base_pred_weight_table_flag*/
+	/*2014.08.23  b_base_pred_weight_table_flag*/
 	int b_base_pred_weight_table_flag ; //先赋值为1，再看
 	int i_slice_group_map_type  ;//这个值不能确定，但是不会走
 } x264_pps_t;

@@ -1717,8 +1717,8 @@ generic_option:
                 break;
             }
     }
-
-
+/*sky  2014.08.28 param parse extension */
+ param ->i_layer_number = 2 ;//ÔİÊ±Ğ´ËÀ
     return 0;
 }
 
