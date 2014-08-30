@@ -63,7 +63,16 @@ do {\
 #define PREALLOC_INIT\
     int    prealloc_idx = 0;\
     size_t prealloc_size = 0;\
-    uint8_t **preallocs[PREALLOC_BUF_SIZE];
+    uint8_t **preallocs[PREALLOC_BUF_SIZE];\
+    int    prealloc_idx_BL = 0;\
+    size_t prealloc_size_BL = 0;\
+    uint8_t **preallocs_BL[PREALLOC_BUF_SIZE];\
+    int    prealloc_idx_EL1 = 0;\
+    size_t prealloc_size_EL1 = 0;\
+    uint8_t **preallocs_EL1[PREALLOC_BUF_SIZE];\
+    int    prealloc_idx_EL2 = 0;\
+    size_t prealloc_size_EL2 = 0;\
+    uint8_t **preallocs_EL2[PREALLOC_BUF_SIZE];
 
 #define PREALLOC( var, size )\
 do {\
@@ -78,6 +87,55 @@ do {\
     while( prealloc_idx-- )\
         *preallocs[prealloc_idx] += (intptr_t)ptr;\
 } while(0)
+
+/* Add by chenjie */
+#define PREALLOC_BL( var, size )\
+do {\
+    var = (void*)prealloc_size_BL;\
+    preallocs_BL[prealloc_idx_BL++] = (uint8_t**)&var;\
+    prealloc_size_BL += ALIGN(size, NATIVE_ALIGN);\
+} while(0)
+
+#define PREALLOC_END_BL( ptr )\
+do {\
+    CHECKED_MALLOC( ptr, prealloc_size_BL );\
+    while( prealloc_idx_BL-- )\
+        *preallocs_BL[prealloc_idx_BL] += (intptr_t)ptr;\
+} while(0)
+
+
+#define PREALLOC_EL1( var, size )\
+do {\
+    var = (void*)prealloc_size_EL1;\
+    preallocs_EL1[prealloc_idx_EL1++] = (uint8_t**)&var;\
+    prealloc_size_EL1 += ALIGN(size, NATIVE_ALIGN);\
+} while(0)
+
+#define PREALLOC_END_EL1( ptr )\
+do {\
+    CHECKED_MALLOC( ptr, prealloc_size_EL1 );\
+    while( prealloc_idx_EL1-- )\
+        *preallocs_EL1[prealloc_idx_EL1] += (intptr_t)ptr;\
+} while(0)
+
+
+
+#define PREALLOC_EL2( var, size )\
+do {\
+    var = (void*)prealloc_size_EL2;\
+    preallocs_EL2[prealloc_idx_EL2++] = (uint8_t**)&var;\
+    prealloc_size_EL2 += ALIGN(size, NATIVE_ALIGN);\
+} while(0)
+
+#define PREALLOC_END_EL2( ptr )\
+do {\
+    CHECKED_MALLOC( ptr, prealloc_size_EL2 );\
+    while( prealloc_idx_EL2-- )\
+        *preallocs_EL2[prealloc_idx_EL2] += (intptr_t)ptr;\
+} while(0)
+
+
+
 
 #define ARRAY_SIZE(array)  (sizeof(array)/sizeof(array[0]))
 

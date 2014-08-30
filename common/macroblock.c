@@ -256,6 +256,38 @@ int x264_macroblock_cache_allocate( x264_t *h )
 
     h->mb.b_interlaced = PARAM_INTERLACED;
 
+
+    /* Add by chenjie */
+    int i_mbBL_count = h->mbBL.i_mb_count;
+
+    h->mbBL.i_mb_stride = h->mbBL.i_mb_width;
+    h->mbBL.i_b8_stride = h->mbBL.i_mb_width * 2;
+    h->mbBL.i_b4_stride = h->mbBL.i_mb_width * 4;
+
+    h->mbBL.b_interlaced = PARAM_INTERLACED;
+
+
+    int i_mbEL1_count = h->mbEL1.i_mb_count;
+
+    h->mbEL1.i_mb_stride = h->mbEL1.i_mb_width;
+    h->mbEL1.i_b8_stride = h->mbEL1.i_mb_width * 2;
+    h->mbEL1.i_b4_stride = h->mbEL1.i_mb_width * 4;
+
+    h->mbEL1.b_interlaced = PARAM_INTERLACED;
+
+
+    int i_mbEL2_count = h->mbEL2.i_mb_count;
+
+    h->mbEL2.i_mb_stride = h->mbEL2.i_mb_width;
+    h->mbEL2.i_b8_stride = h->mbEL2.i_mb_width * 2;
+    h->mbEL2.i_b4_stride = h->mbEL2.i_mb_width * 4;
+
+    h->mbEL2.b_interlaced = PARAM_INTERLACED;
+
+
+
+
+
     PREALLOC_INIT
 
     PREALLOC( h->mb.qp, i_mb_count * sizeof(int8_t) );
@@ -269,13 +301,76 @@ int x264_macroblock_cache_allocate( x264_t *h )
     /* all coeffs */
     PREALLOC( h->mb.non_zero_count, i_mb_count * 48 * sizeof(uint8_t) );
 
+
+    /* Add by chenjie */
+    PREALLOC_BL( h->mbBL.qp, i_mbBL_count * sizeof(int8_t) );
+    PREALLOC_BL( h->mbBL.cbp, i_mbBL_count * sizeof(int16_t) );
+    PREALLOC_BL( h->mbBL.mb_transform_size, i_mbBL_count * sizeof(int8_t) );
+    PREALLOC_BL( h->mbBL.slice_table, i_mbBL_count * sizeof(uint16_t) );
+
+    /* 0 -> 3 top(4), 4 -> 6 : left(3) */
+    PREALLOC_BL( h->mbBL.intra4x4_pred_mode, i_mb_count * 8 * sizeof(int8_t) );
+
+    /* all coeffs */
+    PREALLOC_BL( h->mbBL.non_zero_count, i_mbBL_count * 48 * sizeof(uint8_t) );
+
+
+
+    PREALLOC_EL1( h->mbEL1.qp, i_mbEL1_count * sizeof(int8_t) );
+    PREALLOC_EL1( h->mbEL1.cbp, i_mbEL1_count * sizeof(int16_t) );
+    PREALLOC_EL1( h->mbEL1.mb_transform_size, i_mbEL1_count * sizeof(int8_t) );
+    PREALLOC_EL1( h->mbEL1.slice_table, i_mbEL1_count * sizeof(uint16_t) );
+
+    /* 0 -> 3 top(4), 4 -> 6 : left(3) */
+    PREALLOC_EL1( h->mbEL1.intra4x4_pred_mode, i_mbEL1_count * 8 * sizeof(int8_t) );
+
+    /* all coeffs */
+    PREALLOC_EL1( h->mbEL1.non_zero_count, i_mbEL1_count * 48 * sizeof(uint8_t) );
+
+
+
+    PREALLOC_EL2( h->mbEL2.qp, i_mbEL2_count * sizeof(int8_t) );
+    PREALLOC_EL2( h->mbEL2.cbp, i_mbEL2_count * sizeof(int16_t) );
+    PREALLOC_EL2( h->mbEL2.mb_transform_size, i_mbEL2_count * sizeof(int8_t) );
+    PREALLOC_EL2( h->mbEL2.slice_table, i_mbEL2_count * sizeof(uint16_t) );
+
+    /* 0 -> 3 top(4), 4 -> 6 : left(3) */
+    PREALLOC_EL2( h->mbEL2.intra4x4_pred_mode, i_mbEL2_count * 8 * sizeof(int8_t) );
+
+    /* all coeffs */
+    PREALLOC_EL2( h->mbEL2.non_zero_count, i_mbEL2_count * 48 * sizeof(uint8_t) );
+
+
+
     if( h->param.b_cabac )
     {
         PREALLOC( h->mb.skipbp, i_mb_count * sizeof(int8_t) );
         PREALLOC( h->mb.chroma_pred_mode, i_mb_count * sizeof(int8_t) );
         PREALLOC( h->mb.mvd[0], i_mb_count * sizeof( **h->mb.mvd ) );
+
+        /* Add by chenjie */
+        PREALLOC_BL( h->mbBL.skipbp, i_mbBL_count * sizeof(int8_t) );
+        PREALLOC_BL( h->mbBL.chroma_pred_mode, i_mbBL_count * sizeof(int8_t) );
+        PREALLOC_BL( h->mbBL.mvd[0], i_mbBL_count * sizeof( **h->mbBL.mvd ) );
+
+        PREALLOC_EL1( h->mbEL1.skipbp, i_mbEL1_count * sizeof(int8_t) );
+        PREALLOC_EL1( h->mbEL1.chroma_pred_mode, i_mbEL1_count * sizeof(int8_t) );
+        PREALLOC_EL1( h->mbEL1.mvd[0], i_mbEL1_count * sizeof( **h->mbEL1.mvd ) );
+
+        PREALLOC_EL2( h->mbEL2.skipbp, i_mbEL2_count * sizeof(int8_t) );
+        PREALLOC_EL2( h->mbEL2.chroma_pred_mode, i_mbEL2_count * sizeof(int8_t) );
+        PREALLOC_EL2( h->mbEL2.mvd[0], i_mbEL2_count * sizeof( **h->mbEL2.mvd ) );
+
         if( h->param.i_bframe )
+        {
             PREALLOC( h->mb.mvd[1], i_mb_count * sizeof( **h->mb.mvd ) );
+
+            /* Add by chenjie */
+            PREALLOC_BL( h->mbBL.mvd[1], i_mbBL_count * sizeof( **h->mbBL.mvd ) );
+            PREALLOC_EL1( h->mbEL1.mvd[1], i_mbEL1_count * sizeof( **h->mbEL1.mvd ) );
+            PREALLOC_EL2( h->mbEL2.mvd[1], i_mbEL2_count * sizeof( **h->mbEL2.mvd ) );
+        }
+            
     }
 
     for( int i = 0; i < 2; i++ )
@@ -285,7 +380,15 @@ int x264_macroblock_cache_allocate( x264_t *h )
             i_refs = X264_MIN(X264_REF_MAX, i_refs + 1 + (BIT_DEPTH == 8)); //smart weights add two duplicate frames, one in >8-bit
 
         for( int j = !i; j < i_refs; j++ )
+        {
             PREALLOC( h->mb.mvr[i][j], 2 * (i_mb_count + 1) * sizeof(int16_t) );
+
+            /* Add by chenjie */
+            PREALLOC_BL( h->mbBL.mvr[i][j], 2 * (i_mbBL_count + 1) * sizeof(int16_t) );
+            PREALLOC_EL1( h->mbEL1.mvr[i][j], 2 * (i_mbEL1_count + 1) * sizeof(int16_t) );
+            PREALLOC_EL2( h->mbEL2.mvr[i][j], 2 * (i_mbEL2_count + 1) * sizeof(int16_t) );
+        }
+            
     }
 
     if( h->param.analyse.i_weighted_pred )
@@ -294,6 +397,12 @@ int x264_macroblock_cache_allocate( x264_t *h )
         int luma_plane_size = 0;
         int numweightbuf;
 
+        /* Add by chenjie */
+        int luma_plane_size_BL = 0;
+        int luma_plane_size_EL1 = 0;
+        int luma_plane_size_EL2 = 0;
+
+
         if( h->param.analyse.i_weighted_pred == X264_WEIGHTP_FAKE )
         {
             // only need buffer for lookahead
@@ -301,6 +410,12 @@ int x264_macroblock_cache_allocate( x264_t *h )
             {
                 // Fake analysis only works on lowres
                 luma_plane_size = h->fdec->i_stride_lowres * (h->mb.i_mb_height*8+2*i_padv);
+
+                /* Add by chenjie */
+                luma_plane_size_BL = h->fdec->i_stride_lowres * (h->mbBL.i_mb_height*8+2*i_padv);
+                luma_plane_size_EL1 = h->fdec->i_stride_lowres * (h->mbEL1.i_mb_height*8+2*i_padv);
+                luma_plane_size_EL2 = h->fdec->i_stride_lowres * (h->mbEL2.i_mb_height*8+2*i_padv);
+
                 // Only need 1 buffer for analysis
                 numweightbuf = 1;
             }
@@ -313,6 +428,11 @@ int x264_macroblock_cache_allocate( x264_t *h )
              * needs the same amount of space and 4:2:2 needs twice that much */
             luma_plane_size = h->fdec->i_stride[0] * (h->mb.i_mb_height*(16<<(CHROMA_FORMAT==CHROMA_422))+2*i_padv);
 
+            /* Add by chenjie */
+            luma_plane_size_BL = h->fdec->i_stride[0] * (h->mbBL.i_mb_height*(16<<(CHROMA_FORMAT==CHROMA_422))+2*i_padv);
+            luma_plane_size_EL1 = h->fdec->i_stride[0] * (h->mbEL1.i_mb_height*(16<<(CHROMA_FORMAT==CHROMA_422))+2*i_padv);
+            luma_plane_size_EL2 = h->fdec->i_stride[0] * (h->mbEL2.i_mb_height*(16<<(CHROMA_FORMAT==CHROMA_422))+2*i_padv);
+
             if( h->param.analyse.i_weighted_pred == X264_WEIGHTP_SMART )
                 //smart can weight one ref and one offset -1 in 8-bit
                 numweightbuf = 1 + (BIT_DEPTH == 8);
@@ -322,12 +442,30 @@ int x264_macroblock_cache_allocate( x264_t *h )
         }
 
         for( int i = 0; i < numweightbuf; i++ )
+        {
             PREALLOC( h->mb.p_weight_buf[i], luma_plane_size * sizeof(pixel) );
+
+            /* Add by chenjie */
+            PREALLOC_BL( h->mbBL.p_weight_buf[i], luma_plane_size_BL * sizeof(pixel) );
+            PREALLOC_EL1( h->mbEL1.p_weight_buf[i], luma_plane_size_EL1 * sizeof(pixel) );
+            PREALLOC_EL2( h->mbEL2.p_weight_buf[i], luma_plane_size_EL2 * sizeof(pixel) );
+        }
+            
     }
 
     PREALLOC_END( h->mb.base );
 
+    /* Add by chenjie */
+    PREALLOC_END_BL( h->mbBL.base );
+    PREALLOC_END_EL1( h->mbEL1.base );
+    PREALLOC_END_EL2( h->mbEL2.base );
+
     memset( h->mb.slice_table, -1, i_mb_count * sizeof(uint16_t) );
+
+    /* Add by chenjie */
+    memset( h->mbBL.slice_table, -1, i_mbBL_count * sizeof(uint16_t) );
+    memset( h->mbEL1.slice_table, -1, i_mbEL1_count * sizeof(uint16_t) );
+    memset( h->mbEL2.slice_table, -1, i_mbEL2_count * sizeof(uint16_t) );
 
     for( int i = 0; i < 2; i++ )
     {
@@ -339,6 +477,14 @@ int x264_macroblock_cache_allocate( x264_t *h )
         {
             M32( h->mb.mvr[i][j][0] ) = 0;
             h->mb.mvr[i][j]++;
+
+            /* Add by chenjie */
+            M32( h->mbBL.mvr[i][j][0] ) = 0;
+            h->mbBL.mvr[i][j]++;
+            M32( h->mbEL1.mvr[i][j][0] ) = 0;
+            h->mbEL1.mvr[i][j]++;
+            M32( h->mbEL2.mvr[i][j][0] ) = 0;
+            h->mbEL2.mvr[i][j]++;
         }
     }
 
@@ -346,6 +492,8 @@ int x264_macroblock_cache_allocate( x264_t *h )
 fail:
     return -1;
 }
+
+
 void x264_macroblock_cache_free( x264_t *h )
 {
     x264_free( h->mb.base );
