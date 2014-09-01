@@ -705,8 +705,8 @@ void x264_prefetch_fenc( x264_t *h, x264_frame_t *fenc, int i_mb_x, int i_mb_y )
     int off_y  = 16 * i_mb_x + 16 * i_mb_y * stride_y;
     int off_uv = 16 * i_mb_x + (16 * i_mb_y * stride_uv >> CHROMA_V_SHIFT);
     h->mc.prefetch_fenc( fenc->plane[0]+off_y, stride_y,
-                         fenc->plane[1]+off_uv, stride_uv, i_mb_x );
-}*/
+ */                        fenc->plane[1]+off_uv, stride_uv, i_mb_x );
+}
 
 NOINLINE void x264_copy_column8( pixel *dst, pixel *src )
 {
