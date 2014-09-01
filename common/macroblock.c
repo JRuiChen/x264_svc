@@ -709,6 +709,102 @@ NOINLINE void x264_copy_column8( pixel *dst, pixel *src )
         dst[i*FDEC_STRIDE] = src[i*FDEC_STRIDE];
 }
 
+/* Add by chenjie */
+static void ALWAYS_INLINE x264_load_upsampled_mb_to_mbPicRef_of_elLayer(x264_t *h, pixel *src, int mb_x, int mb_y, int i_plane, int b_chroma, int b_mbaff)
+{
+    int mb_interlaced = b_mbaff && MB_INTERLACED;
+    int height = b_chroma ? 16 >> CHROMA_V_SHIFT : 16;
+    int i_stride = h->fdec->i_stride[i_plane];
+    int i_stride2 = i_stride << mb_interlaced;
+    int i_pix_offset = mb_interlaced
+                     ? 16 * mb_x + height * (mb_y&~1) * i_stride + (mb_y&1) * i_stride
+                     : 16 * mb_x + height * mb_y * i_stride;
+    pixel *plane_fdec = &h->fdec->plane[i_plane][i_pix_offset];
+    int fdec_idx = b_mbaff ? (mb_interlaced ? (3 + (mb_y&1)) : (mb_y&1) ? 2 : 4) : !(mb_y&1);
+    pixel *intra_fdec = &h->intra_border_backup[fdec_idx][i_plane][mb_x*16];
+    int ref_pix_offset[2] = { i_pix_offset, i_pix_offset };
+
+     /* ref_pix_offset[0] references the current field and [1] the opposite field. */
+    if( mb_interlaced )
+        ref_pix_offset[1] += (1-2*(mb_y&1)) * i_stride;
+    h->mbEL1.pic.i_stride[i_plane] = i_stride2;
+    h->mbEL1.pic.p_fenc_plane[i_plane] = &h->fenc->plane[i_plane][i_pix_offset];;
+    if(b_chroma)
+    {
+
+    }
+    else
+    {
+		h->mc.copy[PIXEL_16x16]( h->mbEL1.pic.p_fenc[i_plane], FENC_STRIDE, h->mbEL1.pic.p_fenc_plane[i_plane], i_stride2, 16 );
+             memcpy( h->mbEL1.pic.p_fdec[i_plane]-FDEC_STRIDE, intra_fdec, 24*sizeof(pixel) );
+    	       h->mbEL1.pic.p_fdec[i_plane][-FDEC_STRIDE-1] = intra_fdec[-1];
+    }
+
+    if( b_mbaff || h->mbEL1.b_reencode_mb )
+    {
+        for( int j = 0; j < height; j++ )
+            if( b_chroma )
+            {
+                h->mbEL1.pic.p_fdec[1][-1+j*FDEC_STRIDE] = plane_fdec[-2+j*i_stride2];
+                h->mbEL1.pic.p_fdec[2][-1+j*FDEC_STRIDE] = plane_fdec[-1+j*i_stride2];
+            }
+            else
+                h->mbEL1.pic.p_fdec[i_plane][-1+j*FDEC_STRIDE] = plane_fdec[-1+j*i_stride2];
+    }
+    pixel *plane_src, **filtered_src;
+
+    for( int j = 0; j < h->mbEL1.pic.i_fref[0]; j++ )
+    {
+        // Interpolate between pixels in same field.
+        if( mb_interlaced )
+        {
+            plane_src = h->fref[0][j>>1]->plane_fld[i_plane];
+            filtered_src = h->fref[0][j>>1]->filtered_fld[i_plane];
+        }
+        else
+        {
+            plane_src = h->fref[0][j]->plane[i_plane];
+            filtered_src = h->fref[0][j]->filtered[i_plane];
+        }
+        h->mbEL1.pic.p_fref[0][j][i_plane*4] = plane_src + ref_pix_offset[j&1];
+
+        if( !b_chroma )
+        {
+            for( int k = 1; k < 4; k++ )
+                h->mbEL1.pic.p_fref[0][j][i_plane*4+k] = filtered_src[k] + ref_pix_offset[j&1];
+            if( !i_plane )
+            {
+                if( h->sh.weight[j][0].weightfn )
+                    h->mbEL1.pic.p_fref_w[j] = &h->fenc->weighted[j >> mb_interlaced][ref_pix_offset[j&1]];
+                else
+                    h->mbEL1.pic.p_fref_w[j] = h->mbEL1.pic.p_fref[0][j][0];
+            }
+        }
+    }
+
+    if( h->sh.i_type == SLICE_TYPE_B )
+        for( int j = 0; j < h->mbEL1.pic.i_fref[1]; j++ )
+        {
+            if( mb_interlaced )
+            {
+                plane_src = h->fref[1][j>>1]->plane_fld[i_plane];
+                filtered_src = h->fref[1][j>>1]->filtered_fld[i_plane];
+            }
+            else
+            {
+                plane_src = h->fref[1][j]->plane[i_plane];
+                filtered_src = h->fref[1][j]->filtered[i_plane];
+            }
+            h->mbEL1.pic.p_fref[1][j][i_plane*4] = plane_src + ref_pix_offset[j&1];
+
+            if( !b_chroma )
+                for( int k = 1; k < 4; k++ )
+                    h->mbEL1.pic.p_fref[1][j][i_plane*4+k] = filtered_src[k] + ref_pix_offset[j&1];
+        }
+
+    h->mbEL1.pic.p_ref_BL[i_plane] = src;
+}
+
 static void ALWAYS_INLINE x264_macroblock_load_pic_pointers( x264_t *h, int mb_x, int mb_y, int i, int b_chroma, int b_mbaff )
 {
     int mb_interlaced = b_mbaff && MB_INTERLACED;

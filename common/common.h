@@ -1140,6 +1140,10 @@ struct x264_t
             /* pointer over mb of the frame to be reconstructed  */
             pixel *p_fdec[3];
 
+	     pixel *p_ref_BL[3];// Add by chenjie
+
+	     
+
             /* pointer over mb of the references */
             int i_fref[2];
             /* [12]: yN, yH, yV, yHV, (NV12 ? uv : I444 ? (uN, uH, uV, uHV, vN, ...)) */
