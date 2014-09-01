@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ---- mv Matches (201 in 25 files) ----
 Analyse.c (encoder):46
     /* [ref][0] is 16x16 mv, [ref][1..4] are 8x8 mv from partition [0..3] */
@@ -1043,6 +1044,8 @@ X264.h:583
     int mvs_per_2mb; /* max mvs per 2 consecutive mbs. */
     int slice_rate;  /* ?? */
 =======
+=======
+>>>>>>> ead0aa196b0d408240a7c3154777a6d1c0f2be06
 ---- pps Matches (161 in 20 files) ----
 Analyse.c (encoder):/*sky 2014.08.24 this pps 这个pps其实可以不用修改,出于逻辑还是应该修改的*/
 Analyse.c (encoder):    if( h->param.analyse.b_transform_8x8 && h->pps[h->i_layer_id].b_transform_8x8_mode )
@@ -1201,4 +1204,7 @@ X264.h:    int i_sps_id;               /* SPS and PPS id number */
 X264.h:     * each part, and stitching them back together will result in identical SPS/PPS. This is necessary for stitching
 X264.h:     * with container formats that don't allow multiple SPS/PPS. */
 X264.h: *      return the SPS and PPS that will be used for the whole stream.
+<<<<<<< HEAD
+>>>>>>> ead0aa196b0d408240a7c3154777a6d1c0f2be06
+=======
 >>>>>>> ead0aa196b0d408240a7c3154777a6d1c0f2be06

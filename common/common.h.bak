@@ -43,13 +43,24 @@
 #define ARRAY_ELEMS(a) ((sizeof(a))/(sizeof(a[0])))
 
 /*some returned value - BY MING*/
-const int m_nOK = 0;
-const int m_nERR = -1;
-const int m_nEndOfStream = -2;
-const int m_nEndOfFile = -3;
-const int m_nEndOfBuffer = -4;
-const int m_nInvalidParameter = -5;
-const int m_nDataNotAvailable = -6;
+
+#define m_nOK  0
+#define m_nERR  -1
+#define m_nEndOfStream  -2
+#define m_nEndOfFile -3
+#define m_nEndOfBuffer  -4
+#define m_nInvalidParameter  -5
+#define m_nDataNotAvailable  -6
+
+/*
+extern const int  m_nOK;
+extern const int  m_nERR;
+extern const int  m_nEndOfStream;
+extern const int  m_nEndOfFile;
+extern const int  m_nEndOfBuffer;
+extern const int  m_nInvalidParameter;
+extern const int  m_nDataNotAvailable;
+*/
 
 /*define some value related to computer - BY MING*/
 #define MSYS_INT_MIN          (-2147483647 - 1)
@@ -85,7 +96,7 @@ const int m_nDataNotAvailable = -6;
 }
 
 
-#define RERR \
+#define RERR() \
 {\
    assert(0);\
    return m_nERR;\
@@ -129,7 +140,16 @@ do {\
 #define PREALLOC_INIT\
     int    prealloc_idx = 0;\
     size_t prealloc_size = 0;\
-    uint8_t **preallocs[PREALLOC_BUF_SIZE];
+    uint8_t **preallocs[PREALLOC_BUF_SIZE];\
+    int    prealloc_idx_BL = 0;\
+    size_t prealloc_size_BL = 0;\
+    uint8_t **preallocs_BL[PREALLOC_BUF_SIZE];\
+    int    prealloc_idx_EL1 = 0;\
+    size_t prealloc_size_EL1 = 0;\
+    uint8_t **preallocs_EL1[PREALLOC_BUF_SIZE];\
+    int    prealloc_idx_EL2 = 0;\
+    size_t prealloc_size_EL2 = 0;\
+    uint8_t **preallocs_EL2[PREALLOC_BUF_SIZE];
 
 #define PREALLOC( var, size )\
 do {\
@@ -144,6 +164,55 @@ do {\
     while( prealloc_idx-- )\
         *preallocs[prealloc_idx] += (intptr_t)ptr;\
 } while(0)
+
+/* Add by chenjie */
+#define PREALLOC_BL( var, size )\
+do {\
+    var = (void*)prealloc_size_BL;\
+    preallocs_BL[prealloc_idx_BL++] = (uint8_t**)&var;\
+    prealloc_size_BL += ALIGN(size, NATIVE_ALIGN);\
+} while(0)
+
+#define PREALLOC_END_BL( ptr )\
+do {\
+    CHECKED_MALLOC( ptr, prealloc_size_BL );\
+    while( prealloc_idx_BL-- )\
+        *preallocs_BL[prealloc_idx_BL] += (intptr_t)ptr;\
+} while(0)
+
+
+#define PREALLOC_EL1( var, size )\
+do {\
+    var = (void*)prealloc_size_EL1;\
+    preallocs_EL1[prealloc_idx_EL1++] = (uint8_t**)&var;\
+    prealloc_size_EL1 += ALIGN(size, NATIVE_ALIGN);\
+} while(0)
+
+#define PREALLOC_END_EL1( ptr )\
+do {\
+    CHECKED_MALLOC( ptr, prealloc_size_EL1 );\
+    while( prealloc_idx_EL1-- )\
+        *preallocs_EL1[prealloc_idx_EL1] += (intptr_t)ptr;\
+} while(0)
+
+
+
+#define PREALLOC_EL2( var, size )\
+do {\
+    var = (void*)prealloc_size_EL2;\
+    preallocs_EL2[prealloc_idx_EL2++] = (uint8_t**)&var;\
+    prealloc_size_EL2 += ALIGN(size, NATIVE_ALIGN);\
+} while(0)
+
+#define PREALLOC_END_EL2( ptr )\
+do {\
+    CHECKED_MALLOC( ptr, prealloc_size_EL2 );\
+    while( prealloc_idx_EL2-- )\
+        *preallocs_EL2[prealloc_idx_EL2] += (intptr_t)ptr;\
+} while(0)
+
+
+
 
 #define ARRAY_SIZE(array)  (sizeof(array)/sizeof(array[0]))
 
@@ -559,7 +628,15 @@ typedef struct
 	int b_constrained_intra_resampling_flag;
 	int b_slice_skip_flag; 
 	int i_num_mbs_in_slice;
+<<<<<<< HEAD
 	
+=======
+
+	  /*int b_adaptive_base_mode_flag;
+	int b_adaptive_motion_prediction_flag;
+	int b_adaptive_residual_prediction_flag;
+	sh里边这几个值如果是0的话其实是不用改的*/
+>>>>>>> ead0aa196b0d408240a7c3154777a6d1c0f2be06
 	int b_adaptive_base_mode_flag;
 	int b_default_base_mode_flag;
 	int b_adaptive_motion_prediction_flag;
@@ -1162,7 +1239,7 @@ struct x264_t
 		int8_t* transform8x8_size;       /* BY MING*/
       /*extenstion mb table - BY MING */
         uint8_t (*sub_partition)[4];
-		uint8_t * intra_pred_mode;
+		uint8_t * intra16x16_pred_mode;
 		int* mb_mode;
 		int (*blk_moed)[4];
         
@@ -1177,7 +1254,7 @@ struct x264_t
 		int i_blk_mode[4];
          /* buffer for weighted versions of the reference frames */
         pixel *p_weight_buf[X264_REF_MAX];
-
+       
         /* current value */
         int     i_type;
         int     i_partition;
@@ -1237,6 +1314,10 @@ struct x264_t
 
             /* pointer over mb of the frame to be reconstructed  */
             pixel *p_fdec[3];
+
+	     pixel *p_ref_BL[3];// Add by chenjie
+
+	     
 
             /* pointer over mb of the references */
             int i_fref[2];
