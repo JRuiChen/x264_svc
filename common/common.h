@@ -43,13 +43,24 @@
 #define ARRAY_ELEMS(a) ((sizeof(a))/(sizeof(a[0])))
 
 /*some returned value - BY MING*/
-const int m_nOK = 0;
-const int m_nERR = -1;
-const int m_nEndOfStream = -2;
-const int m_nEndOfFile = -3;
-const int m_nEndOfBuffer = -4;
-const int m_nInvalidParameter = -5;
-const int m_nDataNotAvailable = -6;
+
+#define m_nOK  0
+#define m_nERR  -1
+#define m_nEndOfStream  -2
+#define m_nEndOfFile -3
+#define m_nEndOfBuffer  -4
+#define m_nInvalidParameter  -5
+#define m_nDataNotAvailable  -6
+
+/*
+extern const int  m_nOK;
+extern const int  m_nERR;
+extern const int  m_nEndOfStream;
+extern const int  m_nEndOfFile;
+extern const int  m_nEndOfBuffer;
+extern const int  m_nInvalidParameter;
+extern const int  m_nDataNotAvailable;
+*/
 
 /*define some value related to computer - BY MING*/
 #define MSYS_INT_MIN          (-2147483647 - 1)
@@ -63,21 +74,20 @@ const int m_nDataNotAvailable = -6;
   	{\
   	  return (retVal);\
   	}\
-
 }
 
 #define ROTRS(exp,retVal)\
 {\
    if((exp))\
    	{\
-   	  return retVal\
+   	  return retVal;\
    	  }\
 }
 
 
 #define RNOK(exp)\
 {\
-  const int nMSysRetVal = (exp)\
+  const int nMSysRetVal = (exp);\
   if(nMSysRetVal != m_nOK)\
   	{\
   	  assert(0);\
@@ -86,7 +96,7 @@ const int m_nDataNotAvailable = -6;
 }
 
 
-#define RERR \
+#define RERR() \
 {\
    assert(0);\
    return m_nERR;\
@@ -560,7 +570,7 @@ typedef struct
 	int b_constrained_intra_resampling_flag;
 	int b_slice_skip_flag; 
 	int i_num_mbs_in_slice;
-	int 
+	
 	int b_adaptive_base_mode_flag;
 	int b_default_base_mode_flag;
 	int b_adaptive_motion_prediction_flag;
@@ -894,13 +904,14 @@ struct x264_t
                                              * NOTE: this will fail on resolutions above 2^16 MBs... */
         uint8_t *field;
 
-
+ 
 		int8_t * mb_mode;					/*mb mode - BY MING*/
 		int8_t (* blk_mode)[4];           /*blk_mode - BY MING*/
         int8_t* BL_skip;                /*bl_skip - BY MING*/
 		int8_t* transform8x8_size;       /* BY MING*/
+		int8_t* intra16x16_pred_mode;/*BY MING*/
 		
-         
+        
          /* buffer for weighted versions of the reference frames */
         pixel *p_weight_buf[X264_REF_MAX];
 
@@ -917,8 +928,8 @@ struct x264_t
         int     i_chroma_pred_mode;
 
         int8_t i_mb_mode;/*current macroblock mb mode - BY MING*/
-		int8_t i_blk_mode[4];/*current macroblock blk mode - BY MING*/
-		ALIGNED_4(int8_t i_blk_mode[4]);/*current sub partition mode - BY MING*/
+		//int8_t i_blk_mode[4];/*current macroblock blk mode - BY MING*/
+		int8_t i_blk_mode[4];/*current sub partition mode - BY MING*/
         /* skip flags for i4x4 and i8x8
          * 0 = encode as normal.
          * 1 (non-RD only) = the DCT is still in h->dct, restore fdec and skip reconstruction.
@@ -1162,8 +1173,7 @@ struct x264_t
 		int8_t* transform8x8_size;       /* BY MING*/
       /*extenstion mb table - BY MING */
         uint8_t (*sub_partition)[4];
-		uint8_t * intra_pred_mode;
-		uint8_t * chroma_pred_mode;
+		uint8_t * intra16x16_pred_mode;
 		int* mb_mode;
 		int (*blk_moed)[4];
         
@@ -1175,10 +1185,10 @@ struct x264_t
         int b_BL_skip_flag;
 		int b_residual_pred_flag;
         int i_mb_mode;
-		int i_blk_mode;
+		int i_blk_mode[4];
          /* buffer for weighted versions of the reference frames */
         pixel *p_weight_buf[X264_REF_MAX];
-
+       
         /* current value */
         int     i_type;
         int     i_partition;

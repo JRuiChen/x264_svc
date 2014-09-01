@@ -388,7 +388,7 @@ static ALWAYS_INLINE void x264_cabac_mb_header_i( x264_t *h, x264_cabac_t *cb, i
         if( (h->mb.i_neighbour & MB_TOP) && h->mb.i_mb_type_top != I_4x4 )
             ctx++;
 
-        x264_cabac_mb_type_intra( h, cb, i_mb_type, 3+ctx, 3+3, 3+4, 3+5, 3+6, 3+7 );
+        x264_cabac_mb_type_intra( h, cb, i_mb_type, 3+ctx, 3+3, 3+4, 3+5, 3+6, 3+7 );  // mb_type
     }
     else if( slice_type == SLICE_TYPE_P )
     {
@@ -414,10 +414,11 @@ static ALWAYS_INLINE void x264_cabac_mb_header_i( x264_t *h, x264_cabac_t *cb, i
     if( i_mb_type == I_PCM )
         return;
 
-    if( i_mb_type != I_16x16 )
+    if( i_mb_type != I_16x16 )  //if( transform_8x8_mode_flag && mb_type = = I_NxN )
     {
-        if( h->pps->b_transform_8x8_mode )
-            x264_cabac_transform_size( h, cb );
+    /*sky 2014.08.29 修改了pps*/
+        if( h->pps[h->i_layer_id].b_transform_8x8_mode )
+            x264_cabac_transform_size( h, cb ); // ransform_size_8x8_flag
 
         int di = h->mb.b_transform_8x8 ? 4 : 1;
         for( int i = 0; i < 16; i += di )
@@ -430,6 +431,7 @@ static ALWAYS_INLINE void x264_cabac_mb_header_i( x264_t *h, x264_cabac_t *cb, i
 
     if( chroma )
         x264_cabac_intra_chroma_pred_mode( h, cb );
+	// 没有else if( MbPartPredMode( mb_type, 0 ) != Direct )
 }
 
 static ALWAYS_INLINE void x264_cabac_mb_header_p( x264_t *h, x264_cabac_t *cb, int i_mb_type, int chroma )
@@ -983,6 +985,10 @@ static ALWAYS_INLINE void x264_macroblock_write_cabac_internal( x264_t *h, x264_
     else //if( h->sh.i_type == SLICE_TYPE_I )
         x264_cabac_mb_header_i( h, cb, i_mb_type, SLICE_TYPE_I, chroma );
 
+	/* sky 这个表示非  I 条带判断 if( mb_type != I_NxN &&
+MbPartPredMode( mb_type, 0 ) != Intra_16x16 &&
+NumMbPart( mb_type ) = = 4 )*/
+
 #if !RDO_SKIP_BS
     i_mb_pos_tex = x264_cabac_pos( cb );
     h->stat.frame.i_mv_bits += i_mb_pos_tex - i_mb_pos_start;
@@ -1010,18 +1016,20 @@ static ALWAYS_INLINE void x264_macroblock_write_cabac_internal( x264_t *h, x264_
     }
 #endif
 
-    if( i_mb_type != I_16x16 )
+    if( i_mb_type != I_16x16 )    // if( MbPartPredMode( mb_type, 0 ) != Intra_16x16 ) 
     {
-        x264_cabac_cbp_luma( h, cb );
+        x264_cabac_cbp_luma( h, cb );  // 这个写入 他的后四位其实就写入了 coded_block_pattern余16的	情况
         if( chroma )
-            x264_cabac_cbp_chroma( h, cb );
+            x264_cabac_cbp_chroma( h, cb ); // 这个地方应该就是除16了 
     }
 
     if( x264_mb_transform_8x8_allowed( h ) && h->mb.i_cbp_luma )
     {
-        x264_cabac_transform_size( h, cb );
+        x264_cabac_transform_size( h, cb ); // 这在往里边写transform size
     }
-
+	
+ /*sky if( CodedBlockPatternLuma > 0 | | CodedBlockPatternChroma > 0 | |
+MbPartPredMode( mb_type, 0 ) = = Intra_16x16 ) */
     if( h->mb.i_cbp_luma || (chroma && h->mb.i_cbp_chroma) || i_mb_type == I_16x16 )
     {
         const int b_intra = IS_INTRA( i_mb_type );
@@ -1036,12 +1044,12 @@ static ALWAYS_INLINE void x264_macroblock_write_cabac_internal( x264_t *h, x264_
                 x264_cabac_block_residual_dc_cbf( h, cb, ctx_cat_plane[DCT_LUMA_DC][p], LUMA_DC+p, h->dct.luma16x16_dc[p], 1 );
 
                 /* AC Luma */
-                if( h->mb.i_cbp_luma )
+                if( h->mb.i_cbp_luma )  
                     for( int i = p*16; i < p*16+16; i++ )
                         x264_cabac_block_residual_cbf( h, cb, ctx_cat_plane[DCT_LUMA_AC][p], i, h->dct.luma4x4[i]+1, 1 );
             }
         }
-        else if( h->mb.b_transform_8x8 )
+        else if( h->mb.b_transform_8x8 ) // i_mb_type  != i_16X16 这条线
         {
             if( plane_count == 3 )
             {
@@ -1096,7 +1104,7 @@ if( (h->mb.i_neighbour & MB_TOP) && !h->mb.mb_transform_size[h->mb.i_mb_top_xy] 
                     x264_cabac_block_residual_8x8( h, cb, DCT_LUMA_8x8, h->dct.luma8x8[i] );
             }
         }
-        else
+        else // h->mb.b_transform_8X8 == 0
         {
             for( int p = 0; p < plane_count; p++ )
                 FOREACH_BIT( i8x8, 0, h->mb.i_cbp_luma )

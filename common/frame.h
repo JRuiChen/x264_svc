@@ -40,20 +40,15 @@
 #define  TMM_TABLE_SIZE          512
 #define false 0
 #define true 1
-#define ROTRS( exp, retVal )  \
-{                             \
-  if( ( exp ) )               \
-  {                           \
-    return retVal;            \
-  }                           \
-}
 //typedef  unsigned char pixel;
+
+
 
 enum RefIdxValues
 {
   BLOCK_NOT_AVAILABLE = 0,
-  BLOCK_NOT_PREDICTED = -1;
-}
+  BLOCK_NOT_PREDICTED = -1
+};
 
 
 typedef int bool;
@@ -113,12 +108,12 @@ typedef struct MOTIONUPSAMPLING
    int b_direct8x8_inference;
    int i_mv_threshold;
    int b_curr_field_mb;
-   slice_type_e e_slice_type;
+   int e_slice_type;
    int i_ref_layer_dqid;
    int i_max_list_idx;
    int b_scoeff_pred;
    int b_tcoeff_pred;
-   ResizeParameters& m_rc_resize_params;
+   ResizeParameters* m_rc_resize_params;
 
    int i_mb_x0_crop_frm;
    int i_mb_y0_crop_frm;
@@ -131,11 +126,11 @@ typedef struct MOTIONUPSAMPLING
    int b_in_crop_window;
    int b_intraBL;
    int i_aai_part_idc[4][4];
-   int i_aai_ref_idx_temp[4][4];
+   int i_aai_ref_idx_temp[2][2][2];
    int i_aaai_ref_idx[2][2][2];
    int i_aaac_mv[2][4][4][2];
-   MbMode mb_mode;
-   BlkMode blk_mode[4];
+   int mb_mode;
+   int blk_mode[4];
    
    int i_fwd_bwd;
    int b_aa_base_intra[2][2];
@@ -162,9 +157,9 @@ int* xAddMv(int*,int*);
 
 int xMvCopy(int*,int*);
 
-int* xMvLeftShift(int*,short);
+int xMvLeftShift(int*,short);
 
-int* xMvRightShift(int*,short);
+int xMvRightShift(int*,short);
 
 /*xSetPartIdcArray(this function implements subclause G.8.6.1.1) - BY MING*/
 int xSetPartIdcArray(MotionUpsampling*,x264_t*);
@@ -174,21 +169,21 @@ int xSetPredMbData(MotionUpsampling*,x264_t*);
 int xMbdataClear(x264_t* h);
  
 /*xGetRefLayerMb*/
-int xGetRefLayerMb(MotionUpsampling*,int,int,int&,int&,int&,x264_t*);
+int xGetRefLayerMb(MotionUpsampling*,int,int,int*,int*,int*,x264_t*);
 
 /*xGetRefLayerPartIdc - BY MING*/
-int xGetRefLayerPartIdc(MotionUpsampling*,int,int,int&,x264_t* );
+int xGetRefLayerPartIdc(MotionUpsampling*,int,int,int*,x264_t* );
 
 
 int xGetRefIdxAndInitialMvPred(MotionUpsampling*,int,x264_t* );
-int xGetInitialBaseRefIdxAndMv(int,int,int,int&,int* );
+int xGetInitialBaseRefIdxAndMv(MotionUpsampling*,int,int,int,int*,int*,x264_t*);
 int xDeriveBlockModeAndUpdateMv(MotionUpsampling*,int);
 
 int xGetMinRefIdx(int,int);
 
 int xResampleMotion(MotionUpsampling*, int ,int ,x264_t*);
 
-int xUpsampleMotion(MotionUpsampling*,ResizeParameters*,int b_field_resampling,int b_residual_pred_check,int i_mv_threshold,x264_t*);
+int xUpsampleMotion(MotionUpsampling*,ResizeParameters*,int ,int ,int ,x264_t*);
 
 
 
@@ -461,9 +456,8 @@ void xBasicIntraUpsampling( int  iBaseW,   int  iBaseH,   int  iCurrW,   int  iC
 void xCompIntraUpsampling( ResizeParameters* pcParameters, bool bChroma, bool bBotFlag, bool bVerticalInterpolation, bool bFrameMb, int iMargin ,DownConvert* cDownConvert);
 void upsamplingSVC( pixel* pucBufferY,int iStrideY, ResizeParameters* pcParameters,int bBotCoincided,DownConvert* cDownConvert );
 
-/*upsampling motion data from base layer to enhance layer - BY MING*/
-void upsampleMotion(x264_slice_header_t* sh,ResizeParameters* resizeParams);
-void resample(int i_mbx_curr,int i_mby_curr);
+
+
 
 
 

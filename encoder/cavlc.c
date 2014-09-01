@@ -312,7 +312,7 @@ static void x264_cavlc_mb_header_i( x264_t *h, int i_mb_type, int i_mb_i_offset,
     {
         int di = i_mb_type == I_8x8 ? 4 : 1;
         bs_write_ue( s, i_mb_i_offset + 0 );
-        if( h->pps->b_transform_8x8_mode )
+        if( h->pps[h->i_layer_id].b_transform_8x8_mode )
             bs_write1( s, h->mb.b_transform_8x8 );
 
         /* Prediction: Luma */

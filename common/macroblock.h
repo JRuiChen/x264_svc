@@ -144,8 +144,6 @@ static const uint8_t x264_mb_type_list_table[X264_MBTYPE_MAX][2][2] =
   	{\
   	  return (MODE_SKIP);\
   	}\
-
-
 }
 
 #define IS_SUB4x4(type) ( (type ==D_L0_4x4)||(type ==D_L1_4x4)||(type ==D_BI_4x4))

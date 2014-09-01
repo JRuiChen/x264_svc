@@ -57,7 +57,7 @@ enum intra16x16_pred_e
 
     I_PRED_16x16_DC_LEFT = 4,
     I_PRED_16x16_DC_TOP  = 5,
-    I_PRED_16x16_DC_128  = 6,
+    I_PRED_16x16_DC_128  = 6
 };
 static const uint8_t x264_mb_pred_mode16x16_fix[7] =
 {

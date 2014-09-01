@@ -2887,7 +2887,8 @@ static inline void x264_mb_analyse_transform( x264_t *h )
 
 static inline void x264_mb_analyse_transform_rd( x264_t *h, x264_mb_analysis_t *a, int *i_satd, int *i_rd )
 {
-    if( h->param.analyse.b_transform_8x8 && h->pps->b_transform_8x8_mode )
+/*sky 2014.08.24 this pps 这个pps其实可以不用修改,出于逻辑还是应该修改的*/
+    if( h->param.analyse.b_transform_8x8 && h->pps[h->i_layer_id].b_transform_8x8_mode )
     {
         uint32_t subpart_bak = M32( h->mb.i_sub_partition );
         /* Try switching the subpartitions to 8x8 so that we can use 8x8 transform mode */

@@ -103,8 +103,17 @@ void x264_sps_init( x264_sps_t *sps, int i_id, x264_param_t *param )
     int csp = param->i_csp & X264_CSP_MASK;
 
     sps->i_id = i_id;
-    sps->i_mb_width = ( param->i_width + 15 ) / 16;
-    sps->i_mb_height= ( param->i_height + 15 ) / 16;
+	/*sky 2014.08.29 添加 ssps 的宽度高度计算*/
+	if(sps->i_nal_type == NAL_SPS)
+		{
+    			sps->i_mb_width = ( param->i_width + 15 ) / 16;
+    			sps->i_mb_height= ( param->i_height + 15 ) / 16;
+		}
+	else if(sps->i_nal_type == NAL_UNIT_SUBSET_SPS)
+		{
+			sps->i_mb_width = ( param->i_width + 15 ) / 16 * 2 * (sps->i_id + 1);
+    			sps->i_mb_height= ( param->i_height + 15 ) / 16 * 2 * (sps->i_id + 1);
+		}
     sps->i_chroma_format_idc = csp >= X264_CSP_I444 ? CHROMA_444 :
                                csp >= X264_CSP_I422 ? CHROMA_422 : CHROMA_420;
 

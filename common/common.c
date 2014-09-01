@@ -50,6 +50,10 @@ x264_pthread_mutex_t mutex_slice_encode_sleeped_threads = X264_PTHREAD_MUTEX_INI
 int dst_s = 0;
 
 
+
+
+
+
 const int x264_bit_depth = BIT_DEPTH;
 
 const int x264_chroma_format = X264_CHROMA_FORMAT;
