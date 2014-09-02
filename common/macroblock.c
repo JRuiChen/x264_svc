@@ -578,6 +578,37 @@ void x264_macroblock_slice_init( x264_t *h )
     h->mb.partition = h->fdec->mb_partition;
     h->mb.field = h->fdec->field;
 
+    /* Add by chenjie */
+    h->mbBL.mv[0] = h->fdec->mv[0];
+    h->mbBL.mv[1] = h->fdec->mv[1];
+    h->mbBL.mvr[0][0] = h->fdec->mv16x16;
+    h->mbBL.ref[0] = h->fdec->ref[0];
+    h->mbBL.ref[1] = h->fdec->ref[1];
+    h->mbBL.type = h->fdec->mb_type;
+    h->mbBL.partition = h->fdec->mb_partition;
+    h->mbBL.field = h->fdec->field;
+
+    h->mbEL1.mv[0] = h->fdec->mv[0];
+    h->mbEL1.mv[1] = h->fdec->mv[1];
+    h->mbEL1.mvr[0][0] = h->fdec->mv16x16;
+    h->mbEL1.ref[0] = h->fdec->ref[0];
+    h->mbEL1.ref[1] = h->fdec->ref[1];
+    h->mbEL1.type = h->fdec->mb_type;
+    h->mbEL1.partition = h->fdec->mb_partition;
+    h->mbEL1.field = h->fdec->field;
+
+    h->mbEL2.mv[0] = h->fdec->mv[0];
+    h->mbEL2.mv[1] = h->fdec->mv[1];
+    h->mbEL2.mvr[0][0] = h->fdec->mv16x16;
+    h->mbEL2.ref[0] = h->fdec->ref[0];
+    h->mbEL2.ref[1] = h->fdec->ref[1];
+    h->mbEL2.type = h->fdec->mb_type;
+    h->mbEL2.partition = h->fdec->mb_partition;
+    h->mbEL2.field = h->fdec->field;
+
+	
+
+	
     h->fdec->i_ref[0] = h->i_ref[0];
     h->fdec->i_ref[1] = h->i_ref[1];
     for( int i = 0; i < h->i_ref[0]; i++ )
@@ -623,6 +654,11 @@ void x264_macroblock_slice_init( x264_t *h )
     /* init with not available (for top right idx=7,15) */
     memset( h->mb.cache.ref, -2, sizeof( h->mb.cache.ref ) );
 
+    /* Add by chenjie */
+    memset( h->mbBL.cache.ref, -2, sizeof( h->mbBL.cache.ref ) );
+    memset( h->mbEL1.cache.ref, -2, sizeof( h->mbEL1.cache.ref ) );
+    memset( h->mbEL2.cache.ref, -2, sizeof( h->mbEL2.cache.ref ) );
+
     if( h->i_ref[0] > 0 )
         for( int field = 0; field <= SLICE_MBAFF; field++ )
         {
@@ -643,6 +679,40 @@ void x264_macroblock_slice_init( x264_t *h )
     h->mb.i_neighbour4[13] =
     h->mb.i_neighbour4[15] =
     h->mb.i_neighbour8[3] = MB_LEFT|MB_TOP|MB_TOPLEFT;
+
+    /* Add by chenjie */
+    h->mbBL.i_neighbour4[6] =
+    h->mbBL.i_neighbour4[9] =
+    h->mbBL.i_neighbour4[12] =
+    h->mbBL.i_neighbour4[14] = MB_LEFT|MB_TOP|MB_TOPLEFT|MB_TOPRIGHT;
+    h->mbBL.i_neighbour4[3] =
+    h->mbBL.i_neighbour4[7] =
+    h->mbBL.i_neighbour4[11] =
+    h->mbBL.i_neighbour4[13] =
+    h->mbBL.i_neighbour4[15] =
+    h->mbBL.i_neighbour8[3] = MB_LEFT|MB_TOP|MB_TOPLEFT;
+
+    h->mbEL1.i_neighbour4[6] =
+    h->mbEL1.i_neighbour4[9] =
+    h->mbEL1.i_neighbour4[12] =
+    h->mbEL1.i_neighbour4[14] = MB_LEFT|MB_TOP|MB_TOPLEFT|MB_TOPRIGHT;
+    h->mbEL1.i_neighbour4[3] =
+    h->mbEL1.i_neighbour4[7] =
+    h->mbEL1.i_neighbour4[11] =
+    h->mbEL1.i_neighbour4[13] =
+    h->mbEL1.i_neighbour4[15] =
+    h->mbEL1.i_neighbour8[3] = MB_LEFT|MB_TOP|MB_TOPLEFT;
+
+    h->mbEL2.i_neighbour4[6] =
+    h->mbEL2.i_neighbour4[9] =
+    h->mbEL2.i_neighbour4[12] =
+    h->mbEL2.i_neighbour4[14] = MB_LEFT|MB_TOP|MB_TOPLEFT|MB_TOPRIGHT;
+    h->mbEL2.i_neighbour4[3] =
+    h->mbEL2.i_neighbour4[7] =
+    h->mbEL2.i_neighbour4[11] =
+    h->mbEL2.i_neighbour4[13] =
+    h->mbEL2.i_neighbour4[15] =
+    h->mbEL2.i_neighbour8[3] = MB_LEFT|MB_TOP|MB_TOPLEFT;
 }
 
 
