@@ -2232,7 +2232,7 @@ static void x264_nal_start( x264_t *h, int i_type, int i_ref_idc )
 					{
 						nal ->i_priority_id = 0 ;
 						nal ->b_no_inter_layer_pred_flag = 1 ;						
-						nal ->i_dependency_id = 0;
+						nal ->i_dependency_id = h->i_layer_id;
 						nal ->i_quality_id = 0;
 						nal ->i_temporal_id = 0;
 						nal ->b_use_ref_base_pic_flag = 0;
@@ -2244,7 +2244,7 @@ static void x264_nal_start( x264_t *h, int i_type, int i_ref_idc )
 					{
 						nal ->i_priority_id = 0 ;
 						nal ->b_no_inter_layer_pred_flag = 0 ;	
-						nal ->i_dependency_id = 1;
+						nal ->i_dependency_id = h->i_layer_id;
 						nal ->i_quality_id = 0;
 						nal ->i_temporal_id = 0;
 						nal ->b_use_ref_base_pic_flag = 0;
@@ -2389,16 +2389,23 @@ int x264_encoder_headers( x264_t *h, x264_nal_t **pp_nal, int *pi_nal )
     h->out.i_nal = 0;
     bs_init( &h->out.bs, h->out.p_bitstream, h->out.i_bitstream );
 
-    /* Write SEI, SPS and PPS. */
-	/*sky 2014.08.19 header_write extension*/
 
-	for (int i_layer_id = 0 ; i_layer_id < h->param.i_layer_number;i_layer_id++)
+    /* Write SEI, SPS and PPS. */
+	   /*sky 2014.9.2 sei_svc write extension*/
+	x264_nal_start( h, NAL_SEI,NAL_PRIORITY_DISPOSABLE);
+	if(x264_sei_scalability_write(h,&h->out.bs))
+		return -1;
+
+	if( x264_nal_end( h ) )
+      		return -1;
+	/*sky 2014.08.19 header_write extension*/
+	for (h->i_layer_id = 0 ;h->i_layer_id < h->param.i_layer_number;h->i_layer_id++)
 		{
-			if(i_layer_id)
+			if(h->i_layer_id)
 			{
 			/* generate sub sequence parameters */
    				x264_nal_start( h, NAL_UNIT_SUBSET_SPS, NAL_PRIORITY_HIGHEST );			
-    				x264_sps_write( &h->out.bs,&h->sps[ i_layer_id] );
+    				x264_sps_write( &h->out.bs,&h->sps[h->i_layer_id] );
   			  	if( x264_nal_end( h ) )
   			     		 return -1;  		
 			}
@@ -2406,16 +2413,18 @@ int x264_encoder_headers( x264_t *h, x264_nal_t **pp_nal, int *pi_nal )
 			{
  			 /* generate sequence parameters */
 				x264_nal_start(h,NAL_SPS,NAL_PRIORITY_HIGHEST);
- 			 	x264_sps_write( &h->out.bs, &h->sps [ i_layer_id]);
+ 			 	x264_sps_write( &h->out.bs, &h->sps [h->i_layer_id]);
  			 	if( x264_nal_end( h ) )
     			    		return -1;    		    		
                    	  }
 			 /* generate picture parameters */
 				x264_nal_start( h, NAL_PPS, NAL_PRIORITY_HIGHEST );
-   		    		x264_pps_write( &h->out.bs, &h->sps[ i_layer_id], &h->pps [i_layer_id]);
+   		    		x264_pps_write( &h->out.bs, &h->sps[ h->i_layer_id], &h->pps [h->i_layer_id]);
                   		if( x264_nal_end( h ) )
                      	        return -1;
 		}
+	/*h->i_layer_id = 0 重新赋值0*/
+	h->i_layer_id = 0;
 	/*原代码*/
     /* generate sequence parameters */
 	/*
