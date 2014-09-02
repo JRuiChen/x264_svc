@@ -2301,6 +2301,10 @@ void x264_macroblock_bipred_init( x264_t *h )
                     }
 
                     h->mb.dist_scale_factor_buf[mbfield][field][i_ref0][i_ref1] = dist_scale_factor;
+			/* Add by chenjie */
+			h->mbBL.dist_scale_factor_buf[mbfield][field][i_ref0][i_ref1] = h->mb.dist_scale_factor_buf[mbfield][field][i_ref0][i_ref1];
+			h->mbEL1.dist_scale_factor_buf[mbfield][field][i_ref0][i_ref1] = h->mb.dist_scale_factor_buf[mbfield][field][i_ref0][i_ref1];
+			h->mbEL2.dist_scale_factor_buf[mbfield][field][i_ref0][i_ref1] = h->mb.dist_scale_factor_buf[mbfield][field][i_ref0][i_ref1];
 
                     dist_scale_factor >>= 2;
                     if( h->param.analyse.b_weighted_bipred
@@ -2308,12 +2312,23 @@ void x264_macroblock_bipred_init( x264_t *h )
                           && dist_scale_factor <= 128 )
                     {
                         h->mb.bipred_weight_buf[mbfield][field][i_ref0][i_ref1] = 64 - dist_scale_factor;
+			    /* Add by chenjie */
+			    h->mbBL.bipred_weight_buf[mbfield][field][i_ref0][i_ref1] = h->mb.bipred_weight_buf[mbfield][field][i_ref0][i_ref1];
+			    h->mbEL1.bipred_weight_buf[mbfield][field][i_ref0][i_ref1] = h->mb.bipred_weight_buf[mbfield][field][i_ref0][i_ref1];
+			    h->mbEL2.bipred_weight_buf[mbfield][field][i_ref0][i_ref1] = h->mb.bipred_weight_buf[mbfield][field][i_ref0][i_ref1];
+				
                         // ssse3 implementation of biweight doesn't support the extrema.
                         // if we ever generate them, we'll have to drop that optimization.
                         assert( dist_scale_factor >= -63 && dist_scale_factor <= 127 );
                     }
                     else
+                    {
                         h->mb.bipred_weight_buf[mbfield][field][i_ref0][i_ref1] = 32;
+			    /* Add by chenjie */
+			    h->mbBL.bipred_weight_buf[mbfield][field][i_ref0][i_ref1] = 32;
+			    h->mbEL1.bipred_weight_buf[mbfield][field][i_ref0][i_ref1] = 32;
+			    h->mbEL2.bipred_weight_buf[mbfield][field][i_ref0][i_ref1] = 32;
+                    }
                 }
             }
 }

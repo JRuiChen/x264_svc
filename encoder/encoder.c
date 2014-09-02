@@ -142,7 +142,11 @@ static void x264_slice_header_init( x264_t *h, x264_slice_header_t *sh,
     h->mb.b_direct_auto_write = h->param.analyse.i_direct_mv_pred == X264_DIRECT_PRED_AUTO
                                 && h->param.i_bframe
                                 && ( h->param.rc.b_stat_write || !h->param.rc.b_stat_read );
-
+    /* Add by chenjie */
+    h->mbBL.b_direct_auto_write = h->mb.b_direct_auto_write;
+    h->mbEL1.b_direct_auto_write = h->mb.b_direct_auto_write;
+    h->mbEL2.b_direct_auto_write = h->mb.b_direct_auto_write;
+	
     if( !h->mb.b_direct_auto_read && sh->i_type == SLICE_TYPE_B )
     {
         if( h->fref[1][0]->i_poc_l0ref0 == h->fref[0][0]->i_poc )
@@ -155,6 +159,11 @@ static void x264_slice_header_init( x264_t *h, x264_slice_header_t *sh,
         else
         {
             h->mb.b_direct_auto_write = 0;
+	    /* Add by chenjie */
+		h->mbBL.b_direct_auto_write = 0;
+		h->mbEL1.b_direct_auto_write = 0;
+		h->mbEL2.b_direct_auto_write = 0;
+		
             sh->b_direct_spatial_mv_pred = 1;
         }
     }
