@@ -61,42 +61,13 @@ static const uint8_t x264_pred_i4x4_neighbors[12] =
 #define IS_INTRA(type) ( (type) == I_4x4 || (type) == I_8x8 || (type) == I_16x16 || (type) == I_PCM )
 #define IS_SKIP(type)  ( (type) == P_SKIP || (type) == B_SKIP )
 #define IS_DIRECT(type)  ( (type) == B_DIRECT )
-
-
-
-
-/* extension enum MbMode - BY MING*/
-enum MbMode
-{
-  MODE_SKIP         = 0,
-  MODE_16x16        = 1,
-  MODE_16x8         = 2,
-  MODE_8x16         = 3,
-  MODE_8x8          = 4,
-  MODE_8x8ref0      = 5,
-  INTRA_4X4         = 6,
-  MODE_PCM          = 25+6,
-  INTRA_BL          = 36,
-  NOT_AVAILABLE     = 99 //TMM
-};
-
-enum BlkMode
-{
-  BLK_8x8   = 8,
-  BLK_8x4   = 9,
-  BLK_4x8   = 10,
-  BLK_4x4   = 11,
-  BLK_SKIP  = 0
-};
-
-
 enum mb_class_e
 {
     I_4x4           = 0,
     I_8x8           = 1,
     I_16x16         = 2,
     I_PCM           = 3,
-    I_BL            = 20,
+    I_BL            = 20;
     P_L0            = 4,
     P_8x8           = 5,
     P_SKIP          = 6,
@@ -136,15 +107,6 @@ static const uint8_t x264_mb_type_list_table[X264_MBTYPE_MAX][2][2] =
     {{0,0},{0,0}},                                              /* B_8x8 */
     {{0,0},{0,0}}                                               /* B_SKIP */
 };
-
-
-#define CAL_MB_MODE(type,partition)\
-{ \
-  if((type == P_SKIP) || (type == B_SKIP) || (type == B_DIRECT))\
-  	{\
-  	  return (MODE_SKIP);\
-  	}\
-}
 
 #define IS_SUB4x4(type) ( (type ==D_L0_4x4)||(type ==D_L1_4x4)||(type ==D_BI_4x4))
 #define IS_SUB4x8(type) ( (type ==D_L0_4x8)||(type ==D_L1_4x8)||(type ==D_BI_4x8))

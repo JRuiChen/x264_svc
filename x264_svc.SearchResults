@@ -1,0 +1,13 @@
+---- x264_predict_16x16_v_c Matches (3 in 2 files) ----
+Predict.c (common):107
+void x264_predict_16x16_v_c( pixel *src )
+{
+    pixel4 v0 = MPIXEL_X4( &src[ 0-FDEC_STRIDE] );
+Predict.c (common):882
+    pf[I_PRED_16x16_V ]     = x264_predict_16x16_v_c;
+    pf[I_PRED_16x16_H ]     = x264_predict_16x16_h_c;
+    pf[I_PRED_16x16_DC]     = x264_predict_16x16_dc_c;
+Predict.h (common):120
+void x264_predict_16x16_v_c ( pixel *src );
+void x264_predict_16x16_p_c ( pixel *src );
+void x264_predict_8x8c_dc_c ( pixel *src );
