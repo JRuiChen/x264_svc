@@ -691,6 +691,95 @@ void x264_sei_recovery_point_write( x264_t *h, bs_t *s, int recovery_frame_cnt )
     x264_sei_write( s, tmp_buf, bs_pos( &q ) / 8, SEI_RECOVERY_POINT );
 }
 
+/*sky 2014.09.02 sei_scalability_write*/
+int x264_sei_scalability_write(x264_t *h,bs_t *s)
+{
+	bs_realign( s);
+
+	int sei_type = 24 ; // sei scalability info
+	int sei_payload = 29 ; //经验值,sky ,要修改
+	
+	bs_write(s, 8, sei_type);
+	bs_write(s, 8, sei_payload);
+
+	int b_temporal_id_nesting_flag = 0;
+	int b_priority_layer_info_present_flag = 0;
+	int b_priority_id_setting_flag = 0;
+	int i_num_layers_minus1 = h->param.i_layer_number - 1;
+	
+	bs_write1(s, b_temporal_id_nesting_flag);
+	bs_write1(s, b_priority_layer_info_present_flag);
+	bs_write1(s, b_priority_id_setting_flag);
+	if(i_num_layers_minus1 + 1 <= 0 )
+		return -1 ;
+	bs_write_ue(s, i_num_layers_minus1);
+
+	int b_sub_pic_layer_flag = 0;
+	int b_sub_region_flag = 0;
+	int b_iroi_division_info_present_flag = 0;
+	int b_proflie_level_info_present_flag = 0;
+	int b_bitrate_info_present_flag = 0;
+	int b_frm_rate_info_present_flag = 0; // 这个可以再查
+	int b_frm_size_info_present_flag = 1; 
+	int b_layer_dependency_info_present_flag = 0;  // 这个flag要true
+	int b_parameter_sets_info_present_flag = 1;
+	int b_bitstream_restriction_info_present_flag = 0 ;
+	int b_exact_interlayer_pred_flag = 1;
+	int b_layer_conversion_flag = 0 ;
+	int b_layer_output_flag = 1;
+	
+	for(int i = 0 ; i <= i_num_layers_minus1; i++)
+		{
+			bs_write_ue(s, i );// layer_id
+			bs_write(s, 6, 0);//priority_id
+			bs_write1(s, 0); // discardable_flag
+			bs_write(s, 3, i);//dependency_id
+			bs_write(s, 4,0);//quality_id
+			bs_write(s, 3,0);//temporal_id
+			
+			bs_write1(s, b_sub_pic_layer_flag);
+			bs_write1(s, b_sub_region_flag);
+			bs_write1(s, b_iroi_division_info_present_flag);
+			bs_write1(s, b_proflie_level_info_present_flag);
+			bs_write1(s, b_bitrate_info_present_flag);
+			bs_write1(s, b_frm_rate_info_present_flag);
+			bs_write1(s, b_frm_size_info_present_flag);
+			bs_write1(s, b_layer_dependency_info_present_flag);
+			bs_write1(s, b_parameter_sets_info_present_flag);
+			bs_write1(s, b_bitstream_restriction_info_present_flag);
+			bs_write1(s, b_exact_interlayer_pred_flag);
+
+		
+		        bs_write1(s, b_layer_conversion_flag);
+			bs_write1(s, b_layer_output_flag);
+		
+			if(b_frm_size_info_present_flag || b_iroi_division_info_present_flag)
+				{
+				   
+					bs_write_ue(s, h->sps[i].i_mb_width - 1);
+					bs_write_ue(s, h->sps[i].i_mb_height - 1);
+					
+				}
+			if(b_layer_dependency_info_present_flag)
+				{
+				/*sky 这个地方还要再看*/
+					bs_write_ue(s, i-1);
+					bs_write_ue(s, 0);
+				}
+			if(b_parameter_sets_info_present_flag)
+				{
+					bs_write_ue(s, 0);//"ScalableSEI: num_seq_parameter_set_minus1"		
+					bs_write_ue(s, 0);// "ScalableSEI: seq_parameter_set_id_delta"	
+					bs_write_ue(s, 0);//"ScalableSEI: num_subset_seq_parameter_set_minus1"
+					bs_write_ue(s, 0);//  "ScalableSEI: subset_seq_parameter_set_id_delta"	
+					bs_write_ue(s, 0);//"ScalableSEI: num_pic_parameter_set_minus1"
+					bs_write_ue(s, 0);//  "ScalableSEI: pic_parameter_set_id_delta"			
+				}
+		}
+	
+	return 0;
+	
+}
 int x264_sei_version_write( x264_t *h, bs_t *s )
 {
     // random ID number generated according to ISO-11578
