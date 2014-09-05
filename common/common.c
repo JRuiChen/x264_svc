@@ -50,6 +50,7 @@ x264_pthread_mutex_t mutex_slice_encode_sleeped_threads = X264_PTHREAD_MUTEX_INI
 int dst_s = 0;
 
 
+
 const int x264_bit_depth = BIT_DEPTH;
 
 const int x264_chroma_format = X264_CHROMA_FORMAT;
@@ -1448,6 +1449,8 @@ void x264_threadpool_up_sampling()
 {
 	x264_pthread_mutex_t mutex_start_up_sampling = X264_PTHREAD_MUTEX_INITIALIZER;
 	FILE *file_dst = fopen ("tst352x288.yuv", "wb" );
+	x264_pthread_mutex_init( &mutex_start_up_sampling, NULL );
+	x264_pthread_cond_init( &cv_start_up_sampling, NULL );
 	while( !up_sampling_arg.exit )
 	{
 		//x264_pthread_mutex_lock( &mutex_slice_encode_threads_finished );

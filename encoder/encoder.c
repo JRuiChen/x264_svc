@@ -278,7 +278,8 @@ if( sh->b_mbaff )
     		//我觉得不需要处理
     	}
 /*sky 2014.08.23 添加nal ->i_quality_id == 0*/
-if(nal ->i_quality_id == 0)
+/*skytest*/
+if(1)
 {
     if( sh->pps->b_redundant_pic_cnt )
         bs_write_ue( s, sh->i_redundant_pic_cnt );
@@ -329,10 +330,11 @@ if(nal ->i_quality_id == 0)
     if( sh->pps->b_weighted_pred && sh->i_type == SLICE_TYPE_P )
     {
         sh->b_weighted_pred = sh->weight[0][0].weightfn || sh->weight[0][1].weightfn || sh->weight[0][2].weightfn;
-	/*sky 2014.08.23 添   if(!nal->b_no_inter_layer_pred_flag)*/
-	if(!nal->b_no_inter_layer_pred_flag)
-		bs_write1(s, sh->pps->b_base_pred_weight_table_flag); // 这个值在pps中填加值是多少不知道
-		/* pred_weight_table() */
+	if(nal->i_type == NAL_UNIT_CODED_SLICE_SCALABLE)
+	{/*sky 2014.08.23 添   if(!nal->b_no_inter_layer_pred_flag)*/
+		if(!nal->b_no_inter_layer_pred_flag)
+			bs_write1(s, sh->pps->b_base_pred_weight_table_flag); // 这个值在pps中填加值是多少不知道
+	}	/* pred_weight_table() */
         bs_write_ue( s, sh->weight[0][0].i_denom );
         bs_write_ue( s, sh->weight[0][1].i_denom );
         for( int i = 0; i < sh->i_num_ref_idx_l0_active; i++ )
@@ -381,7 +383,8 @@ if(nal ->i_quality_id == 0)
                 bs_write_ue( s, 0 ); /* end command list */
             }
         }
-		/*sky 2014.08.23 添加if(!sh->sps->b_slice_header_restriction_flag)*/
+		if(nal->i_type == NAL_UNIT_CODED_SLICE_SCALABLE)
+	     {/*sky 2014.08.23 添加if(!sh->sps->b_slice_header_restriction_flag)*/
 		if(!sh->sps->b_slice_header_restriction_flag)
 			{
 				
@@ -392,8 +395,10 @@ if(nal ->i_quality_id == 0)
 						// 不会走这条线
 					}
 			}
+		}
     	}
     }
+/*skytest
 else if(nal->i_quality_id == -1 )
 {
 	 if( sh->pps->b_redundant_pic_cnt )
@@ -413,7 +418,7 @@ else if(nal->i_quality_id == -1 )
         }
     }
 
-    /* ref pic list reordering */
+    /* ref pic list reordering 
     if( sh->i_type != SLICE_TYPE_I )
     {
         bs_write1( s, sh->b_ref_pic_list_reordering[0] );
@@ -469,31 +474,31 @@ else if(nal->i_quality_id == -1 )
     }
     else if( sh->pps->b_weighted_bipred == 1 && sh->i_type == SLICE_TYPE_B )
     {
-      /* TODO */
+      /* TODO 
     }
 
     if( i_nal_ref_idc != 0 )
     {
         if( sh->i_idr_pic_id >= 0 )
         {
-            bs_write1( s, 0 );  /* no output of prior pics flag */
-            bs_write1( s, 0 );  /* long term reference flag */
+            bs_write1( s, 0 );  /* no output of prior pics flag 
+            bs_write1( s, 0 );  /* long term reference flag
         }
         else
         {
-            bs_write1( s, sh->i_mmco_command_count > 0 ); /* adaptive_ref_pic_marking_mode_flag */
+            bs_write1( s, sh->i_mmco_command_count > 0 ); /* adaptive_ref_pic_marking_mode_flag 
             if( sh->i_mmco_command_count > 0 )
             {
                 for( int i = 0; i < sh->i_mmco_command_count; i++ )
                 {
-                    bs_write_ue( s, 1 ); /* mark short term ref as unused */
+                    bs_write_ue( s, 1 ); /* mark short term ref as unused 
                     bs_write_ue( s, sh->mmco[i].i_difference_of_pic_nums - 1 );
                 }
-                bs_write_ue( s, 0 ); /* end command list */
+                bs_write_ue( s, 0 ); /* end command list 
             }
         }
     }
-}
+}*/
 
     if( sh->pps->b_cabac && sh->i_type != SLICE_TYPE_I )
         bs_write_ue( s, sh->i_cabac_init_idc );
@@ -509,7 +514,9 @@ else if(nal->i_quality_id == -1 )
             bs_write_se( s, sh->i_beta_offset >> 1 );
         }
     }
-	/*sky 2014.08.25  add svc */
+	/*skytest*/
+	if(nal->i_type == NAL_UNIT_CODED_SLICE_SCALABLE)
+	{/*sky 2014.08.25  add svc */
   if(sh->pps->i_num_slice_groups -1 > 0 
   	&&  sh->pps->i_slice_group_map_type >=3 
   	&& sh->pps->i_slice_group_map_type <= 5)
@@ -563,6 +570,7 @@ else if(nal->i_quality_id == -1 )
 		bs_write(s, 4, 15); // "SH: scan_idx_end"这个值没有搞懂，赋值太麻烦
 			
   	}
+		}
 }
 
 /* If we are within a reasonable distance of the end of the memory allocated for the bitstream, */
@@ -1626,7 +1634,7 @@ x264_t *x264_encoder_open( x264_param_t *param )
     h->i_frame = -1;
     h->i_frame_num = 0;
     h->i_idr_pic_id = 0;
-
+  h->i_layer_id = 0;
     if( (uint64_t)h->param.i_timebase_den * 2 > UINT32_MAX )
     {
         x264_log( h, X264_LOG_ERROR, "Effective timebase denominator %u exceeds H.264 maximum\n", h->param.i_timebase_den );
@@ -2139,6 +2147,7 @@ static void x264_nal_start( x264_t *h, int i_type, int i_ref_idc )
 						nal ->b_output_flag = 1;
 						nal ->i_reserved_three_2bits = 3;
 					}
+				/*skytest
 				else
 					{
 						nal ->i_priority_id = 0 ;
@@ -2150,7 +2159,7 @@ static void x264_nal_start( x264_t *h, int i_type, int i_ref_idc )
 						nal ->b_discardable_flag = 1;
 						nal ->b_output_flag = 1;
 						nal ->i_reserved_three_2bits = 3;
-					}
+					}*/
 				
 			}
 			/*不扩张初始化*/
