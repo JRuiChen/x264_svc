@@ -1430,6 +1430,11 @@ void x264_ratecontrol_start( x264_t *h, int i_force_qp, int overhead )
         {
             h->sh.b_direct_spatial_mv_pred = ( rce->direct_mode == 's' );
             h->mb.b_direct_auto_read = ( rce->direct_mode == 's' || rce->direct_mode == 't' );
+		/* Add by chenjie */
+		h->mbBL.b_direct_auto_read = h->mb.b_direct_auto_read;
+		h->mbEL1.b_direct_auto_read = h->mb.b_direct_auto_read;
+		h->mbEL2.b_direct_auto_read = h->mb.b_direct_auto_read;
+		
         }
     }
 
